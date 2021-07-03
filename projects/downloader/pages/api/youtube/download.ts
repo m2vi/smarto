@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import ytdl from "ytdl-core";
 import contentDisposition from "content-disposition";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
+export const download = async (req: NextApiRequest, res: NextApiResponse) => {
   const { v } = req.query;
   const V = v ? v.toString() : "";
 
@@ -20,3 +20,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   //   filter: (format) => format.itag === 37,
   // }).pipe(res.status(200));
 };
+
+export default download;
