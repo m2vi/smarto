@@ -1,8 +1,7 @@
-import Head from 'next/head';
-import YouTube from '../../components/youtube/Page';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { ModalProvider } from '../../context/Modal';
-import { getSupportedItags } from '../../utils/itags';
+import Head from "next/head";
+import YouTube from "../../components/youtube/Page";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { ModalProvider } from "../../context/Modal";
 
 const index = () => {
   return (
@@ -19,7 +18,7 @@ const index = () => {
 
 export const getServerSideProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale, ['common'])),
+    ...(await serverSideTranslations(locale, ["common"])),
   },
 });
 
