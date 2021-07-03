@@ -1,0 +1,39 @@
+[GET] /d/youtube
+23:36:11:53
+2021-06-10T21:36:12.086Z 8514d68a-dcad-4649-be8e-7e72a044a641 ERROR Error: ENOENT: no such file or directory, scandir '/var/task/public/locales/en'
+at Object.readdirSync (fs.js:1043:3)
+at getLocaleNamespaces (/var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:170:23)
+at /var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:176:20
+at Array.map (<anonymous>)
+at getNamespaces (/var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:175:44)
+at createConfig (/var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:216:29)
+at \_callee$ (/var/task/node_modules/next-i18next/dist/commonjs/serverSideTranslations.js:196:53)
+at tryCatch (/var/task/node_modules/regenerator-runtime/runtime.js:63:40)
+at Generator.invoke [as _invoke] (/var/task/node_modules/regenerator-runtime/runtime.js:293:22)
+at Generator.next (/var/task/node_modules/regenerator-runtime/runtime.js:118:21) {
+errno: -2,
+syscall: 'scandir',
+path: '/var/task/public/locales/en'
+}
+RequestId: 8514d68a-dcad-4649-be8e-7e72a044a641 Error: Runtime exited with error: exit status 1
+Runtime.ExitError
+
+[GET] /\_next/data/a0Fu-neg_BAmLlNc7C3dE/de/d/youtube.json
+23:35:06:00
+2021-06-10T21:35:06.542Z 0c7de9db-23ad-477f-98a8-0e013456ab9e ERROR Error: ENOENT: no such file or directory, scandir '/var/task/public/locales/de'
+at Object.readdirSync (fs.js:1043:3)
+at getLocaleNamespaces (/var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:170:23)
+at /var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:176:20
+at Array.map (<anonymous>)
+at getNamespaces (/var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:175:44)
+at createConfig (/var/task/node_modules/next-i18next/dist/commonjs/config/createConfig.js:216:29)
+at \_callee$ (/var/task/node_modules/next-i18next/dist/commonjs/serverSideTranslations.js:196:53)
+at tryCatch (/var/task/node_modules/regenerator-runtime/runtime.js:63:40)
+at Generator.invoke [as _invoke] (/var/task/node_modules/regenerator-runtime/runtime.js:293:22)
+at Generator.next (/var/task/node_modules/regenerator-runtime/runtime.js:118:21) {
+errno: -2,
+syscall: 'scandir',
+path: '/var/task/public/locales/de'
+}
+RequestId: 0c7de9db-23ad-477f-98a8-0e013456ab9e Error: Runtime exited with error: exit status 1
+Runtime.ExitError

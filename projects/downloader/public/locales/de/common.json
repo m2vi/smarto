@@ -1,0 +1,28 @@
+{
+  "menu": {
+    "youtube": "YouTube"
+  },
+  "actions": {
+    "download": "Herunterladen",
+    "configure": "Konfigurieren",
+    "cancel": "Abbrechen",
+    "view": "Ansehen",
+    "loadEmbed": "Einbettung Laden"
+  },
+  "options": {
+    "format": "Format",
+    "Quality": "Qualität",
+    "Start": "Start",
+    "End": "Ende"
+  },
+  "tooltips": {
+    "views": "Aufrufe",
+    "information": "Information",
+    "information2": "Mehr Informationen",
+    "pause": "Pausieren",
+    "play": "Abspielen"
+  },
+  "pages": {
+    "documentation": "Dokumentation"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "common": {
+    "loadMore": "Load More",
+    "loading": "Loading...",
+    "noUsersFound": "No users found!",
+    "ok": "Ok",
+    "yes": "Yes",
+    "no": "No",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "joinRoom": "Join Room",
+    "copyLink": "Copy Link",
+    "copied": "Copied!",
+    "formattedIntlDate": "{{date, intlDate}}",
+    "formattedIntlTime": "{{time, intlTime}}",
+    "requestPermissions": "Please note running DogeHouse without accessibility permissions may cause unwanted errors"
+  }
+}
