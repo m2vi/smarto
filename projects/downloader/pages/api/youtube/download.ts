@@ -1,11 +1,10 @@
-import { NextApiRequest, NextApiResponse } from 'next';
-import ytdl from 'ytdl-core';
-import contentDisposition from 'content-disposition';
-import { getSupportedItags } from '../../../utils/youtube/itags';
+import { NextApiRequest, NextApiResponse } from "next";
+import ytdl from "ytdl-core";
+import contentDisposition from "content-disposition";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const { v } = req.query;
-  const V = v ? v.toString() : '';
+  const V = v ? v.toString() : "";
 
   let { url, vname, itag, format } = req.query;
 
