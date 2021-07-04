@@ -1,5 +1,5 @@
-import { useEffect, useState } from 'react';
-import ReactTooltip, { TooltipProps } from 'react-tooltip';
+import { useEffect, useState } from "react";
+import ReactTooltip, { TooltipProps } from "react-tooltip";
 
 const Tooltip = ({ effect, border, children, ...props }: TooltipProps) => {
   const [show, setShow] = useState(false);
@@ -13,14 +13,14 @@ const Tooltip = ({ effect, border, children, ...props }: TooltipProps) => {
       {children}
       {show ? (
         <ReactTooltip
-          effect='solid'
+          effect="solid"
           border={false}
-          textColor='var(--color-primary-100)'
-          arrowColor='var(--color-primary-800)'
-          backgroundColor='var(--color-primary-800)'
-          className='rounded-8 p-2'
+          textColor="var(--color-primary-100)"
+          arrowColor="var(--color-primary-800)"
+          backgroundColor="var(--color-primary-800)"
+          className="rounded-8 p-2"
           scrollHide={true}
-          role='Tooltip'
+          role="Tooltip"
           {...props}
         />
       ) : null}

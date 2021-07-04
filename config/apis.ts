@@ -19,8 +19,9 @@ export type accountProps = {
 };
 
 export interface userData {
-  firstid: string;
-  lastid: string;
+  firstname: string;
+  lastname: string;
   birthday: number;
+  createdAt: number;
   accounts: accountProps;
 }

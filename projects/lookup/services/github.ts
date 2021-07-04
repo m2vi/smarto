@@ -12,7 +12,11 @@ export class GitHub {
   }
 
   async fetcher(path: string) {
-    const req = await fetch(new URL(path, this.#baseUrl).href);
+    const headers = {
+      Authorization: `Authorization: token ${process.env.GitHubPAT}`,
+    };
+
+    const req = await fetch(new URL(path, this.#baseUrl).href, { headers });
     const json = await req.json();
 
     return json;

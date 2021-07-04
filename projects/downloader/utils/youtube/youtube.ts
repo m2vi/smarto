@@ -1,13 +1,7 @@
-import moment, { Duration } from 'moment';
-import ytdl, {
-  getBasicInfo,
-  getURLVideoID,
-  validateID,
-  validateURL,
-  videoInfo,
-} from 'ytdl-core';
-import { itagArray } from './itags';
-import { AppendParamProps, urlAppend } from '../url';
+import moment, { Duration } from "moment";
+import ytdl, { getBasicInfo, getURLVideoID, validateID, validateURL, videoInfo } from "ytdl-core";
+import { itagArray } from "./itags";
+import { AppendParamProps, urlAppend } from "../url";
 
 export interface parsedProps {
   success: boolean;
@@ -64,20 +58,17 @@ interface lengthProps {
 }
 
 export const calcLength = (lengthSeconds: string): lengthProps => {
-  const duration = moment.duration(
-    parseInt(lengthSeconds) ? parseInt(lengthSeconds) : 0,
-    'seconds'
-  );
+  const duration = moment.duration(parseInt(lengthSeconds) ? parseInt(lengthSeconds) : 0, "seconds");
 
   const format = (duration: Duration) => {
     const hasHours = duration.asHours() > 1;
     // I have absolutely no idea what to call this variable
-    const executor = moment.utc(duration.as('milliseconds'));
+    const executor = moment.utc(duration.as("milliseconds"));
 
     if (hasHours) {
-      return executor.format('HH:mm:ss');
+      return executor.format("HH:mm:ss");
     } else {
-      return executor.format('mm:ss');
+      return executor.format("mm:ss");
     }
   };
 
@@ -111,8 +102,7 @@ const parse = (data: videoInfo): parsedProps => {
     keywords,
     viewCount,
   } = videoDetails;
-  const { id, name, channel_url, verified, subscriber_count, thumbnails } =
-    author;
+  const { id, name, channel_url, verified, subscriber_count, thumbnails } = author;
   const { flashSecureUrl, flashUrl, height, iframeUrl, width } = embed;
 
   return {
@@ -161,7 +151,7 @@ const e = (code: number, message?: string, error?: string) => {
 
 export const getVideoDetails = async (link: string) => {
   if (!validateURL(link)) {
-    return e(1, 'The link given does not satisfy the requierements.');
+    return e(1, "The link given does not satisfy the requierements.");
   } else if (!validateID(getURLVideoID(link))) {
     return e(2, "The link given does not match YouTube's requirements.");
   }
@@ -173,7 +163,7 @@ export const getVideoDetails = async (link: string) => {
   try {
     details = await getBasicInfo(id);
   } catch (e) {
-    details = e(0, 'Internal Server Error', e.message);
+    details = e(0, "Internal Server Error", e.message);
   }
 
   return parse(details);
@@ -191,24 +181,16 @@ export const genDownloadDetails = (name?: string): downloadDetails => {
 
 export interface ytOptionProps {}
 
-export const genDownloadLink = (
-  url: string,
-  vname: string,
-  itag: number,
-  format: string,
-  options?: ytOptionProps
-) => {
+export const genDownloadLink = (url: string, vname: string, itag: number, format: string, options?: ytOptionProps) => {
   const { protocol, port, hostname } = window.location;
-  const baseUrl = new URL(
-    `${protocol}//${hostname}:${port}/api/youtube/download`
-  );
+  const baseUrl = new URL(`${protocol}//${hostname}:${port}/api/youtube/download`);
 
   const params: Array<AppendParamProps> = [
-    { param: 'url', value: url },
-    { param: 'vname', value: vname },
-    { param: 'itag', value: itag.toString() },
-    { param: 'format', value: format },
-    { param: 'options', value: JSON.stringify(options) },
+    { param: "url", value: url },
+    { param: "vname", value: vname },
+    { param: "itag", value: itag.toString() },
+    { param: "format", value: format },
+    { param: "options", value: JSON.stringify(options) },
   ];
 
   return urlAppend(baseUrl, params);

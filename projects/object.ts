@@ -1,6 +1,8 @@
-import moment, { lang } from "moment";
+import moment from "moment";
 import GitHub from "./lookup/services/github";
 import projects from "./projects";
+import { isDevelopment } from "../utils/env/constants";
+import sessionManager from "../utils/store/sessionManager";
 
 export interface projectProps {
   enabled?: boolean;
@@ -32,7 +34,7 @@ export class Projects {
   projects: projectArray;
   activeArray: string[];
 
-  constructor(private keys: string[]) {
+  constructor(private keys: string[], private fetch?: boolean) {
     this.projects = projects;
   }
 
@@ -47,30 +49,37 @@ export class Projects {
   }
 
   async getUpdates() {
-    let bin: [string, projectProps][] = Object.entries(this.projects);
+    //! HARD TO READ
 
-    for (let i = 0; i < bin.length; i++) {
-      const curr = this.projects[bin[i][0]];
+    sessionManager.get("updatedProjects", async (success: boolean, item: any) => {
+      if (success && item) {
+        this.projects = item;
+      } else {
+        let bin: [string, projectProps][] = Object.entries(this.projects);
+        const revert = (Array: [string, projectProps][]) => {
+          let bin: projectArray = {};
+          Array.forEach((item) => {
+            if (!item[1].enabled) return;
+            [(bin[item[0]] = item[1])];
+          });
+          return bin;
+        };
 
-      if (curr.repository && curr.enabled) {
-        const user = new GitHub(curr.repository?.user);
-        const { updated_at, language } = await user.repo(curr.repository?.name);
+        for (let i = 0; i < bin.length; i++) {
+          const curr = this.projects[bin[i][0]];
+          if (curr.repository && curr.enabled && this.fetch) {
+            const user = new GitHub(curr.repository?.user);
+            const { updated_at, language } = await user.repo(curr.repository?.name);
 
-        bin[i][1].updatedAt = moment(updated_at).fromNow();
-        bin[i][1].language = language ? language : "Plain";
+            bin[i][1].updatedAt = moment(updated_at).fromNow();
+            !bin[i][1].language && (bin[i][1].language = language ? language : false);
+          }
+        }
+        sessionManager.store("updatedProjects", revert(bin));
+
+        this.projects = revert(bin);
       }
-    }
-
-    const revert = (Array: [string, projectProps][]) => {
-      let bin: projectArray = {};
-      Array.forEach((item) => {
-        if (!item[1].enabled) return;
-        [(bin[item[0]] = item[1])];
-      });
-      return bin;
-    };
-
-    this.projects = revert(bin);
+    });
   }
 
   get() {
@@ -105,7 +114,6 @@ export class Projects {
   }
 
   async __init__() {
-    this.setActive();
-    await this.getUpdates();
+    this.getUpdates().then(() => this.setActive());
   }
 }

@@ -11,6 +11,7 @@ class MyDocument extends Document {
       <Html lang="en-UK">
         <Head>
           <meta name="title" content="Utils, Tools and more!" />
+          <meta name="theme-color" content="#1f1d2b" />
           <meta
             name="description"
             content="A Util page with all kinds of tools, generators, code snippets, useful links, calculators, important formulas, data visualisation and much more!"

@@ -4,19 +4,16 @@ export interface truncateOptionsProps {
   specialsAtEnd?: boolean;
 }
 
-export const truncate = (
-  input: string,
-  { cutAt, specialsAtEnd, replaceWidth }: truncateOptionsProps
-) => {
+export const truncate = (input: string, { cutAt, specialsAtEnd, replaceWidth }: truncateOptionsProps) => {
   if (input.length < cutAt) return input;
 
-  replaceWidth = replaceWidth ? replaceWidth : '...';
+  replaceWidth = replaceWidth ? replaceWidth : "...";
 
   input = input.slice(0, cutAt);
 
   const cutSepcials = (input: string) => {
     if (specialsAtEnd) return input;
-    const specials = '!"#$%&\'()*+,-./:;<=>?@[]^_`{|}~';
+    const specials = "!\"#$%&'()*+,-./:;<=>?@[]^_`{|}~";
 
     let Input = input;
     for (let letter = Input.length - 1; letter <= 0; letter--) {

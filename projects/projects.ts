@@ -39,11 +39,6 @@ export const projects: projectArray = {
     icon: SpeedtestIcon,
     tags: ["internet", "speed", "test", "check", "*"],
     badge: "all",
-    repository: {
-      name: "speedtest",
-      type: "git",
-      user: "m2vi",
-    },
   },
   link_shortener: {
     enabled: true,
@@ -55,11 +50,6 @@ export const projects: projectArray = {
     icon: LinkShortenerIcon,
     tags: ["url", "link", "short", "*"],
     badge: "all",
-    repository: {
-      name: "link_shortener",
-      type: "git",
-      user: "m2vi",
-    },
   },
   package_tracker: {
     enabled: true,
@@ -71,11 +61,6 @@ export const projects: projectArray = {
     icon: PackageTrackerIcon,
     tags: ["package", "delivery", "find", "track", "*"],
     badge: "web",
-    repository: {
-      name: "package_tracker",
-      type: "git",
-      user: "m2vi",
-    },
   },
   cointracker: {
     enabled: true,
@@ -87,11 +72,6 @@ export const projects: projectArray = {
     icon: CointrackerIcon,
     tags: ["cointracker", "elon musk", "track", "find", "*"],
     badge: "web",
-    repository: {
-      name: "cointracker",
-      type: "git",
-      user: "m2vi",
-    },
   },
   lookup: {
     enabled: true,
@@ -103,11 +83,6 @@ export const projects: projectArray = {
     icon: LookupIcon,
     tags: ["find", "search", "hack", "*"],
     badge: "web",
-    repository: {
-      name: "lookup",
-      type: "git",
-      user: "m2vi",
-    },
   },
   weather_app: {
     enabled: true,
@@ -119,11 +94,6 @@ export const projects: projectArray = {
     icon: WeatherAppIcon,
     tags: ["outside", "life", "cloud", "*"],
     badge: "all",
-    repository: {
-      name: "weather_app",
-      type: "git",
-      user: "m2vi",
-    },
   },
   downloader: {
     enabled: true,
@@ -151,11 +121,6 @@ export const projects: projectArray = {
     icon: SmartHomeHandlerIcon,
     tags: ["smart", "home", "light", "control", "*"],
     badge: "all",
-    repository: {
-      name: "smart_home_handler",
-      type: "git",
-      user: "m2vi",
-    },
   },
   files: {
     enabled: false,
@@ -167,11 +132,6 @@ export const projects: projectArray = {
     icon: FilesIcon,
     tags: ["ssh", "connect", "control", "manage", "*"],
     badge: "all",
-    repository: {
-      name: "files",
-      type: "git",
-      user: "m2vi",
-    },
   },
   code_snippets: {
     enabled: true,
@@ -183,11 +143,6 @@ export const projects: projectArray = {
     icon: CodeSnippetsIcon,
     tags: ["code", "example", "hello world", "get", "*"],
     badge: "web",
-    repository: {
-      name: "code_snippets",
-      type: "git",
-      user: "m2vi",
-    },
   },
 };
 export default projects;

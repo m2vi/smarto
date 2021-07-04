@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 
 const ModalContext = React.createContext(null);
 
@@ -13,7 +13,7 @@ export interface actionProps {
 
 export const modalReducer = (state, { type, value }: actionProps) => {
   switch (type) {
-    case 'setOpen': {
+    case "setOpen": {
       return { isOpen: value };
     }
     default: {
@@ -25,15 +25,13 @@ export const modalReducer = (state, { type, value }: actionProps) => {
 export const ModalProvider = ({ children }) => {
   const [state, dispatch] = React.useReducer(modalReducer, initalState);
   const value = { state, dispatch };
-  return (
-    <ModalContext.Provider value={value}>{children}</ModalContext.Provider>
-  );
+  return <ModalContext.Provider value={value}>{children}</ModalContext.Provider>;
 };
 
 export const useModal = () => {
   const context = React.useContext(ModalContext);
   if (context === undefined) {
-    console.error('useCount must be used within a CountProvider');
+    console.error("useCount must be used within a CountProvider");
   }
   return context;
 };

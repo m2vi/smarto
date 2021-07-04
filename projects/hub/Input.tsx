@@ -19,6 +19,7 @@ export const BarButton = ({
   return (
     <button
       className={`py-2 text-sm rounded-r-8 bg-primary-700 text-primary-300 font-bold flex items-center justify-center h-8 hover:bg-primary-700 px-4 ${className}`}
+      name="Search"
       {...props}
     >
       <IoSearch className="h-3 w-3" />
@@ -35,7 +36,7 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
   const { dispatch } = useHub();
 
   useEffect(() => {
-    const projects = new Projects([]);
+    const projects = new Projects([], true);
     projects.__init__().then(() => {
       setProjects(projects.toFilteredArray());
     });
