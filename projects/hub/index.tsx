@@ -23,7 +23,7 @@ export const Hub = () => {
         <Sidebar />
         <div className="h-screen w-full flex-col flex mr-8">
           <Topbar />
-          <div className="h-full w-full py-6">
+          <main className="h-full w-full py-6">
             {state.length === 0 || state === [false] ? (
               <>
                 <Discover />
@@ -50,7 +50,7 @@ export const Hub = () => {
                 );
               })
             )}
-          </div>
+          </main>
           <div className="mt-4"></div>
         </div>
       </div>
