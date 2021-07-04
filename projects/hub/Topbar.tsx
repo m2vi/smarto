@@ -8,7 +8,7 @@ export const Topbar = () => {
     <div className="w-full py-4 h-80 flex items-center justify-between">
       <div className="max-w-2xl w-full flex justify-center items-center">
         <Bar placeholder="Search" />
-        <BarButton />
+        <BarButton aria-label="Search" />
       </div>
       <div className="flex flex-row">
         <div className="flex flex-row items-center cursor-pointer select-none">

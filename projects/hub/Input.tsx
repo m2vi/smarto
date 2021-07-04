@@ -19,7 +19,6 @@ export const BarButton = ({
   return (
     <button
       className={`py-2 text-sm rounded-r-8 bg-primary-700 text-primary-300 font-bold flex items-center justify-center h-8 hover:bg-primary-700 px-4 ${className}`}
-      name="Search"
       {...props}
     >
       <IoSearch className="h-3 w-3" />
