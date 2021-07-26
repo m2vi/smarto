@@ -2,7 +2,7 @@ export interface FaviconProps {
   project: string;
 }
 
-export const Favicon = ({ project }: FaviconProps) => {
+export const Favicon = ({project}: FaviconProps) => {
   return (
     <>
       <link rel="apple-touch-icon" sizes="57x57" href={`/favicon/${project}/apple-icon-57x57.png`} />

@@ -1,4 +1,4 @@
-import exitNodes from "../../assets/exitNodes/exitNodes";
+import exitNodes from '../../assets/exitNodes/exitNodes';
 
 const torDetect = (ip: string) => {
   return exitNodes.data.includes(ip);

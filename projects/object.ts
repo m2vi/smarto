@@ -1,4 +1,4 @@
-import projects from "./projects";
+import projects from './projects';
 
 export interface projectProps {
   enabled?: boolean;
@@ -9,11 +9,11 @@ export interface projectProps {
   createdAt?: number;
   updatedAt?: string;
   description?: string;
-  badge?: "web" | "mobile" | "desktop" | "all";
+  badge?: 'web' | 'mobile' | 'desktop' | 'all';
   language?: string;
   url?: string;
   repository?: {
-    type?: "git";
+    type?: 'git';
     user?: string;
     name?: string;
   };
@@ -51,7 +51,7 @@ export class Projects {
   getActiveArray() {
     const Array = this.toArray();
 
-    return Array.filter((p) => {
+    return Array.filter(p => {
       if (p.active) {
         return true;
       } else {
@@ -61,11 +61,11 @@ export class Projects {
   }
 
   toArray(): projectProps[] {
-    return Object.entries(this.projects).map((p) => p[1]);
+    return Object.entries(this.projects).map(p => p[1]);
   }
 
   toFilteredArray(): projectProps[] {
-    return Object.entries(this.projects).map((p) => {
+    return Object.entries(this.projects).map(p => {
       if (!p[1].enabled) return;
       return p[1];
     });

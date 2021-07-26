@@ -1,4 +1,4 @@
-import Vibrant from "node-vibrant";
+import Vibrant from 'node-vibrant';
 
 const getKeyColor = async (imagePath: string) => {
   const palette = await Vibrant.from(imagePath).getPalette();
@@ -7,7 +7,7 @@ const getKeyColor = async (imagePath: string) => {
   const hsl = palette.Vibrant.hsl;
 
   return {
-    cssReady: `rgb(${rgb.join(", ")})`,
+    cssReady: `rgb(${rgb.join(', ')})`,
     rgb,
     hsl,
   };

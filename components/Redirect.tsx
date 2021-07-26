@@ -1,20 +1,9 @@
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import Head from 'next/head';
+import {useRouter} from 'next/router';
+import {useEffect} from 'react';
+import {RedirectProps} from '../types/components';
 
-export interface RedirectProps {
-  type: "push" | "replace";
-  url: string;
-  as?: string;
-  title?: string;
-  options?: {
-    shallow?: boolean;
-    locale?: string | false;
-    scroll?: boolean;
-  };
-}
-
-export const Redirect = ({ type, url, as, options }: RedirectProps) => {
+export const Redirect = ({title, type, url, as, options}: RedirectProps) => {
   const Router = useRouter();
 
   const defaultOptions = {
@@ -27,7 +16,7 @@ export const Redirect = ({ type, url, as, options }: RedirectProps) => {
     if (!Router.isReady) return;
 
     switch (type) {
-      case "replace":
+      case 'replace':
         Router.replace(url, as, options);
         break;
 
@@ -40,7 +29,7 @@ export const Redirect = ({ type, url, as, options }: RedirectProps) => {
   return (
     <>
       <Head>
-        <title>Redirecting...</title>
+        <title>{title ? title : 'Redirecting...'}</title>
       </Head>
     </>
   );

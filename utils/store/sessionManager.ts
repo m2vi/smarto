@@ -2,7 +2,7 @@ export class SessionManager {
   constructor() {}
 
   private cb(func: Function, ...params: any): void {
-    if (typeof func === "function" && func) {
+    if (typeof func === 'function' && func) {
       func(...params);
     }
   }

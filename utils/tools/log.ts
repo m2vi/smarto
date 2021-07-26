@@ -1,24 +1,24 @@
-import { isDevelopment, isTesting } from "../env/constants";
+import {isDevelopment, isTesting} from '../env/constants';
 
 const log = (query: any, type?: string, when?: boolean) => {
   when = !when ? isDevelopment || isTesting : when;
-  type = !type ? "log" : type;
+  type = !type ? 'log' : type;
 
   if (when) {
     switch (type) {
-      case "log":
+      case 'log':
         console.log(query);
         break;
-      case "warn":
+      case 'warn':
         console.warn(query);
         break;
-      case "info":
+      case 'info':
         console.info(query);
         break;
-      case "error":
+      case 'error':
         console.error(query);
         break;
-      case "debug":
+      case 'debug':
         console.debug(query);
         break;
       default:
@@ -27,7 +27,7 @@ const log = (query: any, type?: string, when?: boolean) => {
     }
   }
 
-  return "";
+  return '';
 };
 
 export default log;

@@ -1,4 +1,4 @@
 export interface RedirectProps {
-  type: "push" | "replace";
+  type: 'push' | 'replace';
   title?: string;
 }

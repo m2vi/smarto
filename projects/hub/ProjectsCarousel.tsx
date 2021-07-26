@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
-import { projectProps, Projects } from "../object";
-import Widget from "./Widget";
+import {useEffect, useState} from 'react';
+import 'keen-slider/keen-slider.min.css';
+import {useKeenSlider} from 'keen-slider/react';
+import {projectProps, Projects} from '../object';
+import Widget from './Widget';
 
 const ProjectsCarousel = () => {
   const [slidesPerView, setSlidesPerView] = useState(5);
@@ -20,9 +20,9 @@ const ProjectsCarousel = () => {
     <div className="w-full">
       <h4 className="mb-4">Projects</h4>
       <div ref={sliderRef} className="keen-slider">
-        {projects.map((project) => {
+        {projects.map(project => {
           if (!project) return;
-          const { icon, description, badge, language, name, path, updatedAt, key }: projectProps = project;
+          const {icon, description, badge, language, name, path, updatedAt, key}: projectProps = project;
 
           return (
             <Widget
@@ -36,7 +36,7 @@ const ProjectsCarousel = () => {
               updatedAt={updatedAt}
               key={key}
               className="keen-slider__slide"
-              style={{ aspectRatio: "2 / 1" }}
+              style={{aspectRatio: '2 / 1'}}
             />
           );
         })}

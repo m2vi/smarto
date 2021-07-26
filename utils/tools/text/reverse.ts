@@ -1,7 +1,7 @@
-import log from "../log";
+import log from '../log';
 
 const reverse = (str: string) => {
-  if (typeof str !== "string") return log("Param must be a string!");
+  if (typeof str !== 'string') return log('Param must be a string!');
 
   let newStr: string;
 

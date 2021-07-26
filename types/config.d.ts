@@ -1,12 +1,12 @@
 export enum supportedAccounts {
-  discord = "discord",
-  github = "github",
-  instagram = "instagram",
-  ip = "ip",
-  reddit = "reddit",
-  scoresaber = "scoresaber",
-  steam = "steam",
-  youtube = "youtube",
+  discord = 'discord',
+  github = 'github',
+  instagram = 'instagram',
+  ip = 'ip',
+  reddit = 'reddit',
+  scoresaber = 'scoresaber',
+  steam = 'steam',
+  youtube = 'youtube',
 }
 
 export type accountProps = {

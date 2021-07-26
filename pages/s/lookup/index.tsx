@@ -1,4 +1,4 @@
-import LookupIndex from "../../../projects/lookup/index";
+import LookupIndex from '../../../projects/lookup/index';
 
 const index = () => {
   return <LookupIndex />;

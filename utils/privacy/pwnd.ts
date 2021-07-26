@@ -1,4 +1,4 @@
-import { PwndArgs } from "../../types/privacy";
+import {PwndArgs} from '../../types/privacy';
 
 export class Pwnd {
   constructor(private data: string, private type: PwndArgs) {}

@@ -1,11 +1,11 @@
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { IoMenuOutline, IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
-import { Projects, projectProps } from "../object";
+import Image from 'next/image';
+import Link from 'next/link';
+import {useEffect, useState} from 'react';
+import {IoMenuOutline, IoLogOutOutline, IoSettingsOutline} from 'react-icons/io5';
+import {Projects, projectProps} from '../object';
 
-export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
-  return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{ height: "2px" }}></span>;
+export const Divider = ({className}: React.HTMLAttributes<HTMLSpanElement>) => {
+  return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{height: '2px'}}></span>;
 };
 
 export const Sidebar = () => {
@@ -13,7 +13,7 @@ export const Sidebar = () => {
 
   useEffect(() => {
     const func = async () => {
-      const projects = new Projects(["hub", "package_tracker", "lookup"]);
+      const projects = new Projects(['hub', 'package_tracker', 'lookup']);
       projects.setActive();
       setProjects(projects.getActiveArray());
     };
@@ -28,8 +28,8 @@ export const Sidebar = () => {
       </span>
       <Divider className="mb-3" />
       <div className=" w-full flex flex-col items-center">
-        {projects.map((project) => {
-          const { path, key, icon }: projectProps = project;
+        {projects.map(project => {
+          const {path, key, icon}: projectProps = project;
 
           return (
             <Link href={path} passHref={true} key={key}>

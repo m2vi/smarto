@@ -1,14 +1,14 @@
 export const videoCard = () => {
   try {
-    const gl = document.createElement("canvas").getContext("webgl");
+    const gl = document.createElement('canvas').getContext('webgl');
 
     if (!gl) {
       return {
-        error: "no webgl",
+        error: 'no webgl',
       };
     }
 
-    const debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
 
     if (debugInfo) {
       return {
@@ -20,12 +20,12 @@ export const videoCard = () => {
 
     return {
       success: false,
-      message: "no WEBGL_debug_renderer_info",
+      message: 'no WEBGL_debug_renderer_info',
     };
   } catch (e) {
     return {
       success: false,
-      message: "no WEBGL_debug_renderer_info",
+      message: 'no WEBGL_debug_renderer_info',
     };
   }
 };
