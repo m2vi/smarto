@@ -16,13 +16,6 @@ const ProjectsCarousel = () => {
 
   const getWidth = () => {};
 
-  useEffect(() => {
-    const projects = new Projects([], true);
-    projects.__init__().then(() => {
-      setProjects(projects.toArray());
-    });
-  }, []);
-
   return (
     <div className="w-full">
       <h4 className="mb-4">Projects</h4>

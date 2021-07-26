@@ -1,8 +1,4 @@
-import moment from "moment";
-import GitHub from "./lookup/services/github";
 import projects from "./projects";
-import { isDevelopment } from "../utils/env/constants";
-import sessionManager from "../utils/store/sessionManager";
 
 export interface projectProps {
   enabled?: boolean;
@@ -48,40 +44,6 @@ export class Projects {
     this.projects = bin;
   }
 
-  async getUpdates() {
-    //! HARD TO READ
-
-    sessionManager.get("updatedProjects", async (success: boolean, item: any) => {
-      if (success && item) {
-        this.projects = item;
-      } else {
-        let bin: [string, projectProps][] = Object.entries(this.projects);
-        const revert = (Array: [string, projectProps][]) => {
-          let bin: projectArray = {};
-          Array.forEach((item) => {
-            if (!item[1].enabled) return;
-            [(bin[item[0]] = item[1])];
-          });
-          return bin;
-        };
-
-        for (let i = 0; i < bin.length; i++) {
-          const curr = this.projects[bin[i][0]];
-          if (curr.repository && curr.enabled && this.fetch) {
-            const user = new GitHub(curr.repository?.user);
-            const { updated_at, language } = await user.repo(curr.repository?.name);
-
-            bin[i][1].updatedAt = moment(updated_at).fromNow();
-            !bin[i][1].language && (bin[i][1].language = language ? language : false);
-          }
-        }
-        sessionManager.store("updatedProjects", revert(bin));
-
-        this.projects = revert(bin);
-      }
-    });
-  }
-
   get() {
     return this.projects;
   }
@@ -111,9 +73,5 @@ export class Projects {
 
   toJSON() {
     return JSON.stringify(this.projects);
-  }
-
-  async __init__() {
-    this.getUpdates().then(() => this.setActive());
   }
 }

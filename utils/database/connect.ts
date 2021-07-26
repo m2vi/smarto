@@ -1,8 +1,5 @@
 import mongoose from "mongoose";
-
-interface connection {
-  isConnnect: number;
-}
+import { connection } from "../../types/database";
 
 const connection = {
   isConnected: 0,

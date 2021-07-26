@@ -1,6 +1,6 @@
 ## TODO
 
-- [] Add a system for all the unordered files and visualize it figma
+- [ ] Add a system for all the unordered files and visualize it figma
 
 ## Big Apps
 
@@ -19,7 +19,6 @@
 - [ ] Validator
 - [ ] Text tools
 - [ ] Privacy Tracker
-
 
 ## Hub
 

@@ -1,27 +1,27 @@
 export class SessionManager {
   constructor() {}
 
-  cb(func: Function, ...params: any) {
+  private cb(func: Function, ...params: any): void {
     if (typeof func === "function" && func) {
       func(...params);
     }
   }
 
-  get(key: string, cb?: Function) {
+  public get(key: string, cb?: Function): any {
     const item = JSON.parse(sessionStorage.getItem(key));
     this.cb(cb, item ? true : false, item);
     return cb;
   }
 
-  store(key: string, dataz: any) {
+  public store(key: string, dataz: any): void {
     sessionStorage.setItem(key, JSON.stringify(dataz));
   }
 
-  remove(key: string) {
+  public remove(key: string): void {
     sessionStorage.removeItem(key);
   }
 
-  clear() {
+  public clear(): void {
     sessionStorage.clear();
   }
 }
