@@ -1,8 +1,8 @@
-import {forwardRef, useEffect, useState} from 'react';
-import {IoSearch} from 'react-icons/io5';
-import {matchSorter} from 'match-sorter';
-import {Projects} from '../object';
-import {useHub} from '../../context/hubSearch';
+import { forwardRef, useEffect, useState } from 'react';
+import { IoSearch } from 'react-icons/io5';
+import { matchSorter } from 'match-sorter';
+import { Projects } from '../object';
+import { useHub } from '../../context/hubSearch';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   error?: string;
@@ -26,32 +26,25 @@ export const BarButton = ({
   );
 };
 
-export const Bar = forwardRef<HTMLInputElement, InputProps>(({className, error, transparent, disabled, ...props}, ref) => {
+export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error, transparent, disabled, ...props }, ref) => {
   const bg = transparent ? `bg-transparent` : `bg-primary-700`;
   const ring = error ? `ring-1 ring-secondary` : 'border-0';
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 
   const [projects, setProjects] = useState([]);
-  const {dispatch} = useHub();
+  const { dispatch } = useHub();
 
-  useEffect(() => {
-    const projects = new Projects([], true);
-    projects.__init__().then(() => {
-      setProjects(projects.toFilteredArray());
-    });
-  }, []);
-
-  const handleChange = ({currentTarget: {value}}: React.FormEvent<HTMLInputElement>) => {
+  const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
     let results = matchSorter(projects, value, {
       keys: ['key', 'name', 'path', 'description', 'tags', 'badge', 'language'],
     });
 
     if (results.length === projects.length && value.length === 0) {
-      dispatch({type: 'clear'});
+      dispatch({ type: 'clear' });
     } else if (results.length === 0) {
-      dispatch({type: 'setArray', value: [false]});
+      dispatch({ type: 'setArray', value: [false] });
     } else {
-      dispatch({type: 'setArray', value: results});
+      dispatch({ type: 'setArray', value: results });
     }
   };
 

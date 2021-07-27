@@ -1,9 +1,9 @@
 import Head from 'next/head';
-import {useRouter} from 'next/router';
-import {useEffect} from 'react';
-import {RedirectProps} from '../types/components';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { RedirectProps } from '../types/components';
 
-export const Redirect = ({title, type, url, as, options}: RedirectProps) => {
+export const Redirect = ({ title, type, url, as, options }: RedirectProps) => {
   const Router = useRouter();
 
   const defaultOptions = {

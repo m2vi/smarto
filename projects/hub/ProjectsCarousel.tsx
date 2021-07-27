@@ -1,7 +1,8 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from 'react';
 import 'keen-slider/keen-slider.min.css';
-import {useKeenSlider} from 'keen-slider/react';
-import {projectProps, Projects} from '../object';
+import { useKeenSlider } from 'keen-slider/react';
+import { Projects } from '../object';
+import { projectProps } from '../../types/projects';
 import Widget from './Widget';
 
 const ProjectsCarousel = () => {
@@ -22,7 +23,7 @@ const ProjectsCarousel = () => {
       <div ref={sliderRef} className="keen-slider">
         {projects.map(project => {
           if (!project) return;
-          const {icon, description, badge, language, name, path, updatedAt, key}: projectProps = project;
+          const { icon, description, badge, language, name, path, updatedAt, key }: projectProps = project;
 
           return (
             <Widget
@@ -36,7 +37,7 @@ const ProjectsCarousel = () => {
               updatedAt={updatedAt}
               key={key}
               className="keen-slider__slide"
-              style={{aspectRatio: '2 / 1'}}
+              style={{ aspectRatio: '2 / 1' }}
             />
           );
         })}

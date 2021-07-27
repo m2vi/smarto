@@ -1,4 +1,4 @@
-import {isDevelopment, isTesting} from '../env/constants';
+import { isDevelopment, isTesting } from '../env/constants';
 
 const log = (query: any, type?: string, when?: boolean) => {
   when = !when ? isDevelopment || isTesting : when;

@@ -1,6 +1,6 @@
-import {AppProps} from 'next/app';
+import { AppProps } from 'next/app';
 import Router from 'next/router';
-import {appWithTranslation} from 'next-i18next';
+import { appWithTranslation } from 'next-i18next';
 import NProgress from 'nprogress';
 import log from '../utils/tools/log';
 
@@ -16,6 +16,6 @@ Router.events.on('routeChangeStart', url => {
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
-const MyApp = ({Component, pageProps}: AppProps) => <Component {...pageProps} />;
+const MyApp = ({ Component, pageProps }: AppProps) => <Component {...pageProps} />;
 
 export default appWithTranslation(MyApp);

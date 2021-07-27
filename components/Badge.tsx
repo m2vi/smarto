@@ -1,6 +1,6 @@
-import {HTMLAttributes} from 'react';
+import { HTMLAttributes } from 'react';
 
-const Badge = ({className, ...props}: HTMLAttributes<HTMLSpanElement>) => {
+const Badge = ({ className, ...props }: HTMLAttributes<HTMLSpanElement>) => {
   return <span className={`${className}`} {...props}></span>;
 };
 

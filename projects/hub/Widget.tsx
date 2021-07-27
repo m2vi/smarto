@@ -1,4 +1,4 @@
-import {projectProps} from '../object';
+import { projectProps } from '../../types/projects';
 import Image from 'next/image';
 
 export interface WidgetProps extends React.HTMLAttributes<HTMLDivElement>, projectProps {

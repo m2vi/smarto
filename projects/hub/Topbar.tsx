@@ -1,7 +1,7 @@
 import Avatar from 'react-avatar';
 
-import {GoChevronDown} from 'react-icons/go';
-import {Bar, BarButton} from './Input';
+import { GoChevronDown } from 'react-icons/go';
+import { Bar, BarButton } from './Input';
 
 export const Topbar = () => {
   return (

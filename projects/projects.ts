@@ -1,4 +1,4 @@
-import {projectArray} from './object';
+import { projectArray } from '../types/projects';
 
 import HubIcon from '../public/assets/hub.svg';
 import SpeedtestIcon from '../public/assets/speedtest.svg';

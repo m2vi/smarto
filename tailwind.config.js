@@ -95,8 +95,8 @@ module.exports = {
     },
   },
   variants: {
-    backgroundColor: ({after}) => after(['disabled']),
-    textColor: ({after}) => after(['disabled']),
+    backgroundColor: ({ after }) => after(['disabled']),
+    textColor: ({ after }) => after(['disabled']),
     extend: {
       borderWidth: ['last'],
     },
