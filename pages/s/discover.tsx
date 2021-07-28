@@ -1,4 +1,4 @@
-import Hub from '@projects/hub';
+import Hub from '@components/pages/hub';
 import { HubProvider } from '@context/hubSearch';
 
 export const Discover = () => {

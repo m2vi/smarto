@@ -31,7 +31,7 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
   const ring = error ? `ring-1 ring-secondary` : 'border-0';
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState(new Projects([]).toArray());
   const { dispatch } = useHub();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {

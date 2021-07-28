@@ -3,7 +3,7 @@ import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 import { Projects } from '@projects/object';
 import { projectProps } from '@Types/projects';
-import Widget from '@projects/hub/Widget';
+import Widget from '@components/pages/hub/Widget';
 
 const ProjectsCarousel = () => {
   const [slidesPerView, setSlidesPerView] = useState(5);
@@ -37,7 +37,6 @@ const ProjectsCarousel = () => {
               updatedAt={updatedAt}
               key={key}
               className="keen-slider__slide"
-              style={{ aspectRatio: '2 / 1' }}
             />
           );
         })}
