@@ -2,7 +2,8 @@ import { forwardRef, useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { matchSorter } from 'match-sorter';
 import { Projects } from '@projects/object';
-import { useHub } from '@context/hubSearch';
+import { useDispatch } from 'react-redux';
+import { setSearch, deactivateSearch, clearSearch } from '@redux/actions/search';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   error?: string;
@@ -32,7 +33,8 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 
   const [projects, setProjects] = useState(new Projects([]).toArray());
-  const { dispatch } = useHub();
+
+  const dispatch = useDispatch();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
     let results = matchSorter(projects, value, {
@@ -40,11 +42,11 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
     });
 
     if (results.length === projects.length && value.length === 0) {
-      dispatch({ type: 'clear' });
+      dispatch(clearSearch());
     } else if (results.length === 0) {
-      dispatch({ type: 'setArray', value: [false] });
+      dispatch(deactivateSearch());
     } else {
-      dispatch({ type: 'setArray', value: results });
+      dispatch(setSearch(results));
     }
   };
 
