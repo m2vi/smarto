@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
-import { Projects } from '../object';
-import { projectProps } from '../../types/projects';
-import Widget from './Widget';
+import { Projects } from '@projects/object';
+import { projectProps } from '@Types/projects';
+import Widget from '@projects/hub/Widget';
 
 const ProjectsCarousel = () => {
   const [slidesPerView, setSlidesPerView] = useState(5);

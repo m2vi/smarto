@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { RedirectProps } from '../types/components';
+import { RedirectProps } from '@Types/components';
 
 export const Redirect = ({ title, type, url, as, options }: RedirectProps) => {
   const Router = useRouter();

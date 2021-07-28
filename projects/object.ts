@@ -1,5 +1,5 @@
-import projects from './projects';
-import { projectArray, projectProps } from '../types/projects';
+import projects from '@projects/projects';
+import { projectArray, projectProps } from '@Types/projects';
 
 export class Projects {
   projects: projectArray;

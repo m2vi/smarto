@@ -1,8 +1,8 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { matchSorter } from 'match-sorter';
-import { Projects } from '../object';
-import { useHub } from '../../context/hubSearch';
+import { Projects } from '@projects/object';
+import { useHub } from '@context/hubSearch';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   error?: string;

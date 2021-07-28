@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import Favicon from '../../components/Favicon';
-import Discover from './Discover';
-import Projects from './ProjectsCarousel';
-import Sidebar from './Sidebar';
-import Topbar from './Topbar';
-import { useHub } from '../../context/hubSearch';
-import { projectProps } from '../../types/projects';
-import Widget from './Widget';
+import Favicon from '@components/Favicon';
+import Discover from '@projects/hub/Discover';
+import Projects from '@projects/hub/ProjectsCarousel';
+import Sidebar from '@projects/hub/Sidebar';
+import Topbar from '@projects/hub/Topbar';
+import { useHub } from '@context/hubSearch';
+import { projectProps } from '@Types/projects';
+import Widget from '@projects/hub/Widget';
 
 export const Hub = () => {
   const { state } = useHub();

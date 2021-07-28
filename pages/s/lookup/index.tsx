@@ -1,7 +1,5 @@
-import LookupIndex from '../../../projects/lookup/index';
-
 const index = () => {
-  return <LookupIndex />;
+  return null;
 };
 
 export default index;

@@ -1,16 +1,16 @@
-import { projectProps } from '../../types/projects';
+import { projectProps } from '@Types/projects';
 import Image from 'next/image';
 
 export interface WidgetProps extends React.HTMLAttributes<HTMLDivElement>, projectProps {
   Key: string;
 }
 
-export const Widget = ({icon, description, badge, language, name, path, updatedAt, Key, className, ...props}: WidgetProps) => {
-  const style = {height: '150px', width: '248px'};
+export const Widget = ({ icon, description, badge, language, name, path, updatedAt, Key, className, ...props }: WidgetProps) => {
+  const style = { height: '150px', width: '248px' };
   return (
     <div
       className={`bg-primary-800 p-3 pb-4 flex flex-col items-start cursor-pointer rounded-25 relative hover:bg-primary-600 ${className}`}
-      style={{height: '150px'}}
+      style={{ height: '150px' }}
       {...props}
     >
       <span className="h-8 w-8 bg-primary-700 rounded-15 mb-1">

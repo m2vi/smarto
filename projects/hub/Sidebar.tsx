@@ -2,7 +2,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoMenuOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
-import { Projects, projectProps } from '../object';
+import { Projects } from '@projects/object';
+import { projectProps } from '@Types/projects';
 
 export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
   return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{ height: '2px' }}></span>;

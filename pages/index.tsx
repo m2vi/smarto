@@ -1,6 +1,6 @@
-import Full from '../components/Full';
-import Redirect from '../components/Redirect';
-import { Spinner } from '../components/Spinner';
+import Full from '@components/Full';
+import Redirect from '@components/Redirect';
+import { Spinner } from '@components/Spinner';
 
 const index = () => {
   return (

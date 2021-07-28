@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, DetailedHTMLProps, ReactNode } from 'react';
-import { Spinner } from './Spinner';
+import { Spinner } from '@components/Spinner';
 
 const sizeClassnames = {
   big: 'py-2 px-6 text-sm rounded-lg',

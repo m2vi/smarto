@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { connection } from '../../types/database';
+import { connection } from '@Types/database';
 
 const connection = {
   isConnected: 0,

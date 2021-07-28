@@ -1,5 +1,5 @@
-import Hub from '../../projects/hub';
-import { HubProvider } from '../../context/hubSearch';
+import Hub from '@projects/hub';
+import { HubProvider } from '@context/hubSearch';
 
 export const Discover = () => {
   return (
