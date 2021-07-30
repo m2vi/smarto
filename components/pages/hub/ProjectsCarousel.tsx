@@ -1,13 +1,12 @@
 import { useEffect, useState } from 'react';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
-import { Projects } from '@projects/object';
-import { projectProps } from '@Types/projects';
+import { projectArray } from '@projects/object';
+import { ProjectProps } from '@Types/projects';
 import Widget from '@components/pages/hub/Widget';
 
 const ProjectsCarousel = () => {
   const [slidesPerView, setSlidesPerView] = useState(5);
-  const [projects, setProjects] = useState(new Projects([]).toFilteredArray());
   const [sliderRef, slider] = useKeenSlider<HTMLDivElement>({
     slidesPerView,
     spacing: 10,
@@ -21,9 +20,9 @@ const ProjectsCarousel = () => {
     <div className="w-full">
       <h4 className="mb-4">Projects</h4>
       <div ref={sliderRef} className="keen-slider">
-        {projects.map(project => {
+        {projectArray.map(project => {
           if (!project) return;
-          const { icon, description, badge, language, name, path, updatedAt, key }: projectProps = project;
+          const { icon, description, badge, language, name, path, updatedAt, key }: ProjectProps = project;
 
           return (
             <Widget

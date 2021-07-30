@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoMenuOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 import { Projects } from '@projects/object';
-import { projectProps } from '@Types/projects';
+import { ProjectProps } from '@Types/projects';
 
 export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
   return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{ height: '2px' }}></span>;
@@ -30,7 +30,7 @@ export const Sidebar = () => {
       <Divider className="mb-3" />
       <div className=" w-full flex flex-col items-center">
         {projects.map(project => {
-          const { path, key, icon }: projectProps = project;
+          const { path, key, icon }: ProjectProps = project;
 
           return (
             <Link href={path} passHref={true} key={key}>

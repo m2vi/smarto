@@ -1,4 +1,4 @@
-import { projectArray } from '@Types/projects';
+import { ProjectArray } from '@Types/projects';
 
 import HubIcon from '@public/assets/hub.svg';
 import SpeedtestIcon from '@public/assets/speedtest.svg';
@@ -12,7 +12,7 @@ import SmartHomeHandlerIcon from '@public/assets/smart_home_handler.svg';
 import FilesIcon from '@public/assets/files.svg';
 import CodeSnippetsIcon from '@public/assets/code_snippets.svg';
 
-export const projects: projectArray = {
+export const projects: ProjectArray = {
   hub: {
     enabled: true,
     key: 'hub',

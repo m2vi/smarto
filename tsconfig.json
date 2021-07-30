@@ -27,6 +27,6 @@
       "@redux/*": ["redux/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "redux/reducers/searchReducer.sx"],
   "exclude": ["node_modules"]
 }

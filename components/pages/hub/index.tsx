@@ -6,11 +6,13 @@ import Sidebar from '@components/pages/hub/Sidebar';
 import Topbar from '@components/pages/hub/Topbar';
 import { projectProps } from '@Types/projects';
 import Widget from '@components/pages/hub/Widget';
-import { useStore } from 'react-redux';
-
+import { useHub } from '@context/hubSearch';
+import { useEffect } from 'react';
 export const Hub = () => {
-  const state = useStore();
-  console.warn(state);
+  const { state } = useHub();
+
+  useEffect(() => console.log(state));
+
   return (
     <>
       <Head>
@@ -22,14 +24,13 @@ export const Hub = () => {
         <div className="h-screen w-full flex-col flex mr-8">
           <Topbar />
           <main className="h-full w-full py-6">
-            {console.log(state.getState().results)}
-            {state.getState().results === 0 || state.getState().results === [false] ? (
+            {state.length === 0 || state === [false] ? (
               <>
                 <Discover />
                 <Projects />
               </>
             ) : (
-              state.getState().results.map((project: projectProps) => {
+              state.map((project: projectProps) => {
                 if (!project) return;
                 const { icon, description, badge, language, name, path, updatedAt, key } = project;
 

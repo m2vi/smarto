@@ -1,16 +1,16 @@
 import projects from '@projects/projects';
-import { projectArray, projectProps } from '@Types/projects';
+import { ProjectArray, ProjectProps } from '@Types/projects';
 
 export class Projects {
-  projects: projectArray;
+  projects: ProjectArray;
   activeArray: string[];
 
-  constructor(private keys: string[], private fetch?: boolean) {
+  constructor(private keys?: string[], private fetch?: boolean) {
     this.projects = projects;
   }
 
   setActive() {
-    let bin: projectArray = this.projects;
+    let bin: ProjectArray = this.projects;
 
     for (let i = 0; i < this.keys.length; i++) {
       bin[this.keys[i]].active = true;
@@ -35,11 +35,11 @@ export class Projects {
     });
   }
 
-  toArray(): projectProps[] {
+  toArray(): ProjectProps[] {
     return Object.entries(this.projects).map(p => p[1]);
   }
 
-  toFilteredArray(): projectProps[] {
+  toFilteredArray(): ProjectProps[] {
     return Object.entries(this.projects).map(p => {
       if (!p[1].enabled) return;
       return p[1];
@@ -50,3 +50,7 @@ export class Projects {
     return JSON.stringify(this.projects);
   }
 }
+
+export const projectArray = new Projects().toArray();
+
+export default Projects;

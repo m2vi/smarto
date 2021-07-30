@@ -1,4 +1,4 @@
-export interface projectProps {
+export interface ProjectProps {
   enabled?: boolean;
   key?: string;
   name?: string;
@@ -20,6 +20,6 @@ export interface projectProps {
   active?: boolean;
 }
 
-export interface projectArray {
+export interface ProjectArray {
   [key: string]: projectProps;
 }

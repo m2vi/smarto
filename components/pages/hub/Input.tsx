@@ -1,9 +1,8 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { matchSorter } from 'match-sorter';
-import { Projects } from '@projects/object';
-import { useDispatch } from 'react-redux';
-import { setSearch, deactivateSearch, clearSearch } from '@redux/actions/search';
+import { projectArray } from '@projects/object';
+import { useHub } from '@context/hubSearch';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   error?: string;
@@ -32,21 +31,18 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
   const ring = error ? `ring-1 ring-secondary` : 'border-0';
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 
-  const [projects, setProjects] = useState(new Projects([]).toArray());
-
-  const dispatch = useDispatch();
+  const projects = projectArray;
+  const { dispatch } = useHub();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
-    let results = matchSorter(projects, value, {
-      keys: ['key', 'name', 'path', 'description', 'tags', 'badge', 'language'],
-    });
+    let results = matchSorter(projects, value, { keys: ['key', 'name', 'path', 'description', 'tags', 'badge', 'language'] });
 
     if (results.length === projects.length && value.length === 0) {
-      dispatch(clearSearch());
+      dispatch({ type: 'clear' });
     } else if (results.length === 0) {
-      dispatch(deactivateSearch());
+      dispatch({ type: 'setArray', value: [false] });
     } else {
-      dispatch(setSearch(results));
+      dispatch({ type: 'setArray', value: results });
     }
   };
 
