@@ -1,5 +1,10 @@
+export interface MetaProps {
+  description: string;
+  langauge: string;
+}
+
 export interface RedirectProps {
-  type: "push" | "replace";
+  type: 'push' | 'replace';
   url: string;
   as?: string;
   title?: string;

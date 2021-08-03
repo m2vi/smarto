@@ -47,7 +47,7 @@ export const Sidebar = () => {
         <Divider className="mb-3" />
 
         <span className="px-4 py-3 rounded-15 h-full w-full cursor-pointer flex justify-center items-center" aria-roledescription="wrapper">
-          <Link href="/settigns" passHref={true}>
+          <Link href="/settings" passHref={true}>
             <span className="h-8 w-8 rounded-15 bg-primary-700 flex justify-center items-center">
               <IoSettingsOutline className="h-3 w-3 text-primary-300" />
             </span>

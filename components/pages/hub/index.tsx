@@ -4,7 +4,7 @@ import Discover from '@components/pages/hub/Discover';
 import Projects from '@components/pages/hub/ProjectsCarousel';
 import Sidebar from '@components/pages/hub/Sidebar';
 import Topbar from '@components/pages/hub/Topbar';
-import { projectProps } from '@Types/projects';
+import { ProjectProps } from '@Types/projects';
 import Widget from '@components/pages/hub/Widget';
 import { useHub } from '@context/hubSearch';
 import { useEffect } from 'react';
@@ -30,7 +30,7 @@ export const Hub = () => {
                 <Projects />
               </>
             ) : (
-              state.map((project: projectProps) => {
+              state.map((project: ProjectProps) => {
                 if (!project) return;
                 const { icon, description, badge, language, name, path, updatedAt, key } = project;
 
