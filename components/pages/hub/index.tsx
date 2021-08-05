@@ -6,10 +6,10 @@ import Sidebar from '@components/pages/hub/Sidebar';
 import Topbar from '@components/pages/hub/Topbar';
 import { ProjectProps } from '@Types/projects';
 import Widget from '@components/pages/hub/Widget';
-import { useHub } from '@context/hubSearch';
+import { useSearch } from '@context/search';
 import { useEffect } from 'react';
 export const Hub = () => {
-  const { state } = useHub();
+  const { state } = useSearch();
 
   useEffect(() => console.log(state));
 

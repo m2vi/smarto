@@ -21,7 +21,7 @@ const ProjectsCarousel = () => {
       <h4 className="mb-4">Projects</h4>
       <div ref={sliderRef} className="keen-slider">
         {projectArray.map(project => {
-          if (!project) return;
+          if (!project || !project.enabled) return;
           const { icon, description, badge, language, name, path, updatedAt, key }: ProjectProps = project;
 
           return (

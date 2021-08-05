@@ -1,15 +1,23 @@
 import { ProjectProps } from '@Types/projects';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 export interface WidgetProps extends React.HTMLAttributes<HTMLDivElement>, ProjectProps {
   Key: string;
 }
 
 export const Widget = ({ icon, description, badge, language, name, path, updatedAt, Key, className, ...props }: WidgetProps) => {
+  const Router = useRouter();
+
+  const handleClick = () => {
+    Router.push(path, undefined, { shallow: true });
+  };
+
   return (
     <div
       className={`bg-primary-800 p-3 pb-4 flex flex-col items-start cursor-pointer rounded-25 relative hover:bg-primary-600 ${className}`}
       style={{ height: '135px' }}
+      onClick={handleClick}
       {...props}
     >
       <span className="h-8 w-8 bg-primary-700 rounded-15 mb-1">

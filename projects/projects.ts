@@ -30,7 +30,7 @@ export const projects: ProjectArray = {
     },
   },
   speedtest: {
-    enabled: true,
+    enabled: false,
     key: 'speedtest',
     name: 'Speedtest',
     path: '/s/speedtest',
@@ -41,7 +41,7 @@ export const projects: ProjectArray = {
     badge: 'all',
   },
   link_shortener: {
-    enabled: true,
+    enabled: false,
     key: 'link_shortener',
     name: 'Link Shortener',
     path: '/s/link_shortener',
@@ -52,7 +52,7 @@ export const projects: ProjectArray = {
     badge: 'all',
   },
   package_tracker: {
-    enabled: true,
+    enabled: false,
     key: 'package_tracker',
     name: 'Package Tracker',
     path: '/s/package_tracker',
@@ -63,7 +63,7 @@ export const projects: ProjectArray = {
     badge: 'web',
   },
   cointracker: {
-    enabled: true,
+    enabled: false,
     key: 'cointracker',
     name: 'Cointracker',
     path: '/s/cointracker',
@@ -85,7 +85,7 @@ export const projects: ProjectArray = {
     badge: 'web',
   },
   weather_app: {
-    enabled: true,
+    enabled: false,
     key: 'weather_app',
     name: 'Weather App',
     path: '/s/weather_app',
@@ -96,7 +96,7 @@ export const projects: ProjectArray = {
     badge: 'all',
   },
   downloader: {
-    enabled: true,
+    enabled: false,
     key: 'downloader',
     name: 'Downloader',
     path: '/s/downloader',
@@ -134,7 +134,7 @@ export const projects: ProjectArray = {
     badge: 'all',
   },
   code_snippets: {
-    enabled: true,
+    enabled: false,
     key: 'code_snippets',
     name: 'Code Snippets',
     path: '/s/code_snippets',

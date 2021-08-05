@@ -2,7 +2,7 @@ import { forwardRef, useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { matchSorter } from 'match-sorter';
 import { projectArray } from '@projects/object';
-import { useHub } from '@context/hubSearch';
+import { useSearch } from '@context/search';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
   error?: string;
@@ -32,7 +32,7 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 
   const projects = projectArray;
-  const { dispatch } = useHub();
+  const { dispatch } = useSearch();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
     let results = matchSorter(projects, value, { keys: ['key', 'name', 'path', 'description', 'tags', 'badge', 'language'] });

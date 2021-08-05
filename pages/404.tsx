@@ -16,7 +16,7 @@ export default function FourOhFour() {
         <div>
           <h1>404</h1>
           <p className="text-primary-300 pb-2">Oh no! That page doesn&apos;t exist!</p>
-          <Link href="/s/discover" passHref={true} replace={false}>
+          <Link href="/" passHref={true} replace={false}>
             <span>
               <ButtonLink className="text-accent">
                 <span className="flex items-center justify-center mx-auto">

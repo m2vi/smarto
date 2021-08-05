@@ -1,12 +1,12 @@
 import Hub from '@components/pages/hub';
-import { HubProvider } from '@context/hubSearch';
+import { SearchProvider } from '@context/search';
 
 export const Discover = () => {
   return (
     <>
-      <HubProvider>
+      <SearchProvider>
         <Hub />
-      </HubProvider>
+      </SearchProvider>
     </>
   );
 };

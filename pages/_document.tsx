@@ -1,5 +1,6 @@
 import Meta from '@components/Meta';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
+import { contextType } from 'react-modal';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

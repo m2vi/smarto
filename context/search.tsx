@@ -1,6 +1,6 @@
 import { createContext, useContext, useReducer } from 'react';
 
-const HubContext = createContext(null);
+const SearchContext = createContext(null);
 
 const initalState: any = [];
 
@@ -9,7 +9,7 @@ export interface actionProps {
   value: any;
 }
 
-export const hubReducer = (state, { type, value }: actionProps) => {
+export const searchReducer = (state, { type, value }: actionProps) => {
   switch (type) {
     case 'setArray': {
       return value;
@@ -23,14 +23,14 @@ export const hubReducer = (state, { type, value }: actionProps) => {
   }
 };
 
-export const HubProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(hubReducer, initalState);
+export const SearchProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(searchReducer, initalState);
   const value = { state, dispatch };
-  return <HubContext.Provider value={value}>{children}</HubContext.Provider>;
+  return <SearchContext.Provider value={value}>{children}</SearchContext.Provider>;
 };
 
-export const useHub = () => {
-  const context = useContext(HubContext);
+export const useSearch = () => {
+  const context = useContext(SearchContext);
   if (context === undefined) {
     console.error('useCount must be used within a CountProvider');
   }

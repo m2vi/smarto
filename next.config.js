@@ -10,7 +10,7 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/s/',
+        source: '/s',
         destination: '/s/discover',
         permanent: true,
       },
