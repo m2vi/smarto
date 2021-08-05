@@ -1,16 +1,16 @@
 import { ProjectArray } from '@Types/projects';
 
-import HubIcon from '@public/assets/hub.svg';
-import SpeedtestIcon from '@public/assets/speedtest.svg';
-import LinkShortenerIcon from '@public/assets/link_shortener.svg';
-import PackageTrackerIcon from '@public/assets/package_tracker.svg';
-import CointrackerIcon from '@public/assets/cointracker.svg';
-import LookupIcon from '@public/assets/lookup.svg';
-import WeatherAppIcon from '@public/assets/weather_app.svg';
-import DownloaderIcon from '@public/assets/downloader.svg';
-import SmartHomeHandlerIcon from '@public/assets/smart_home_handler.svg';
-import FilesIcon from '@public/assets/files.svg';
-import CodeSnippetsIcon from '@public/assets/code_snippets.svg';
+import HubIcon from '@public/assets/projects/hub.svg';
+import SpeedtestIcon from '@public/assets/projects/speedtest.svg';
+import LinkShortenerIcon from '@public/assets/projects/link_shortener.svg';
+import PackageTrackerIcon from '@public/assets/projects/package_tracker.svg';
+import CointrackerIcon from '@public/assets/projects/cointracker.svg';
+import LookupIcon from '@public/assets/projects/lookup.svg';
+import WeatherAppIcon from '@public/assets/projects/weather_app.svg';
+import DownloaderIcon from '@public/assets/projects/downloader.svg';
+import SmartHomeHandlerIcon from '@public/assets/projects/smart_home_handler.svg';
+import FilesIcon from '@public/assets/projects/files.svg';
+import CodeSnippetsIcon from '@public/assets/projects/code_snippets.svg';
 
 export const projects: ProjectArray = {
   hub: {
