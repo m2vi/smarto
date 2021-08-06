@@ -1,12 +1,12 @@
 export class Client {
   #baseUrl: string;
   constructor(private service: string) {
-    this.#baseUrl = 'http://lookup.vercel.app/api';
+    this.#baseUrl = '/api/lookup';
   }
 
   private async fetcher(id: string) {
     try {
-      const data = await fetch(`${this.#baseUrl}/${this.service}/${id}`);
+      const data = await fetch(`${this.#baseUrl}?service=${this.service}&id=${id}`);
       const json = await data.json();
       return json;
     } catch (error) {

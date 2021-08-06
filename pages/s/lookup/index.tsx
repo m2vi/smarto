@@ -10,7 +10,7 @@ const Home = () => {
   const handleClick = (url: string) => {
     Router.push(`/s/lookup/${url}`);
   };
-
+  console.log(DiscordLogo);
   return (
     <>
       <Head>
@@ -22,7 +22,7 @@ const Home = () => {
           className="bg-primary-800 p-3 w-80 h-80 grid place-items-center rounded-15 hover:bg-primary-700 cursor-pointer no-drag select-none"
           onClick={() => handleClick('discord')}
         >
-          <Image src={DiscordLogo} alt="Discord Logo" />
+          <DiscordLogo className="w-full h-full" />
         </div>
       </Full>
     </>

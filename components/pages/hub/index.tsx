@@ -15,10 +15,6 @@ export const Hub = () => {
 
   return (
     <>
-      <Head>
-        <title>Discover</title>
-        <Favicon project="hub" />
-      </Head>
       <div className="h-screen w-full flex flex-row">
         <Sidebar />
         <div className="h-screen w-full flex-col flex mr-8">
