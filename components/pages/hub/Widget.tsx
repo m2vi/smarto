@@ -1,5 +1,4 @@
 import { ProjectProps } from '@Types/projects';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 export interface WidgetProps extends React.HTMLAttributes<HTMLDivElement>, ProjectProps {
@@ -8,7 +7,7 @@ export interface WidgetProps extends React.HTMLAttributes<HTMLDivElement>, Proje
 
 export const Widget = ({ icon, description, badge, language, name, path, updatedAt, Key, className, ...props }: WidgetProps) => {
   const Router = useRouter();
-
+  const Icon = icon;
   const handleClick = () => {
     Router.push(path, undefined, { shallow: true });
   };
@@ -21,7 +20,7 @@ export const Widget = ({ icon, description, badge, language, name, path, updated
       {...props}
     >
       <span className="h-8 w-8 bg-primary-700 rounded-15 mb-1">
-        <Image src={icon} alt={Key} className="h-8 w-8 rounded-15" />
+        <Icon className="h-8 w-8 rounded-15" />
       </span>
       <span className="flex items-center justify-start flex-row">
         <p className="mr-1">{name}</p>

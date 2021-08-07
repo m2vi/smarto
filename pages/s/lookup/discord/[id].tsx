@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import { Client } from '@projects/lookup/client';
 import { FormatedProps } from '@Types/lookup';
 import { Spinner } from '@components/Spinner';
-
+import { apiBaseUrl } from '@utils/env/constants';
 const ModalWrapper = styled.div`
   background-color: #18191c;
   border-radius: 8px;
@@ -104,61 +104,52 @@ const CustomStatus = styled.div`
   color: #b9bbbe;
 `;
 
-const Discord = ({ id }) => {
-  const [user, setUser] = useState({} as FormatedProps);
+const Discord = ({ data }) => {
+  const {
+    avatar: { url: avatar },
+    username,
+    discriminator,
+  } = data as FormatedProps;
 
-  useEffect(() => {
-    const api = new Client('discord');
-
-    api.get(id).then(user => setUser(user));
-  }, [id]);
-
-  if (!user?.success) {
-    return (
-      <Full className="grid place-items-center">
-        <Spinner />
-      </Full>
-    );
-  } else {
-    const {
-      avatar: { url },
-      username,
-      discriminator,
-    } = user;
-
-    return (
-      <>
-        <Full className="grid place-items-center">
-          <ModalWrapper>
-            <BackgroundColor color="rgb(70, 62, 48)" />
-            <div className="w-full relative">
-              <Avatar>
-                <Image src={url} alt=" " className="" aria-hidden="true" height="120" width="120"></Image>
-              </Avatar>
-              <HeaderTop />
-            </div>
-            <NameTag>
-              <span>{username}</span>
-              <span className="discriminator">#{discriminator}</span>
-            </NameTag>
-            <CustomStatus>I have all the best cognition with all the top grammar</CustomStatus>
-          </ModalWrapper>
-        </Full>
-      </>
-    );
-  }
-};
-
-const Page = () => {
   return (
     <>
       <Head>
         <title>Discord</title>
         <link rel="shortcut icon" href="/favicon.ico" />
       </Head>
-      <Discord id="340036867468820482" />
+
+      <Full className="grid place-items-center">
+        <ModalWrapper>
+          <BackgroundColor color="rgb(70, 62, 48)" />
+          <div className="w-full relative">
+            <Avatar>
+              <Image src={avatar} alt=" " className="" aria-hidden="true" height="120" width="120"></Image>
+            </Avatar>
+            <HeaderTop />
+          </div>
+          <NameTag>
+            <span>{username}</span>
+            <span className="discriminator">#{discriminator}</span>
+          </NameTag>
+          <CustomStatus>I have all the best cognition with all the top grammar</CustomStatus>
+        </ModalWrapper>
+      </Full>
     </>
   );
 };
 
-export default Page;
+export async function getServerSideProps({ query: { id } }) {
+  const data = await (await fetch(`${apiBaseUrl}/lookup?service=discord&id=${id}`)).json();
+
+  if (!data) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { data },
+  };
+}
+
+export default Discord;

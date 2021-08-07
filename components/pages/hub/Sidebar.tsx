@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoMenuOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
@@ -31,11 +30,11 @@ export const Sidebar = () => {
       <div className=" w-full flex flex-col items-center">
         {projects.map(project => {
           const { path, key, icon }: ProjectProps = project;
-
+          const Icon = icon;
           return (
             <Link href={path} passHref={true} key={key}>
               <span className="px-4 py-3 rounded-15 h-full w-full cursor-pointer">
-                <Image src={icon} alt={key} className="h-8 w-8 rounded-15" draggable={false} />
+                <Icon className="h-8 w-8 rounded-15" draggable={false} />
               </span>
             </Link>
           );

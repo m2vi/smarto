@@ -3,7 +3,7 @@ export interface ProjectProps {
   key?: string;
   name?: string;
   path?: string;
-  icon?: StaticImageData;
+  icon?: any;
   createdAt?: number;
   updatedAt?: string;
   description?: string;
