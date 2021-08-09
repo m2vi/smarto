@@ -1,6 +1,5 @@
 import Meta from '@components/Meta';
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
-import { contextType } from 'react-modal';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -10,7 +9,7 @@ class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en-UK">
+      <Html lang={this.props.__NEXT_DATA__.props.initialLanguage}>
         <Head>
           <Meta langauge="en" description="Some text" />
         </Head>

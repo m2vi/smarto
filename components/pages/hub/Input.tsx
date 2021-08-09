@@ -18,7 +18,7 @@ export const BarButton = ({
 }: React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>) => {
   return (
     <button
-      className={`py-2 text-sm rounded-r-8 bg-primary-700 text-primary-300 font-bold flex items-center justify-center h-8 hover:bg-primary-700 px-4 ${className}`}
+      className={`py-2 text-sm rounded-r-8 bg-primary-800 text-primary-300 font-bold flex items-center justify-center h-8 hover:bg-primary-800 px-4 ${className}`}
       {...props}
     >
       <IoSearch className="h-3 w-3" />
@@ -27,7 +27,7 @@ export const BarButton = ({
 };
 
 export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error, transparent, disabled, ...props }, ref) => {
-  const bg = transparent ? `bg-transparent` : `bg-primary-700`;
+  const bg = transparent ? `bg-transparent` : `bg-primary-800`;
   const ring = error ? `ring-1 ring-secondary` : 'border-0';
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 

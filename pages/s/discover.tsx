@@ -1,6 +1,7 @@
 import Favicon from '@components/Favicon';
 import Hub from '@components/pages/hub';
 import { SearchProvider } from '@context/search';
+import { WidgetStateProvider } from '@context/widgetState';
 import Head from 'next/head';
 
 export const Discover = () => {
@@ -11,7 +12,9 @@ export const Discover = () => {
         <Favicon project="hub" />
       </Head>
       <SearchProvider>
-        <Hub />
+        <WidgetStateProvider>
+          <Hub />
+        </WidgetStateProvider>
       </SearchProvider>
     </>
   );

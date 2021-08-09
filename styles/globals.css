@@ -33,6 +33,14 @@
   --color-primary-800: #252836;
   --color-primary-900: #1f1d2b;
 
+  --color-primary-100: hsl(0, 0%, 100%);
+  --color-primary-200: hsl(200, 17%, 85%);
+  --color-primary-300: hsl(223, 14%, 60%);
+  --color-primary-600: hsl(215, 24%, 16%);
+  --color-primary-700: hsl(215, 27%, 15%);
+  --color-primary-800: hsl(215, 28%, 12%);
+  --color-primary-900: hsl(212, 35%, 10%);
+
   /* Toasts */
   --toast-default: #8b1dd0;
   --toast-success: #27d0b2;
@@ -558,4 +566,13 @@ body,
   border-top: 3px var(--color-primary-600) solid;
   border-right: 3px var(--color-primary-600) solid;
   border-radius: 50%;
+}
+
+.reallySmall {
+  font-size: 10px;
+  line-height: 1;
+}
+
+.l-1 {
+  line-height: 1;
 }

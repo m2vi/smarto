@@ -3,7 +3,7 @@ import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
 import { projectArray } from '@projects/object';
 import { ProjectProps } from '@Types/projects';
-import Widget from '@components/pages/hub/Widget';
+import Project from '@components/pages/hub/Project';
 
 const ProjectsCarousel = () => {
   const [slidesPerView, setSlidesPerView] = useState(5);
@@ -25,7 +25,7 @@ const ProjectsCarousel = () => {
           const { icon, description, badge, language, name, path, updatedAt, key }: ProjectProps = project;
 
           return (
-            <Widget
+            <Project
               Key={key}
               icon={icon}
               description={description}

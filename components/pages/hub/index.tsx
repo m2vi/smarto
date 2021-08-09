@@ -5,19 +5,17 @@ import Projects from '@components/pages/hub/ProjectsCarousel';
 import Sidebar from '@components/pages/hub/Sidebar';
 import Topbar from '@components/pages/hub/Topbar';
 import { ProjectProps } from '@Types/projects';
-import Widget from '@components/pages/hub/Widget';
+import Project from '@components/pages/hub/Project';
 import { useSearch } from '@context/search';
-import { useEffect } from 'react';
+
 export const Hub = () => {
   const { state } = useSearch();
 
-  useEffect(() => console.log(state));
-
   return (
     <>
-      <div className="h-screen w-full flex flex-row">
+      <div className="h-screen w-screen max-w-screen-2xl flex flex-row justify-between">
         <Sidebar />
-        <div className="h-screen w-full flex-col flex mr-8">
+        <div className="h-screen w-full max-w-screen-xl flex-col flex mx-7">
           <Topbar />
           <main className="h-full w-full py-6">
             {state.length === 0 || state === [false] ? (
@@ -31,7 +29,7 @@ export const Hub = () => {
                 const { icon, description, badge, language, name, path, updatedAt, key } = project;
 
                 return (
-                  <Widget
+                  <Project
                     icon={icon}
                     description={description}
                     badge={badge}
@@ -49,6 +47,7 @@ export const Hub = () => {
           </main>
           <div className="mt-4"></div>
         </div>
+        <Sidebar invisible={true} />
       </div>
     </>
   );

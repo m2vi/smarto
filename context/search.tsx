@@ -32,7 +32,7 @@ export const SearchProvider = ({ children }) => {
 export const useSearch = () => {
   const context = useContext(SearchContext);
   if (context === undefined) {
-    console.error('useCount must be used within a CountProvider');
+    console.error('useSearch must be used within a SearchProvider');
   }
   return context;
 };
