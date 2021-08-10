@@ -576,3 +576,7 @@ body,
 .l-1 {
   line-height: 1;
 }
+
+.hoverDucDog:hover div.h-7.w-7.mr-2.rounded.bg-primary-600.grid.place-items-center {
+  background-color: var(--color-primary-800);
+}

@@ -7,6 +7,7 @@ import 'nprogress/nprogress.css';
 import 'tailwindcss/tailwind.css';
 import '@styles/globals.css';
 import '@styles/bootstrap-grid.css';
+import '@styles/notifications.css';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

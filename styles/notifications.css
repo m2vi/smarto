@@ -1,0 +1,60 @@
+.notification-container {
+  max-width: 450px;
+  padding: 0 15px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100vw;
+  z-index: 999999;
+}
+@media (max-width: 600px) {
+  .notification-container {
+    max-width: 100%;
+  }
+}
+.notification {
+  background-color: var(--color-primary-800);
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  color: var(--color-primary-100);
+  cursor: pointer;
+  margin-top: 15px;
+  opacity: 1;
+  padding: 15px 20px;
+  position: relative;
+}
+.notification-enter {
+  visibility: hidden;
+  transform: translate3d(100%, 0, 0);
+}
+.notification-enter.notification-enter-active {
+  transition: all 0.4s;
+}
+.notification-enter.notification-enter-active,
+.notification-leave {
+  transform: translateZ(0);
+  visibility: visible;
+}
+.notification-leave.notification-leave-active {
+  transform: translate3d(100%, 0, 0);
+  transition: all 0.4s;
+  visibility: hidden;
+}
+.notification .notification-message {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: space-between;
+}
+.notification .notification-message .title {
+  display: flex;
+  justify-content: center;
+  margin: 0px 20px 0px 5px;
+}
+.notification .notification-message .title img {
+  align-self: center;
+}
+.notification .notification-message .message {
+  display: flex;
+  align-items: center;
+}

@@ -23,9 +23,9 @@ export const Widget = ({ name, value: base, icon: Icon, getValue, invisible }: W
 
   return (
     <div
-      className={`${
-        !invisible ? 'bg-primary-800 hover:bg-primary-700' : 'bg-transparent invisible'
-      } p-3 flex flex-row justify-start items-center h-11 rounded-8 cursor-pointer`}
+      className={`bg-primary-800 hover:bg-primary-700 hoverDucDog p-3 flex flex-row justify-start items-center h-11 rounded-8 cursor-pointer ${
+        invisible && 'invisible'
+      }`}
       style={{ width: 'calc((1280px - 10px * 6) / 6)' }}
     >
       <div className="h-7 w-7 mr-2 rounded bg-primary-600 grid place-items-center">{Icon ? <Icon /> : null}</div>
