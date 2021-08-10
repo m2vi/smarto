@@ -1,3 +1,5 @@
+import { SearchItemProps } from './search';
+
 export enum supportedAccounts {
   discord = 'discord',
   github = 'github',
@@ -20,4 +22,5 @@ export interface userData {
   birthday: number;
   createdAt: number;
   accounts: accountProps;
+  search: SearchItemProps[];
 }
