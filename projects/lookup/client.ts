@@ -1,3 +1,5 @@
+import { isDevelopment } from '@utils/env/constants';
+
 export class Client {
   #baseUrl: string;
   constructor(private service: string) {
@@ -5,15 +7,22 @@ export class Client {
   }
 
   private async fetcher(id: string) {
-    try {
-      const data = await fetch(`${this.#baseUrl}?service=${this.service}&id=${id}`);
-      const json = await data.json();
-      return json;
-    } catch (error) {
+    if (isDevelopment) {
       return {
         success: false,
-        message: error.message,
+        message: 'Failed',
       };
+    } else {
+      try {
+        const data = await fetch(`${this.#baseUrl}?service=${this.service}&id=${id}`);
+        const json = await data.json();
+        return json;
+      } catch (error) {
+        return {
+          success: false,
+          message: 'Failed',
+        };
+      }
     }
   }
 

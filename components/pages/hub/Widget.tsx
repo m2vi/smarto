@@ -1,25 +1,23 @@
 import { useWidgetState } from '@context/widgetState';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 export interface WidgetProps {
   name?: string;
-  value?: string;
-  icon?: React.FC;
+  icon?: string;
   getValue?: () => Promise<string>;
   invisible?: boolean;
 }
 
-export const Widget = ({ name, value: base, icon: Icon, getValue, invisible }: WidgetProps) => {
+export const Widget = ({ name, icon, getValue, invisible }: WidgetProps) => {
   const state = useWidgetState().state;
   const [value, setValue] = useState('...');
 
   useEffect(() => {
     if (getValue) {
       getValue().then(newValue => setValue(newValue));
-    } else if (base) {
-      setValue(base);
     }
-  }, [base, getValue]);
+  }, [getValue]);
 
   return (
     <div
@@ -28,7 +26,9 @@ export const Widget = ({ name, value: base, icon: Icon, getValue, invisible }: W
       }`}
       style={{ width: 'calc((1280px - 10px * 6) / 6)' }}
     >
-      <div className="h-7 w-7 mr-2 rounded bg-primary-600 grid place-items-center">{Icon ? <Icon /> : null}</div>
+      <div className="h-7 w-7 mr-2 rounded bg-primary-600 grid place-items-center">
+        {icon && <Image src={icon} alt={name} height="35px" width="35px" />}
+      </div>
       <div className="flex flex-col justify-start items-start h-full">
         <p className="small l-1 pb-1">{name ? name : '...'}</p>
         <p className="small l-1 text-primary-300">{value}</p>
