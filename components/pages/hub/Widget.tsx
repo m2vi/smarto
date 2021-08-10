@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react';
 export interface WidgetProps {
   name?: string;
   icon?: string;
+  bg?: string;
   getValue?: () => Promise<string>;
   invisible?: boolean;
 }
 
-export const Widget = ({ name, icon, getValue, invisible }: WidgetProps) => {
+export const Widget = ({ name, icon, bg, getValue, invisible }: WidgetProps) => {
   const state = useWidgetState().state;
   const [value, setValue] = useState('...');
 
@@ -21,12 +22,12 @@ export const Widget = ({ name, icon, getValue, invisible }: WidgetProps) => {
 
   return (
     <div
-      className={`bg-primary-800 hover:bg-primary-700 hoverDucDog p-3 flex flex-row justify-start items-center h-11 rounded-8 cursor-pointer ${
+      className={`bg-primary-800 hover:bg-primary-700 hoverDucDog p-3 flex flex-row justify-start items-center h-11 rounded-8 cursor-pointer  ${
         invisible && 'invisible'
       }`}
       style={{ width: 'calc((1280px - 10px * 6) / 6)' }}
     >
-      <div className="h-7 w-7 mr-2 rounded bg-primary-600 grid place-items-center">
+      <div className="h-7 w-7 mr-2 rounded bg-primary-600 grid place-items-center select-none">
         {icon && <Image src={icon} alt={name} height="35px" width="35px" />}
       </div>
       <div className="flex flex-col justify-start items-start h-full">
