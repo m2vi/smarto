@@ -1,6 +1,6 @@
 import Favicon from '@components/Favicon';
 import Hub from '@components/pages/hub';
-import { SearchProvider } from '@context/search';
+import { HubSearchProvider } from '@context/hubSearch';
 import { WidgetStateProvider } from '@context/widgetState';
 import Head from 'next/head';
 import { NotificationContainer } from 'react-notifications';
@@ -13,11 +13,11 @@ export const Discover = () => {
         <Favicon project="hub" />
       </Head>
 
-      <SearchProvider>
+      <HubSearchProvider>
         <WidgetStateProvider>
           <Hub />
         </WidgetStateProvider>
-      </SearchProvider>
+      </HubSearchProvider>
 
       <NotificationContainer />
     </>

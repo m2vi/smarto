@@ -1,26 +1,16 @@
+import user from '@config/me';
 import { createContext, useContext, useReducer } from 'react';
 
 const SearchContext = createContext(null);
 
-const initalState: any = [];
+const initalState: any = user.search;
 
 export interface actionProps {
-  type: string;
   value: any;
 }
 
-export const searchReducer = (state, { type, value }: actionProps) => {
-  switch (type) {
-    case 'setArray': {
-      return value;
-    }
-    case 'clear': {
-      return [];
-    }
-    default: {
-      console.error(`Unhandled action type: ${type}`);
-    }
-  }
+export const searchReducer = (state, { value }: actionProps) => {
+  return value;
 };
 
 export const SearchProvider = ({ children }) => {

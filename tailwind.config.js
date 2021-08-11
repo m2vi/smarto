@@ -4,7 +4,7 @@ module.exports = {
   theme: {
     fontFamily: {
       sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
-      mono: ['Menlo', 'Monaco', 'Courier New', 'monospace'],
+      roboto: ['roboto', 'sans-serif'],
     },
     fontSize: {
       tiny: '0.625rem',

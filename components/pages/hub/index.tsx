@@ -6,12 +6,12 @@ import Sidebar from '@components/pages/hub/Sidebar';
 import Topbar from '@components/pages/hub/Topbar';
 import { ProjectProps } from '@Types/projects';
 import Project from '@components/pages/hub/Project';
-import { useSearch } from '@context/search';
+import { useHubSearch } from '@context/hubSearch';
 import { useEffect } from 'react';
 import notify, { NotifyTypes } from '@utils/tools/notify';
 
 export const Hub = () => {
-  const { state } = useSearch();
+  const { state } = useHubSearch();
 
   useEffect(() => {
     notify(NotifyTypes.success, 'LOL');
