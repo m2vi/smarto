@@ -30,7 +30,12 @@ export const Search = () => {
       </Head>
       <Full
         className="grid place-items-center font-roboto"
-        style={{ backgroundImage: `url("/assets/bg/sand.png")`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover' }}
+        style={{
+          backgroundImage: `url("/assets/bg/horizon.png")`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
         onKeyPress={handleKeyDown}
       >
         <GoBack url="/" className="absolute top-0 left-0 m-2 opacity-80" />

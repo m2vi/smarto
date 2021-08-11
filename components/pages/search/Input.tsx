@@ -34,6 +34,7 @@ const Input = forwardRef<HTMLInputElement>((props, ref) => {
 Input.displayName = 'Input';
 
 export const searchItems = (value: string) => {
+  if (value === '' || value === '*') return user.search;
   const items = matchSorter(user.search, value, { keys: ['name', 'path', 'tags'] });
   return items;
 };

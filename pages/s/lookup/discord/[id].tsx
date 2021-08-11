@@ -2,11 +2,11 @@ import Full from '@components/Full';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import { Client } from '@projects/lookup/client';
+import { useEffect, useRef, useState } from 'react';
 import { FormatedProps } from '@Types/lookup';
-import { Spinner } from '@components/Spinner';
-import { apiBaseUrl } from '@utils/env/constants';
+import getKeyColor, { getDominantColor } from '@utils/tools/image/getColor';
+import Tooltip from '@components/Tooltip';
+
 const ModalWrapper = styled.div`
   background-color: #18191c;
   border-radius: 8px;
@@ -105,11 +105,21 @@ const CustomStatus = styled.div`
 `;
 
 const Discord = ({ data }) => {
+  const [bannerColor, setBannerColor] = useState('transparent');
   const {
     avatar: { url: avatar },
     username,
     discriminator,
   } = data as FormatedProps;
+  const imageRef = useRef() as React.MutableRefObject<HTMLImageElement>;
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  useEffect(() => {
+    getKeyColor(avatar).then(c => setBannerColor(c.hex));
+  }, [avatar]);
 
   return (
     <>
@@ -120,10 +130,12 @@ const Discord = ({ data }) => {
 
       <Full className="grid place-items-center">
         <ModalWrapper>
-          <BackgroundColor color="rgb(70, 62, 48)" />
+          <Tooltip>
+            <BackgroundColor color={bannerColor} data-tip="dd" />
+          </Tooltip>
           <div className="w-full relative">
             <Avatar>
-              <Image src={avatar} alt=" " className="" aria-hidden="true" height="120" width="120"></Image>
+              <Image src={`${avatar}?size=128`} alt=" " className="avatarImage-d2dk" aria-hidden="true" height="120" width="120"></Image>
             </Avatar>
             <HeaderTop />
           </div>
@@ -138,8 +150,11 @@ const Discord = ({ data }) => {
   );
 };
 
-export async function getServerSideProps({ query: { id } }) {
-  const data = await (await fetch(`${apiBaseUrl}/lookup?service=discord&id=${id}`)).json();
+export async function getServerSideProps({ query: { id }, req }) {
+  const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const baseUrl = req ? `${protocol}://${req.headers.host}` : '';
+
+  const data = await (await fetch(`${baseUrl}/api/lookup?service=discord&id=${id}`)).json();
 
   if (!data) {
     return {

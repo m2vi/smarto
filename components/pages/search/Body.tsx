@@ -6,7 +6,7 @@ const Body = () => {
   const { state } = useSearch();
 
   return (
-    <div className="flex flex-col px-3 py-1 overflow-y-auto" style={{ margin: '2px' }}>
+    <div className="flex flex-col px-3 py-1 overflow-y-auto dD5d-items" style={{ margin: '2px' }}>
       {state.map((item: SearchItemProps) => {
         const { icon, name, path } = item;
 

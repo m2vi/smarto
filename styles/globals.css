@@ -606,20 +606,20 @@ body,
   opacity: 0.6;
 }
 
-::-webkit-scrollbar {
+.dD5d-items::-webkit-scrollbar {
   width: 5px;
 }
 
-::-webkit-scrollbar-thumb {
+.dD5d-items::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.4);
   border-radius: 4px;
 }
 
-::-webkit-scrollbar-thumb:hover {
+.dD5d-items::-webkit-scrollbar-thumb:hover {
   background: #b3afb3;
 }
 
-::-webkit-scrollbar-track {
+.dD5d-items::-webkit-scrollbar-track {
   background: transparent;
   border-radius: 0px;
 }
