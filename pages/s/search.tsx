@@ -8,7 +8,9 @@ export const Search = () => {
     <>
       <Head>
         <title>Search</title>
-        <Favicon project="hub" />
+        <link rel="icon" type="image/svg+xml" href="/favicon/search/favicon.svg" />
+        {/* <link rel="alternate icon" href="/favicon.ico" /> */}
+        {/* <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#ff8a01"></link> */}
       </Head>
       <SearchProvider>
         <Page />

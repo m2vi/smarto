@@ -23,4 +23,5 @@ export interface userData {
   createdAt: number;
   accounts: accountProps;
   search: SearchItemProps[];
+  markedProjects: string[];
 }

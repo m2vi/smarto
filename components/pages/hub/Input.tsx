@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react';
 import { IoSearch } from 'react-icons/io5';
 import { matchSorter } from 'match-sorter';
-import { projectArray } from '@projects/object';
+import { Projects } from '@projects/index';
 import { useHubSearch } from '@context/hubSearch';
 
 export interface InputProps extends React.ComponentPropsWithoutRef<'input'> {
@@ -31,7 +31,7 @@ export const Bar = forwardRef<HTMLInputElement, InputProps>(({ className, error,
   const ring = error ? `ring-1 ring-secondary` : 'border-0';
   const cn = `w-full px-4 py-2 text-primary-100 h-8 placeholder-primary-300 rounded-l-8 ${bg} ${ring} ${className} `;
 
-  const projects = projectArray;
+  const projects = new Projects().get();
   const { dispatch } = useHubSearch();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {

@@ -1,0 +1,27 @@
+<svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="80" height="80" rx="24.6569" fill="url(#paint0_radial)" />
+    <g filter="url(#filter0_d)">
+        <path
+            d="M49.451 45.7971H47.5266L46.8446 45.1394C49.7677 41.729 51.278 37.0764 50.4498 32.1314C49.3049 25.3594 43.6534 19.9515 36.8328 19.1233C26.5286 17.8566 17.8566 26.5286 19.1233 36.8328C19.9515 43.6534 25.3594 49.3049 32.1314 50.4498C37.0764 51.278 41.729 49.7677 45.1394 46.8446L45.7971 47.5266V49.451L56.1499 59.8039C57.1487 60.8026 58.7808 60.8026 59.7795 59.8039C60.7783 58.8051 60.7783 57.173 59.7795 56.1743L49.451 45.7971ZM34.8353 45.7971C28.7697 45.7971 23.8734 40.9008 23.8734 34.8353C23.8734 28.7697 28.7697 23.8734 34.8353 23.8734C40.9008 23.8734 45.7971 28.7697 45.7971 34.8353C45.7971 40.9008 40.9008 45.7971 34.8353 45.7971Z"
+            fill="#6E5263" />
+    </g>
+    <defs>
+        <filter id="filter0_d" x="17.2417" y="18.5604" width="45.0451" height="45.0695" filterUnits="userSpaceOnUse"
+            color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                result="hardAlpha" />
+            <feOffset dy="1.31872" />
+            <feGaussianBlur stdDeviation="0.879144" />
+            <feComposite in2="hardAlpha" operator="out" />
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0" />
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow" />
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape" />
+        </filter>
+        <radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse"
+            gradientTransform="rotate(45) scale(113.137)">
+            <stop offset="0.0416667" stop-color="#F2F2F3" />
+            <stop offset="1" stop-color="#E4E6E9" />
+        </radialGradient>
+    </defs>
+</svg>

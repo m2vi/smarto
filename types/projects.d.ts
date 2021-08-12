@@ -1,3 +1,7 @@
+export interface ProjectsOptionProps {
+  customProjects: ProjectArray;
+}
+
 export interface ProjectProps {
   enabled?: boolean;
   key?: string;
@@ -20,6 +24,4 @@ export interface ProjectProps {
   active?: boolean;
 }
 
-export interface ProjectArray {
-  [key: string]: projectProps;
-}
+export type ProjectArray = ProjectProps[];

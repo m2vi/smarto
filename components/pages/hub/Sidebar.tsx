@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { IoMenuOutline, IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
-import { Projects } from '@projects/object';
+import { Projects } from '@projects/index';
 import { ProjectProps } from '@Types/projects';
+import user from '@config/me';
 
 export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
   return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{ height: '2px' }}></span>;
@@ -14,9 +15,8 @@ export const Sidebar = ({ invisible }: any) => {
   useEffect(() => {
     if (!invisible) {
       const func = async () => {
-        const projects = new Projects(['hub', 'package_tracker', 'lookup']);
-        projects.setActive();
-        setProjects(projects.getActiveArray());
+        const projects = new Projects(user.markedProjects).getMarked();
+        setProjects(projects);
       };
 
       func();

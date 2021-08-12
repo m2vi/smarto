@@ -12,9 +12,12 @@ export const Topbar = () => {
   useEffect(() => {
     const api = new Client('discord');
     const id = user.accounts.discord.toString();
+
     api.get(id).then(res => {
+      console.log(res);
       if (res && res.success) {
-        const avatar = res.avatar.sizes['128'];
+        const avatar = `${res.avatar.url}?size=128`;
+        console.log(avatar);
         setSrc(avatar);
       } else {
         // error

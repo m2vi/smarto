@@ -1,7 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import 'keen-slider/keen-slider.min.css';
 import { useKeenSlider } from 'keen-slider/react';
-import { projectArray } from '@projects/object';
+import { Projects } from '@projects/index';
 import { ProjectProps } from '@Types/projects';
 import Project from '@components/pages/hub/Project';
 
@@ -13,6 +13,7 @@ const ProjectsCarousel = () => {
     loop: false,
     initial: 0,
   });
+  const projects = new Projects().get();
 
   const getWidth = () => {};
 
@@ -20,7 +21,7 @@ const ProjectsCarousel = () => {
     <div className="w-full">
       <h4 className="mb-4">Projects</h4>
       <div ref={sliderRef} className="keen-slider">
-        {projectArray.map(project => {
+        {projects.map(project => {
           if (!project || !project.enabled) return;
           const { icon, description, badge, language, name, path, updatedAt, key }: ProjectProps = project;
 

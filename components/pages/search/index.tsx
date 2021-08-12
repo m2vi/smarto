@@ -1,9 +1,6 @@
-import { useEffect, useRef, useState } from 'react';
-import Head from 'next/head';
+import { useEffect, useRef } from 'react';
 import Full from '@components/Full';
-import user from '@config/me';
 import GoBack from '@components/GoBack';
-import Favicon from '@components/Favicon';
 import { Wrapper } from '@components/pages/search/styles';
 import Input from '@components/pages/search/Input';
 import Body from '@components/pages/search/Body';
@@ -24,10 +21,6 @@ export const Search = () => {
 
   return (
     <>
-      <Head>
-        <title>Search</title>
-        <Favicon project="hub" />
-      </Head>
       <Full
         className="grid place-items-center font-roboto"
         style={{
