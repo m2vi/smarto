@@ -623,3 +623,7 @@ body,
   background: transparent;
   border-radius: 0px;
 }
+
+.bg-modal {
+  background-color: rgba(0, 0, 0, 0.2);
+}
