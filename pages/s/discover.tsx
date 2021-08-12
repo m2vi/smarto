@@ -3,7 +3,6 @@ import Hub from '@components/pages/hub';
 import { HubSearchProvider } from '@context/hubSearch';
 import { WidgetStateProvider } from '@context/widgetState';
 import Head from 'next/head';
-import { NotificationContainer } from 'react-notifications';
 
 export const Discover = () => {
   return (
@@ -18,8 +17,6 @@ export const Discover = () => {
           <Hub />
         </WidgetStateProvider>
       </HubSearchProvider>
-
-      <NotificationContainer />
     </>
   );
 };

@@ -2,10 +2,13 @@ import Full from '@components/Full';
 import Head from 'next/head';
 import styled from 'styled-components';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormatedProps } from '@Types/lookup';
-import getKeyColor, { getDominantColor } from '@utils/tools/image/getColor';
+import getKeyColor from '@utils/tools/image/getColor';
 import Tooltip from '@components/Tooltip';
+import Favicon from '@components/Favicon';
+import moment from 'moment';
+import GoBack from '@components/GoBack';
 
 const ModalWrapper = styled.div`
   background-color: #18191c;
@@ -23,6 +26,9 @@ const BackgroundColor = styled.div`
   position: relative;
   transition: background-color 0.1s;
   outline: 0;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: cover;
 `;
 
 const Avatar = styled.div`
@@ -35,6 +41,7 @@ const Avatar = styled.div`
   background-color: #18191c;
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 const HeaderTop = styled.div`
@@ -85,8 +92,9 @@ const NameTag = styled.div`
 `;
 
 const CustomStatus = styled.div`
+  display: flex;
+  flex-direction: column;
   line-height: 1;
-  user-select: none;
   text-rendering: optimizeLegibility;
   -webkit-box-direction: normal;
   pointer-events: all;
@@ -98,54 +106,104 @@ const CustomStatus = styled.div`
   font-size: 100%;
   vertical-align: baseline;
   outline: 0;
-  padding: 0 0 16px 16px;
+  padding: 16px;
   font-size: 14px;
   line-height: 18px;
   color: #b9bbbe;
+  border-top: 1px solid #ffffff0f;
 `;
 
 const Discord = ({ data }) => {
   const [bannerColor, setBannerColor] = useState('transparent');
+  const [bannerTooltip, setBannerTooltip] = useState('');
+  const [bannerStyle, setBannerStyle] = useState({});
+
   const {
-    avatar: { url: avatar },
+    avatar: { url: avatarUrl },
     username,
     discriminator,
+    banner: { color: customBannerColor, key: bannerKey, url: bannerUrl },
+    creationDate,
+    flags,
+    id,
+    bot,
   } = data as FormatedProps;
-  const imageRef = useRef() as React.MutableRefObject<HTMLImageElement>;
 
   useEffect(() => {
     console.log(data);
   }, [data]);
 
   useEffect(() => {
-    getKeyColor(avatar).then(c => setBannerColor(c.hex));
-  }, [avatar]);
+    if (customBannerColor && !bannerKey) {
+      setBannerColor(customBannerColor);
+      setBannerTooltip('Custom Banner Color');
+    } else if (bannerKey && bannerUrl) {
+      setBannerStyle({ backgroundImage: `url(${bannerUrl}?size=512)`, width: '600px', height: '240px', cursor: 'pointer' });
+    } else {
+      getKeyColor(avatarUrl).then(c => setBannerColor(c.hex));
+      setBannerTooltip('I use a different algorithm');
+    }
+  }, [avatarUrl, bannerKey, bannerUrl, customBannerColor]);
+
+  const redirect = (url: string) => {
+    window.open(url, '_ blank');
+  };
 
   return (
     <>
       <Head>
         <title>Discord</title>
-        <link rel="shortcut icon" href="/favicon.ico" />
+        <Favicon project="lookup" />
       </Head>
-
-      <Full className="grid place-items-center">
-        <ModalWrapper>
-          <Tooltip>
-            <BackgroundColor color={bannerColor} data-tip="dd" />
-          </Tooltip>
-          <div className="w-full relative">
-            <Avatar>
-              <Image src={`${avatar}?size=128`} alt=" " className="avatarImage-d2dk" aria-hidden="true" height="120" width="120"></Image>
-            </Avatar>
-            <HeaderTop />
-          </div>
-          <NameTag>
-            <span>{username}</span>
-            <span className="discriminator">#{discriminator}</span>
-          </NameTag>
-          <CustomStatus>I have all the best cognition with all the top grammar</CustomStatus>
-        </ModalWrapper>
-      </Full>
+      <div style={{ background: '#36393f' }}>
+        <Full className="grid place-items-center" style={{ background: 'rgba(0, 0, 0, 0.75)' }}>
+          <GoBack url="/s/lookup" className="absolute top-2 left-2 opacity-80" />
+          <ModalWrapper>
+            <Tooltip>
+              <span data-tip={bannerTooltip}>
+                <BackgroundColor
+                  color={bannerColor}
+                  style={bannerStyle}
+                  onClick={() => bannerKey && bannerUrl && redirect(`${bannerUrl}?size=2048`)}
+                />
+              </span>
+            </Tooltip>
+            <div className="w-full relative">
+              <Avatar onClick={() => redirect(`${avatarUrl}?size=1024`)}>
+                <Image
+                  src={`${avatarUrl}?size=128`}
+                  alt=" "
+                  className="avatarImage-d2dk select-none"
+                  aria-hidden="true"
+                  height="120"
+                  width="120"
+                ></Image>
+              </Avatar>
+              <HeaderTop />
+            </div>
+            <NameTag>
+              <span>{username}</span>
+              <span className="discriminator">#{discriminator}</span>
+            </NameTag>
+            <CustomStatus>
+              <span>
+                <b>Creation Date: </b>
+                <span>
+                  {moment(creationDate).format('Mo of MMMM YYYY')} ({moment().diff(creationDate, 'days')} Days)
+                </span>
+              </span>
+              <span>
+                <b>Flags: </b>
+                <span>{flags}</span>
+              </span>
+              <span>
+                <b>Id: </b>
+                <span>{id}</span>
+              </span>
+            </CustomStatus>
+          </ModalWrapper>
+        </Full>
+      </div>
     </>
   );
 };
@@ -158,7 +216,7 @@ export async function getServerSideProps({ query: { id }, req }) {
 
   if (!data) {
     return {
-      notFound: true,
+      props: { data: false },
     };
   }
 

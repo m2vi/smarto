@@ -93,7 +93,7 @@ p {
   font-weight: 500;
 }
 
-p.small {
+.small {
   font-size: 12px;
 }
 
