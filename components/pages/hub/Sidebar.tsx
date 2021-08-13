@@ -24,7 +24,7 @@ export const Sidebar = ({ invisible }: any) => {
   }, [invisible]);
 
   return (
-    <div className={`max-h-screen h-full flex flex-col items-center w-80 relative ${invisible && 'invisible'}`}>
+    <div className={`max-h-screen h-full flex flex-col items-center w-80 relative bg-primary-800 ${invisible && 'invisible'}`}>
       <span className="flex justify-center items-center p-6 cursor-pointer">
         <IoMenuOutline className="h-4 w-4" />
       </span>

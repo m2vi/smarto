@@ -1,1 +1,14 @@
-{}
+{
+  "components": {
+    "time": ["Good morning", "Good afternoon", "Good evening", "Go to bed"]
+  },
+  "titles": {
+    "discover": "Discover",
+    "search": "Search"
+  },
+  "pages": {
+    "search": {
+      "input": "Search"
+    }
+  }
+}

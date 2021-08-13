@@ -16,12 +16,19 @@ export type accountProps = {
 };
 
 export interface userData {
-  nickname: string;
-  firstname: string;
-  lastname: string;
-  birthday: number;
-  createdAt: number;
-  accounts: accountProps;
-  search: SearchItemProps[];
-  markedProjects: string[];
+  nickname?: string;
+  firstname?: string;
+  lastname?: string;
+  birthday?: number;
+  createdAt?: number;
+  accounts?: accountProps;
+  search?: SearchItemProps[];
+  markedProjects?: string[];
+  settings?: ProjectSettingsProps;
+}
+
+export interface ProjectSettingsProps {
+  search?: {
+    openInNewTab?: boolean;
+  };
 }

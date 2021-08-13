@@ -39,8 +39,8 @@
   --color-primary-300: hsl(223, 14%, 60%);
   --color-primary-600: hsl(215, 24%, 16%);
   --color-primary-700: hsl(215, 27%, 15%);
-  --color-primary-800: hsl(215, 28%, 12%);
-  --color-primary-900: hsl(212, 35%, 10%);
+  --color-primary-800: hsl(215, 35%, 12%);
+  --color-primary-900: hsl(229, 30%, 11%);
 
   /* Toasts */
   --toast-default: #8b1dd0;

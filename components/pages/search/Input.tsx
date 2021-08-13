@@ -4,9 +4,11 @@ import { matchSorter } from 'match-sorter';
 import user from '@config/me';
 import { useSearch } from '@context/search';
 import { forwardRef } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Input = forwardRef<HTMLInputElement>((props, ref) => {
   const { dispatch } = useSearch();
+  const { t } = useTranslation();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
     const results = searchItems(value);
@@ -21,7 +23,7 @@ const Input = forwardRef<HTMLInputElement>((props, ref) => {
         <input
           type="text"
           className="bg-transparent border-0 text-2xl font-light p-0 dD5d-input"
-          placeholder="Search"
+          placeholder={t('pages.search.input')}
           onChange={handleChange}
           ref={ref}
         />

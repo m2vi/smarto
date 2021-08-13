@@ -1,1 +1,14 @@
-{}
+{
+  "components": {
+    "time": ["Guten Morgen", "Guten Tag", "Guten Abend", "Geh schlafen"]
+  },
+  "titles": {
+    "discover": "Entdecken",
+    "search": "Suche"
+  },
+  "pages": {
+    "search": {
+      "input": "Suche"
+    }
+  }
+}
