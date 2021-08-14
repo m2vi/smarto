@@ -13,7 +13,7 @@ export enum supportedAccounts {
 }
 
 export type accountProps = {
-  [key in supportedAccounts]?: string | boolean;
+  [key in supportedAccounts]?: string;
 };
 
 export interface userData {
@@ -23,12 +23,11 @@ export interface userData {
   birthday?: number;
   createdAt?: number;
   geo?: {
-    city?: 'Innsbruck';
-    country?: 'Austria';
+    city?: string;
+    country?: string;
   };
   accounts?: accountProps;
   search?: SearchItemProps[];
-  widgets?: WidgetProps[];
   markedProjects?: string[];
   settings?: ProjectSettingsProps;
 }
@@ -50,4 +49,6 @@ export interface WidgetProps {
   unit: string;
   path: string;
   openInNewTab: boolean;
+  func?: () => Promise<string>;
+  removeSpace?: boolean;
 }

@@ -6,9 +6,9 @@ const lookup = async (_: NextApiRequest, res: NextApiResponse) => {
 
     const data = await fetch(`https://lookup.vercel.app/api/${service}/${id}`);
     const json = await data.json();
-    res.json(json);
+    res.status(200).json(json);
   } catch (error) {
-    res.json({
+    res.status(400).json({
       success: false,
       message: error.message,
     });

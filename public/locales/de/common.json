@@ -13,7 +13,12 @@
     "hub": {
       "timer": "Timer",
       "widgets": {
-        "default": "Deine Widgets"
+        "default": "Deine Widgets",
+        "movies": "Filmliste",
+        "scoresaber": "Score Saber",
+        "timer": "Timer",
+        "todo": "Aufgabenliste",
+        "weather": "Wetter"
       }
     }
   }
