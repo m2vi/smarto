@@ -1,26 +1,25 @@
-import Head from 'next/head';
-import Favicon from '@components/Favicon';
-import Discover from '@components/pages/hub/Discover';
-import Projects from '@components/pages/hub/ProjectsCarousel';
 import Sidebar from '@components/pages/hub/Sidebar';
-import Topbar from '@components/pages/hub/Topbar';
-import { ProjectProps } from '@Types/projects';
-import Project from '@components/pages/hub/Project';
-import { useHubSearch } from '@context/hubSearch';
-import { useEffect } from 'react';
-import notify, { NotifyTypes } from '@utils/tools/notify';
 import Full from '@components/Full';
 import Time from '@components/Time';
+import { IoAddCircleOutline, IoEllipsisHorizontalOutline } from 'react-icons/io5';
+import { useTranslation } from 'react-i18next';
+import Widgets from './Widgets';
 
 export const Hub = () => {
-  const { state } = useHubSearch();
+  const { t } = useTranslation();
 
   return (
     <Full className="flex flex-row">
       <Sidebar />
-      <div className="h-screen w-full max-w-xs ml-3 bg-primary-800 p-4"></div>
+      <div className="h-screen w-full max-w-xs ml-3 bg-primary-800 p-4">
+        <span className="flex justify-between items-center">
+          <p className="font-semibold text-lg">{t('pages.hub.timer')}</p>
+          <IoEllipsisHorizontalOutline className="h-4 w-4 text-primary-200 hover:text-primary-100 cursor-pointer" />
+        </span>
+      </div>
       <div className="h-screen w-full ml-3 bg-transparent p-4 pl-1">
-        <Time className="text-primary-300" wrapperClassName="flex flex-col font-medium" />
+        <Time className="text-primary-300" wrapperClassName="flex flex-col font-medium mb-5" />
+        <Widgets />
       </div>
     </Full>
   );

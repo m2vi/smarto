@@ -10,7 +10,7 @@ export const GoBack = ({ url, className, ...props }: GoBackProps) => {
   const Router = useRouter();
 
   const handleClick = () => {
-    Router.push(url, undefined, { shallow: false });
+    Router.push(url);
   };
 
   return <IoArrowBack className={`h-5 w-5 text-white cursor-pointer ${className}`} onClick={handleClick} {...props} />;

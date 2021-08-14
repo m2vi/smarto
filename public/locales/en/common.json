@@ -9,6 +9,12 @@
   "pages": {
     "search": {
       "input": "Search"
+    },
+    "hub": {
+      "timer": "Timer",
+      "widgets": {
+        "default": "Your Widgets"
+      }
     }
   }
 }

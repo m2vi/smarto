@@ -70,11 +70,12 @@ module.exports = {
       300: '350px',
       400: '400px',
       wide: '1440px',
-      widget: '470px',
+      widget: '105px',
     },
     borderWidth: {
       DEFAULT: '1px',
       0: '0px',
+      2: '2px',
     },
     boxShadow: {
       accent: 'var(--shadow-accent)',
@@ -92,6 +93,9 @@ module.exports = {
       },
       outline: {
         'no-chrome': 'none',
+      },
+      maxWidth: {
+        xxs: '225px',
       },
     },
   },

@@ -22,14 +22,16 @@ const Time = ({ format = 'LT', wrapperClassName, ...props }: TimeProps) => {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
-    setInterval(() => {
+    const interval = setInterval(() => {
       setDate(new Date());
     }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
     <div className={wrapperClassName}>
-      <span>{t(`components.time.${getGreeting(moment(date).hours())}`)}</span>
+      <span className="font-semibold text-lg">{t(`components.time.${getGreeting(moment(date).hours())}`)}</span>
       <span {...props}>{moment(date).format(format)}</span>
     </div>
   );

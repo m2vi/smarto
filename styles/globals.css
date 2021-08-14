@@ -3,7 +3,7 @@
 
 ::-webkit-scrollbar {
   overflow: overlay;
-  width: 4px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -26,30 +26,14 @@
   --color-secondary: var(--m2v-red);
   --color-tertiary: #808191;
 
-  --color-primary-100: #dee3ea;
-  --color-primary-200: #b2bdcd;
-  --color-primary-300: #8a8f9c;
-  --color-primary-600: #323d4d;
-  --color-primary-700: #242c37;
-  --color-primary-800: #252836;
-  --color-primary-900: #1f1d2b;
-
-  --color-primary-100: hsl(0, 0%, 100%);
+  --color-primary-100: #ffffff;
   --color-primary-200: hsl(200, 17%, 85%);
   --color-primary-300: hsl(223, 14%, 60%);
+  --color-primary-500: hsl(215, 30%, 23%);
   --color-primary-600: hsl(215, 24%, 16%);
-  --color-primary-700: hsl(215, 27%, 15%);
+  --color-primary-700: hsl(219, 24%, 16%);
   --color-primary-800: hsl(215, 35%, 12%);
   --color-primary-900: hsl(229, 30%, 11%);
-
-  /* Toasts */
-  --toast-default: #8b1dd0;
-  --toast-success: #27d0b2;
-  --toast-error: #c52965;
-  --toast-info: #004eff;
-  --toast-warning: #d0761d;
-  --toast-black: #221d26;
-  --toast-white: #fff;
 }
 
 .dTGAUq {

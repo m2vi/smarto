@@ -74,6 +74,7 @@
     "systeminformation": "^5.6.12",
     "tailwind-scrollbar": "^1.2.4",
     "uuid": "^7.0.3",
+    "whatsapp-web.js": "^1.14.0",
     "yt-channel-info": "^2.2.0",
     "ytdl-core": "^4.8.2"
   },
