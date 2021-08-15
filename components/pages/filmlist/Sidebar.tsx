@@ -27,7 +27,7 @@ const sections = [
 const Sidebar = () => {
   const Router = useRouter();
   const handleClick = (path: string) => {
-    Router.push(`/s/movielist/${path}`);
+    Router.push(`${path}`);
   };
 
   return (

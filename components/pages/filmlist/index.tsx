@@ -1,5 +1,5 @@
 import Full from '@components/Full';
-import Sidebar from '@components/pages/movies/Sidebar';
+import Sidebar from '@components/pages/filmlist/Sidebar';
 import { MovieListItems } from '@config/me';
 import { MoviePageProps } from '@Types/movielist';
 import { searchArray, sortByKey } from '@utils/tools/array';

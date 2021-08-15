@@ -1,6 +1,10 @@
 ## TODO
 
 - [x] Add a system for all the unordered files
+- [ ] USE FUCKING BRITISH
+- [ ] Fix aspect-ratio
+- [ ] Flex, Grid, Block? Find method for stuff u want
+- [ ] Maybe push film list to backend
 
 ## Big Apps
 
