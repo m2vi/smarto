@@ -10,9 +10,9 @@ const getGreeting = (hours: number): number => {
     return 0;
   } else if (between(hours, 11, 17)) {
     return 1;
-  } else if (between(hours, 18, 21)) {
+  } else if (between(hours, 18, 22)) {
     return 2;
-  } else if (between(hours, 22, 4)) {
+  } else if (between(hours, 23, 24) || between(hours, 0, 4)) {
     return 3;
   }
 };

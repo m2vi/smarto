@@ -5,3 +5,11 @@ export const sortByKey = (array: Array<any>, key: string) => {
 export const removeDuplicates = (array: Array<any>) => {
   return array.filter((v, i) => array.indexOf(v) == i);
 };
+
+export const searchArray = (array: any[], key: string, value: string) => {
+  if (array) {
+    return array.filter(item => item[key] === value);
+  } else {
+    return [];
+  }
+};

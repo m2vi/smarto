@@ -24,9 +24,8 @@
   --color-accent-avatar-gradient: linear-gradient(145deg, #0a84ff 0%, #51a8ff 45%, #97c9ff 100%);
 
   --color-secondary: var(--m2v-red);
-  --color-tertiary: #808191;
 
-  --color-primary-100: #ffffff;
+  --color-primary-100: hsl(0, 0%, 100%);
   --color-primary-200: hsl(200, 17%, 85%);
   --color-primary-300: hsl(223, 14%, 60%);
   --color-primary-500: hsl(215, 30%, 23%);
