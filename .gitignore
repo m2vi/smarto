@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 
 # my private stuff
-config/me.ts
+config

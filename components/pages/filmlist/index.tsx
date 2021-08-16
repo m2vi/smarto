@@ -1,6 +1,6 @@
 import Full from '@components/Full';
 import Sidebar from '@components/pages/filmlist/Sidebar';
-import { MovieListItems } from '@config/me';
+import { FilmListItems } from '@config/filmlist';
 import { MoviePageProps } from '@Types/movielist';
 import { searchArray, sortByKey } from '@utils/tools/array';
 import { useEffect, useState } from 'react';
@@ -10,13 +10,13 @@ const Index = ({ sort }: MoviePageProps) => {
   const [items, setItems] = useState([]);
 
   const filter = (key: string, value: any) => {
-    return sortByKey(searchArray(MovieListItems, key, value), 'name');
+    return sortByKey(searchArray(FilmListItems, key, value), 'name');
   };
 
   useEffect(() => {
     switch (sort) {
       case 'all':
-        setItems(sortByKey(MovieListItems, 'name'));
+        setItems(sortByKey(FilmListItems, 'name'));
         break;
       case 'favourites':
         setItems(filter('favoured', true));
@@ -41,7 +41,7 @@ const Index = ({ sort }: MoviePageProps) => {
       <Sidebar />
       <div className="w-full h-full ml-100 p-4 grid row-cols-auto grid-cols-8">
         {sortByKey(items, 'title').map(({ ...props }) => (
-          <Card {...props} key={props.id} />
+          <Card {...props} key={`${props.id}-${props.type}`} />
         ))}
       </div>
     </div>

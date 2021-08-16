@@ -1,10 +1,16 @@
 export interface CardProps {
+  backdrop_path: string;
   favoured?: boolean;
   genre_ids: number[];
   id: number;
   name: string;
+  original_language: string;
+  original_name: string;
+  overview: string;
   poster_path: string;
+  release_date: string;
   type: 'series' | 'film';
+  version: number;
   watched: boolean;
 }
 

@@ -14,7 +14,7 @@
       "timer": "Timer",
       "widgets": {
         "default": "Deine Widgets",
-        "movies": "Filmliste",
+        "filmlist": "Filmliste",
         "scoresaber": "Score Saber",
         "timer": "Timer",
         "todo": "Aufgabenliste",

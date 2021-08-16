@@ -1,4 +1,6 @@
-import { GenreArray } from '@Types/movielist';
+import { CardProps, GenreArray } from '@Types/movielist';
+import moment from 'moment';
+import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types';
 
 export const genreList: { films: GenreArray; series: GenreArray } = {
   films: [
@@ -165,3 +167,55 @@ export const genres = (genres: number[], type: 'series' | 'film'): string => {
 
   return g.join(', ');
 };
+
+export const refactorMovie = ({
+  backdrop_path,
+  genre_ids,
+  id,
+  title: name,
+  original_language,
+  original_title: original_name,
+  overview,
+  poster_path,
+  release_date,
+}: MovieResult): CardProps => ({
+  backdrop_path,
+  favoured: false,
+  genre_ids,
+  id,
+  name,
+  original_language,
+  original_name,
+  overview,
+  poster_path,
+  release_date,
+  type: 'film',
+  version: 2,
+  watched: true,
+});
+
+export const refactorSeries = ({
+  backdrop_path,
+  genre_ids,
+  id,
+  name,
+  original_language,
+  original_name,
+  overview,
+  poster_path,
+  first_air_date: release_date,
+}: TvResult): CardProps => ({
+  backdrop_path,
+  favoured: false,
+  genre_ids,
+  id,
+  name,
+  original_language,
+  original_name,
+  overview,
+  poster_path,
+  release_date,
+  type: 'series',
+  version: 2,
+  watched: true,
+});
