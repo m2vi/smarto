@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { IoCompassOutline, IoFilmOutline, IoLogOutOutline, IoStarOutline, IoTimerOutline, IoTvOutline } from 'react-icons/io5';
+import { IoCompassOutline, IoFilmOutline, IoHappyOutline, IoLogOutOutline, IoStarOutline, IoTimerOutline, IoTvOutline } from 'react-icons/io5';
 
 const sections = [
   {
@@ -13,6 +13,10 @@ const sections = [
   {
     icon: IoTimerOutline,
     path: 'later',
+  },
+  {
+    icon: IoHappyOutline,
+    path: 'childish',
   },
   {
     icon: IoFilmOutline,

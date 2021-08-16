@@ -1,13 +1,18 @@
-import { CardProps } from '@Types/movielist';
+import { CardProps, MoviePageProps } from '@Types/filmlist';
 import { genres } from '@utils/tools/movies';
 import Image from 'next/image';
 import { IoVideocamOutline } from 'react-icons/io5';
 import { Wrapper } from './styles';
 
-const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured }: CardProps) => {
+interface CardCardProps extends MoviePageProps, CardProps {}
+
+const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, childish, sort }: CardCardProps) => {
+  if (childish && sort !== 'childish') return null;
+  const genreList = genres(genre_ids, type);
+
   return (
-    <div className="flex flex-col" style={{ width: '200px' }}>
-      <Wrapper>
+    <div className="flex flex-col float-left m-2" style={{ width: '200px' }}>
+      <Wrapper className="h-full w-full grid place-items-center">
         {poster_path ? (
           <Image
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
@@ -17,13 +22,15 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured }: Car
             className="no-drag select-none w-full"
           />
         ) : (
-          <div className="h-full w-full grid place-items-center">
-            <IoVideocamOutline className="h-5 w-5" />
-          </div>
+          <IoVideocamOutline className="h-5 w-5" />
         )}
       </Wrapper>
-      <p className="font-normal text-lg">{name}</p>
-      <p className="font-normal text-base text-primary-300">{genres(genre_ids, type)}</p>
+      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={genreList}>
+        {name}
+      </p>
+      <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={genreList}>
+        {genreList}
+      </p>
     </div>
   );
 };

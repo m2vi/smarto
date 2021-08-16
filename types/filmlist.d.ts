@@ -12,10 +12,12 @@ export interface CardProps {
   type: 'series' | 'film';
   version: number;
   watched: boolean;
+
+  childish?: boolean;
 }
 
 export interface MoviePageProps {
-  sort: 'all' | 'favourites' | 'later' | 'films' | 'series';
+  sort: 'all' | 'favourites' | 'childish' | 'later' | 'films' | 'series';
 }
 
 export interface GenreProps {
@@ -24,3 +26,9 @@ export interface GenreProps {
 }
 
 export type GenreArray = Array<GenreProps>;
+
+export interface FilmConfigProps {
+  showChildish: boolean;
+  showUnpublished: boolean;
+  sort: 'name' | 'release_date' | 'randomize';
+}

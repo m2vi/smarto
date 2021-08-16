@@ -1,6 +1,8 @@
-import { CardProps, GenreArray } from '@Types/movielist';
+import { FilmListItems } from '@config/filmlist';
+import { CardProps, FilmConfigProps, GenreArray } from '@Types/filmlist';
 import moment from 'moment';
 import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types';
+import { shuffle, sortByKey } from './array';
 
 export const genreList: { films: GenreArray; series: GenreArray } = {
   films: [
@@ -219,3 +221,45 @@ export const refactorSeries = ({
   version: 2,
   watched: true,
 });
+
+export const getReleaseDate = (release_date: string) => {
+  const b = release_date.split('-');
+
+  const d = moment(`${b[1]}.${b[2]}.${b[0]}`).toDate();
+  return d.getTime();
+};
+
+export const applyConfig = ({ showChildish, showUnpublished, sort }: FilmConfigProps) => {
+  let bin: CardProps[] = FilmListItems;
+
+  if (showChildish === false) {
+    bin = bin.filter(item => item.childish === false);
+  }
+  if (showUnpublished === false) {
+    bin = bin.filter(({ release_date }) => {
+      if (release_date !== '') {
+        return Math.sign(new Date().getTime() - getReleaseDate(release_date)) === 1;
+      } else {
+        return false;
+      }
+    });
+  }
+  if (sort) {
+    switch (sort) {
+      case 'name':
+        bin = sortByKey(bin, 'name');
+        break;
+      case 'randomize':
+        bin = shuffle(bin);
+      default:
+        let old = bin;
+        bin = [];
+        old.forEach(item => {
+          item.release_date = getReleaseDate(item.release_date).toString();
+          bin.push(item);
+        });
+        bin = sortByKey(bin, 'release_date');
+        break;
+    }
+  }
+};

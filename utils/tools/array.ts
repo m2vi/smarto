@@ -13,3 +13,17 @@ export const searchArray = (array: any[], key: string, value: string) => {
     return [];
   }
 };
+
+export const shuffle = (array: any[]) => {
+  var currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
