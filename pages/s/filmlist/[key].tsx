@@ -24,7 +24,7 @@ const Films = () => {
         <link rel="icon" type="image/svg+xml" href="/favicon/filmlist/favicon.svg" />
       </Head>
       <NextSeo description="A filmlist with all movies and series I've ever watched" title={t('pages.hub.widgets.filmlist')} defaultTitle="Smarto" />
-      {sort ? <Page sort={sort} /> : <Full className="grid place-items-center" style={{ background: '#222a33' }} />}
+      {sort ? <Page sort={sort} /> : <Full className="grid place-items-center" style={{ background: '#121212' }} />}
     </>
   );
 };

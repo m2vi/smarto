@@ -8,7 +8,7 @@ export interface CardProps {
   original_name: string;
   overview: string;
   poster_path: string;
-  release_date: string;
+  release_date: number;
   type: 'series' | 'film';
   version: number;
   watched: boolean;
@@ -17,7 +17,7 @@ export interface CardProps {
 }
 
 export interface MoviePageProps {
-  sort: 'all' | 'favourites' | 'childish' | 'later' | 'films' | 'series';
+  sort: 'all' | 'favourites' | 'later' | 'soon' | 'childish' | 'films' | 'series';
 }
 
 export interface GenreProps {

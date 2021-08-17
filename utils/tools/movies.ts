@@ -2,7 +2,7 @@ import { FilmListItems } from '@config/filmlist';
 import { CardProps, FilmConfigProps, GenreArray } from '@Types/filmlist';
 import moment from 'moment';
 import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types';
-import { shuffle, sortByKey } from './array';
+import { removeDuplicates, shuffle, sortByKey } from './array';
 
 export const genreList: { films: GenreArray; series: GenreArray } = {
   films: [
@@ -190,7 +190,7 @@ export const refactorMovie = ({
   original_name,
   overview,
   poster_path,
-  release_date,
+  release_date: getReleaseDate(release_date).getTime(),
   type: 'film',
   version: 2,
   watched: true,
@@ -216,17 +216,15 @@ export const refactorSeries = ({
   original_name,
   overview,
   poster_path,
-  release_date,
+  release_date: getReleaseDate(release_date).getTime(),
   type: 'series',
   version: 2,
   watched: true,
 });
 
 export const getReleaseDate = (release_date: string) => {
-  const b = release_date.split('-');
-
-  const d = moment(`${b[1]}.${b[2]}.${b[0]}`).toDate();
-  return d.getTime();
+  const d = moment(release_date).toDate();
+  return d;
 };
 
 export const applyConfig = ({ showChildish, showUnpublished, sort }: FilmConfigProps) => {
@@ -237,29 +235,26 @@ export const applyConfig = ({ showChildish, showUnpublished, sort }: FilmConfigP
   }
   if (showUnpublished === false) {
     bin = bin.filter(({ release_date }) => {
-      if (release_date !== '') {
-        return Math.sign(new Date().getTime() - getReleaseDate(release_date)) === 1;
-      } else {
-        return false;
-      }
+      return Math.sign(new Date().getTime() - release_date) === 1;
     });
   }
-  if (sort) {
-    switch (sort) {
-      case 'name':
-        bin = sortByKey(bin, 'name');
-        break;
-      case 'randomize':
-        bin = shuffle(bin);
-      default:
-        let old = bin;
-        bin = [];
-        old.forEach(item => {
-          item.release_date = getReleaseDate(item.release_date).toString();
-          bin.push(item);
-        });
-        bin = sortByKey(bin, 'release_date');
-        break;
-    }
-  }
 };
+
+export const genreItems = (items: CardProps[]) => {
+  let genres = [];
+
+  items.forEach(({ genre_ids, type }) => {
+    genre_ids.forEach(genre_id => {
+      const curr = genreList[type === 'film' ? 'films' : 'series'].find(genre => genre_id === genre.id);
+      curr && genres.push(curr);
+    });
+  });
+
+  return sortByKey(removeDuplicates(genres), 'name') as { id: number; name: string }[];
+};
+
+export const isReleased = (release_date: number) => {
+  return Math.sign(new Date().getTime() - release_date) === 1;
+};
+
+export const removeUnreleased = (array: CardProps[]) => array.filter(({ release_date }) => isReleased(release_date));

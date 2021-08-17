@@ -1,61 +1,77 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { IoCompassOutline, IoFilmOutline, IoHappyOutline, IoLogOutOutline, IoStarOutline, IoTimerOutline, IoTvOutline } from 'react-icons/io5';
+import { useEffect, useState } from 'react';
+import {
+  IoBookOutline,
+  IoCompassOutline,
+  IoFilmOutline,
+  IoHappyOutline,
+  IoHourglassOutline,
+  IoStarOutline,
+  IoTimerOutline,
+  IoTvOutline,
+} from 'react-icons/io5';
 
 const sections = [
   {
-    icon: IoCompassOutline,
+    icon: IoBookOutline,
     path: 'all',
+    name: 'All Items',
   },
   {
     icon: IoStarOutline,
     path: 'favourites',
+    name: 'Favourites',
   },
   {
     icon: IoTimerOutline,
     path: 'later',
+    name: 'Watchlist',
+  },
+  {
+    icon: IoHourglassOutline,
+    path: 'soon',
+    name: 'Coming Soon',
   },
   {
     icon: IoHappyOutline,
     path: 'childish',
+    name: 'Childish',
   },
   {
     icon: IoFilmOutline,
     path: 'films',
+    name: 'Films',
   },
   {
     icon: IoTvOutline,
     path: 'series',
+    name: 'Series',
   },
 ];
 
 const Sidebar = () => {
   const Router = useRouter();
-  const handleClick = (path: string) => {
-    Router.push(`${path}`);
-  };
+  const [curr, setCurr] = useState('');
+
+  useEffect(() => {
+    setCurr(Router.query.key.toString());
+  }, [Router]);
 
   return (
-    <div
-      className="fixed left-0 top-0 bottom-0 h-full w-80 p-3 flex flex-col items-center justify-between"
-      style={{
-        background: '#191c1e',
-        boxShadow: '0px 40px 40px 8px rgba(0, 0, 0, 0.16)',
-        backdropFilter: 'blur(24px)',
-      }}
-    >
-      <div className="flex flex-col items-center">
-        {sections.map(({ icon: Icon, path }) => (
-          <div
-            className="grid place-items-center mb-11 mt-4 h-4 w-4 cursor-pointer hover:text-accent-hover"
-            key={path}
-            onClick={() => handleClick(path)}
-          >
-            <Icon className="h-4 w-4" />
-          </div>
+    <div className="p-6 flex flex-col w-250">
+      <p className="text-3xl mb-11">
+        filmlist<span style={{ color: '#d7b350' }}>.</span>
+      </p>
+      <div className="w-full flex flex-col items-start">
+        {sections.map(({ path, icon: Icon, name }) => (
+          <Link href={path} passHref={true} shallow={true} key={name}>
+            <span style={{ color: curr === path && '#d7b350' }} className="my-2 flex items-center cursor-pointer">
+              {<Icon className="h-4 2xl:w-4 mr-2" />}
+              {name}
+            </span>
+          </Link>
         ))}
-      </div>
-      <div className="grid place-items-center my-4 h-4 w-4 cursor-pointer hover:text-accent-hover" onClick={() => Router.push('/')}>
-        <IoLogOutOutline className="h-4 w-4" />
       </div>
     </div>
   );

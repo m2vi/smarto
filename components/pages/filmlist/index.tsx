@@ -2,19 +2,26 @@ import Sidebar from '@components/pages/filmlist/Sidebar';
 import { FilmListItems } from '@config/filmlist';
 import { MoviePageProps } from '@Types/filmlist';
 import { searchArray, sortByKey } from '@utils/tools/array';
+import { applyConfig, getReleaseDate, isReleased, removeUnreleased } from '@utils/tools/movies';
 import { useEffect, useState } from 'react';
 import Card from './Card';
+import Sidebar2 from './Sidebar2';
 
 const Index = ({ sort }: MoviePageProps) => {
   const [items, setItems] = useState([]);
 
   const filter = (key: string, value: any) => {
-    const items = FilmListItems.filter(({ genre_ids }) => {
-      return genre_ids.includes(27);
-    });
-    return sortByKey(items, 'name');
+    if (key === 'soon') {
+      let bin = FilmListItems;
 
-    return sortByKey(searchArray(FilmListItems, key, value), 'name');
+      bin = bin.filter(({ release_date }) => {
+        return !isReleased(release_date);
+      });
+
+      return sortByKey(bin, 'release_date');
+    } else {
+      return sortByKey(searchArray(FilmListItems, key, value), 'name');
+    }
   };
 
   useEffect(() => {
@@ -26,7 +33,10 @@ const Index = ({ sort }: MoviePageProps) => {
         setItems(filter('favoured', true));
         break;
       case 'later':
-        setItems(filter('watched', false));
+        setItems(removeUnreleased(filter('watched', false)));
+        break;
+      case 'soon':
+        setItems(filter('soon', false));
         break;
       case 'childish':
         setItems(filter('childish', true));
@@ -44,12 +54,15 @@ const Index = ({ sort }: MoviePageProps) => {
   }, [sort]);
 
   return (
-    <div className="flex w-full h-full overflow-y-auto dD5d-items" style={{ background: '#222a33' }}>
-      <Sidebar />
-      <div className="w-full h-full ml-100 p-4 block">
-        {sortByKey(items, 'title').map(({ ...props }) => (
-          <Card {...props} sort={sort} key={`${props.id}-${props.type}`} />
-        ))}
+    <div className="w-full h-screen flex justify-center" style={{ background: '#121212' }}>
+      <div className="flex w-full justify-between max-w-screen-2xl mx-100 my-6">
+        <Sidebar />
+        <div className="w-full p-4 py-0 block overflow-y-auto dD5d-items" style={{ marginTop: '130px' }}>
+          {sortByKey(items, 'title').map(({ ...props }) => (
+            <Card {...props} sort={sort} key={`${props.id}-${props.type}`} />
+          ))}
+        </div>
+        <Sidebar2 items={items} categories={[]} sort={sort} />
       </div>
     </div>
   );
