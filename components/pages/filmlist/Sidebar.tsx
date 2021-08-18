@@ -70,7 +70,7 @@ const Sidebar = () => {
       </p>
       <div className="w-full flex flex-col items-start">
         {sections.map(({ path, icon: Icon, key }) => (
-          <Link href={path} passHref={true} shallow={false} key={key}>
+          <Link href={`/s/filmlist/${path}`} passHref={true} shallow={false} key={key}>
             <span style={{ color: curr === path && '#d7b350' }} className="my-2 flex items-center cursor-pointer">
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
