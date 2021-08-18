@@ -71,7 +71,7 @@ const Sidebar = () => {
       <div className="w-full flex flex-col items-start">
         {sections.map(({ path, icon: Icon, key }) => (
           <Link href={`/s/filmlist/${path}`} passHref={true} shallow={false} key={key}>
-            <span style={{ color: curr === path && '#d7b350' }} className="my-2 flex items-center cursor-pointer">
+            <span style={{ color: curr === path && '#d7b350' }} className="my-2 flex items-center cursor-pointer filmlist-hover">
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
             </span>
@@ -79,13 +79,13 @@ const Sidebar = () => {
         ))}
         <div className="w-full bg-primary-300 opacity-50 my-2" style={{ height: '1px' }}></div>
         <Link href={'/'} passHref={true} shallow={false}>
-          <span className="my-2 flex items-center cursor-pointer">
+          <span className="my-2 flex items-center cursor-pointer filmlist-hover">
             {<IoSettingsOutline className="h-4 2xl:w-4 mr-2" />}
             {t(`pages.filmlist.menu.settings`)}
           </span>
         </Link>
         <Link href={'/'} passHref={true} shallow={false}>
-          <span className="my-2 flex items-center cursor-pointer">
+          <span className="my-2 flex items-center cursor-pointer filmlist-hover">
             {<IoLogOutOutline className="h-4 2xl:w-4 mr-2" />}
             {t(`pages.filmlist.menu.goback`)}
           </span>
