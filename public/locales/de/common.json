@@ -20,6 +20,25 @@
         "todo": "Aufgabenliste",
         "weather": "Wetter"
       }
+    },
+    "filmlist": {
+      "default": "Filmliste",
+      "name": "filmliste",
+      "menu": {
+        "all": "Alle Einträge",
+        "fav": "Favoriten",
+        "later": "Später Ansehen",
+        "soon": "Bald Verfügbar",
+        "childish": "Kindisch",
+        "films": "Filme",
+        "series": "Serien",
+        "settings": "Einstellungen",
+        "goback": "Zurückkehren"
+      },
+      "items": {
+        "released": "Veröffentlicht",
+        "format": "MMM D, YYYY"
+      }
     }
   }
 }

@@ -2,7 +2,7 @@ import { FilmListItems } from '@config/filmlist';
 import { CardProps, FilmConfigProps, GenreArray } from '@Types/filmlist';
 import moment from 'moment';
 import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types';
-import { removeDuplicates, shuffle, sortByKey } from './array';
+import { removeDuplicates, searchArray, shuffle, sortByKey } from './array';
 
 export const genreList: { films: GenreArray; series: GenreArray } = {
   films: [
@@ -240,21 +240,43 @@ export const applyConfig = ({ showChildish, showUnpublished, sort }: FilmConfigP
   }
 };
 
-export const genreItems = (items: CardProps[]) => {
-  let genres = [];
-
-  items.forEach(({ genre_ids, type }) => {
-    genre_ids.forEach(genre_id => {
-      const curr = genreList[type === 'film' ? 'films' : 'series'].find(genre => genre_id === genre.id);
-      curr && genres.push(curr);
-    });
-  });
-
-  return sortByKey(removeDuplicates(genres), 'name') as { id: number; name: string }[];
-};
-
 export const isReleased = (release_date: number) => {
   return Math.sign(new Date().getTime() - release_date) === 1;
 };
 
 export const removeUnreleased = (array: CardProps[]) => array.filter(({ release_date }) => isReleased(release_date));
+
+export const filter = (key: string, value: any) => {
+  if (key === 'soon') {
+    let bin = FilmListItems;
+
+    bin = bin.filter(({ release_date }) => {
+      return !isReleased(release_date);
+    });
+
+    return sortByKey(bin, 'release_date');
+  } else {
+    return sortByKey(searchArray(FilmListItems, key, value), 'name');
+  }
+};
+
+export const sort = (sort: string) => {
+  switch (sort) {
+    case 'all':
+      return sortByKey(FilmListItems, 'name');
+    case 'favourites':
+      return filter('favoured', true);
+    case 'later':
+      return removeUnreleased(filter('watched', false));
+    case 'soon':
+      return filter('soon', false);
+    case 'childish':
+      return filter('childish', true);
+    case 'films':
+      return filter('type', 'film');
+    case 'series':
+      return filter('type', 'series');
+    default:
+      return [];
+  }
+};

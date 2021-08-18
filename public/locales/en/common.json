@@ -21,6 +21,25 @@
         "todo": "To Do List",
         "weather": "Weather"
       }
+    },
+    "filmlist": {
+      "default": "Filmlist",
+      "name": "filmlist",
+      "menu": {
+        "all": "All Items",
+        "fav": "Favourites",
+        "later": "Watch Later",
+        "soon": "Soon Available",
+        "childish": "Childish",
+        "films": "Films",
+        "series": "Series",
+        "settings": "Settings",
+        "goback": "Go Back"
+      },
+      "items": {
+        "released": "Released",
+        "format": "MMM D, YYYY"
+      }
     }
   }
 }

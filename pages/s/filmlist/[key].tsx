@@ -7,6 +7,7 @@ import { NextSeo } from 'next-seo';
 import { useTranslation } from 'react-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetStaticPaths } from 'next';
+import { FilmSearchProvider } from '@context/filmSearch';
 
 const Films = () => {
   const Router = useRouter();
@@ -19,13 +20,36 @@ const Films = () => {
   }, [Router]);
 
   return (
-    <>
+    <FilmSearchProvider>
       <Head>
         <link rel="icon" type="image/svg+xml" href="/favicon/filmlist/favicon.svg" />
       </Head>
+      <style jsx global>{`
+        #nprogress .bar {
+          background: #d7b350 !important;
+        }
+        #nprogress .peg {
+          box-shadow: 0 0 10px #d7b350, 0 0 5px #d7b350 !important;
+        }
+
+        #nprogress .spinner-icon {
+          border-top-color: #d7b350 !important;
+          border-left-color: #d7b350 !important;
+        }
+
+        html {
+          --color-primary-300: #6c6f7c !important;
+        }
+
+        #__next,
+        html,
+        body {
+          background: #121212;
+        }
+      `}</style>
       <NextSeo description="A filmlist with all movies and series I've ever watched" title={t('pages.hub.widgets.filmlist')} defaultTitle="Smarto" />
-      {sort ? <Page sort={sort} /> : <Full className="grid place-items-center" style={{ background: '#121212' }} />}
-    </>
+      {sort ? <Page sort={sort} /> : <Full className="grid place-items-center" />}
+    </FilmSearchProvider>
   );
 };
 
