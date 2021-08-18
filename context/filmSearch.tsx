@@ -1,21 +1,19 @@
-import { FilmListItems } from '@config/filmlist.2';
-import { CardProps } from '@Types/filmlist';
-import { sort } from '@utils/tools/movies';
-import { matchSorter } from 'match-sorter';
 import { createContext, useContext, useReducer } from 'react';
+
+import { matchSorter } from 'match-sorter';
 
 const FilmSearchContext = createContext(null);
 
-const initalState: any = [];
+const initalState: any = { items: [], render: [] };
 
-export const filmSearchReducer = (state, { sort: sortType, query }) => {
-  const items = sort(sortType);
+export const filmSearchReducer = (state, { items, query }) => {
+  let bin = items ? items : state.items;
 
   if (query) {
-    return matchSorter(items, query, { keys: ['name', 'original_name'] });
+    return { items: bin, render: matchSorter(bin, query, { keys: ['name', 'original_name'] }) };
   }
 
-  return items;
+  return { items: bin, render: bin };
 };
 
 export const FilmSearchProvider = ({ children }) => {

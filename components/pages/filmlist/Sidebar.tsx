@@ -1,7 +1,3 @@
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   IoBookOutline,
   IoFilmOutline,
@@ -13,6 +9,11 @@ import {
   IoTimerOutline,
   IoTvOutline,
 } from 'react-icons/io5';
+import { useEffect, useState } from 'react';
+
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
 const sections = [
   {
@@ -69,7 +70,7 @@ const Sidebar = () => {
       </p>
       <div className="w-full flex flex-col items-start">
         {sections.map(({ path, icon: Icon, key }) => (
-          <Link href={path} passHref={true} shallow={true} key={key}>
+          <Link href={path} passHref={true} shallow={false} key={key}>
             <span style={{ color: curr === path && '#d7b350' }} className="my-2 flex items-center cursor-pointer">
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
@@ -77,13 +78,13 @@ const Sidebar = () => {
           </Link>
         ))}
         <div className="w-full bg-primary-300 opacity-50 my-2" style={{ height: '1px' }}></div>
-        <Link href={'/'} passHref={true} shallow={true}>
+        <Link href={'/'} passHref={true} shallow={false}>
           <span className="my-2 flex items-center cursor-pointer">
             {<IoSettingsOutline className="h-4 2xl:w-4 mr-2" />}
             {t(`pages.filmlist.menu.settings`)}
           </span>
         </Link>
-        <Link href={'/'} passHref={true} shallow={true}>
+        <Link href={'/'} passHref={true} shallow={false}>
           <span className="my-2 flex items-center cursor-pointer">
             {<IoLogOutOutline className="h-4 2xl:w-4 mr-2" />}
             {t(`pages.filmlist.menu.goback`)}

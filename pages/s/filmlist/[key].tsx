@@ -1,23 +1,18 @@
-import Head from 'next/head';
-import Page from '@components/pages/filmlist/index';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import Full from '@components/Full';
-import { NextSeo } from 'next-seo';
-import { useTranslation } from 'react-i18next';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { GetStaticPaths } from 'next';
+
 import { FilmSearchProvider } from '@context/filmSearch';
+import Full from '@components/Full';
+import { GetStaticPaths } from 'next';
+import Head from 'next/head';
+import { NextSeo } from 'next-seo';
+import Page from '@components/pages/filmlist/index';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { sort } from '@utils/tools/movies';
+import { useRouter } from 'next/router';
+import { useTranslation } from 'react-i18next';
 
-const Films = () => {
-  const Router = useRouter();
-  const [sort, setSort] = useState(null);
+const Films = ({ items }) => {
   const { t } = useTranslation();
-
-  useEffect(() => {
-    const query = Router.query.key;
-    setSort(query ? query : null);
-  }, [Router]);
 
   return (
     <FilmSearchProvider>
@@ -25,6 +20,11 @@ const Films = () => {
         <link rel="icon" type="image/svg+xml" href="/favicon/filmlist/favicon.svg" />
       </Head>
       <style jsx global>{`
+        ::selection {
+          color: white;
+          background: #d7b350;
+        }
+
         #nprogress .bar {
           background: #d7b350 !important;
         }
@@ -48,16 +48,16 @@ const Films = () => {
         }
       `}</style>
       <NextSeo description="A filmlist with all movies and series I've ever watched" title={t('pages.hub.widgets.filmlist')} defaultTitle="Smarto" />
-      {sort ? <Page sort={sort} /> : <Full className="grid place-items-center" />}
+      {items ? <Page items={items} /> : <Full className="grid place-items-center" />}
     </FilmSearchProvider>
   );
 };
 
-export async function getStaticProps({ locale }) {
+export async function getStaticProps({ locale, params: { key } }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'footer'])),
-      // Will be passed to the page component as props
+      items: sort(key),
     },
   };
 }
