@@ -1,5 +1,6 @@
 import React from 'react';
 import { SearchItemProps } from './search';
+import { TimerProps } from './timer';
 
 export enum supportedAccounts {
   discord = 'discord',
@@ -28,6 +29,7 @@ export interface userData {
   };
   accounts?: accountProps;
   search?: SearchItemProps[];
+  timers?: TimerProps[];
   markedProjects?: string[];
   settings?: ProjectSettingsProps;
 }

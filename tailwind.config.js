@@ -97,6 +97,7 @@ module.exports = {
       maxWidth: {
         xxs: '225px',
       },
+      screens: { flg: '1125px', fxl: '1350px', f2xl: '1720px' },
     },
   },
   variants: {

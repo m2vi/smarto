@@ -1,10 +1,11 @@
+import { IoAddCircleOutline, IoAddOutline } from 'react-icons/io5';
+import { useEffect, useState } from 'react';
 import user, { widgets } from '@config/me';
+
 import { WidgetProps } from '@Types/config';
 import { sortByKey } from '@utils/tools/array';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IoAddCircleOutline, IoAddOutline } from 'react-icons/io5';
 
 const Widgets = ({ ...props }) => {
   const { t } = useTranslation();

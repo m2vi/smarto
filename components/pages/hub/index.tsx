@@ -1,19 +1,19 @@
-import Sidebar from '@components/pages/hub/Sidebar';
 import Full from '@components/Full';
+import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
+import Sidebar from '@components/pages/hub/Sidebar';
 import Time from '@components/Time';
-import { IoAddCircleOutline, IoEllipsisHorizontalOutline } from 'react-icons/io5';
-import { useTranslation } from 'react-i18next';
+import Timers from './Timers';
 import Widgets from './Widgets';
+import moment from 'moment';
+import { useTranslation } from 'react-i18next';
 
 export const Hub = () => {
-  const { t } = useTranslation();
-
   return (
     <Full className="flex flex-row">
       <Sidebar />
       <div className="h-screen w-full max-w-xs ml-3 bg-primary-800 p-4">
         <span className="flex justify-between items-center">
-          <p className="font-semibold text-lg">{t('pages.hub.timer')}</p>
+          <p className="font-semibold text-lg">Controls</p>
           <IoEllipsisHorizontalOutline className="h-4 w-4 text-primary-200 hover:text-primary-100 cursor-pointer" />
         </span>
       </div>
@@ -25,10 +25,7 @@ export const Hub = () => {
         </div>
         <div className="w-full max-h-250 h-full flex">
           <div className="h-full bg-primary-800 rounded-8 mr-6 w-full max-w-2xl p-4"></div>
-          <div className="h-full grid gap-6 grid-rows-2" style={{ width: 'calc(905px - 504px - 30px)' }}>
-            <div className="flex flex-col w-full bg-primary-800 p-4 rounded-8"></div>
-            <div className="flex flex-col w-full bg-primary-800 p-4 rounded-8"></div>
-          </div>
+          <Timers />
         </div>
       </div>
     </Full>

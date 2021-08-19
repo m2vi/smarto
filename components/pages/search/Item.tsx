@@ -1,13 +1,13 @@
-import user from '@config/me';
-import { SearchItemProps } from '@Types/search';
-import { useRouter } from 'next/router';
 import { IoLinkOutline, IoReturnDownBackSharp } from 'react-icons/io5';
 
-export const Item = ({ icon: Icon = IoLinkOutline, name, path }: SearchItemProps) => {
+import { SearchItemProps } from '@Types/search';
+import { useRouter } from 'next/router';
+
+export const Item = ({ icon: Icon = IoLinkOutline, name, path, me }: SearchItemProps) => {
   const Router = useRouter();
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.ctrlKey || user.settings.search.openInNewTab) return window.open(path, '_ blank');
+    if (e.ctrlKey || me.settings.search.openInNewTab) return window.open(path, '_ blank');
 
     Router.push(path);
   };

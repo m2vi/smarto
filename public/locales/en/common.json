@@ -11,7 +11,11 @@
       "input": "Search"
     },
     "hub": {
-      "timer": "Timer",
+      "timer": {
+        "christmas": "Christmas",
+        "newyear": "New Year",
+        "schoolstart": "Start of school"
+      },
       "widgets": {
         "default": "Your Widgets",
         "favourites": "Favourites",
@@ -34,7 +38,8 @@
         "films": "Films",
         "series": "Series",
         "settings": "Settings",
-        "goback": "Go Back"
+        "goback": "Go Back",
+        "search": "Search movies, series"
       },
       "items": {
         "released": "Released",

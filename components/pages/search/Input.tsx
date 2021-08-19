@@ -1,10 +1,10 @@
 import { Bar } from '@components/pages/search/styles';
 import { IoSearch } from 'react-icons/io5';
-import { matchSorter } from 'match-sorter';
-import user from '@config/me';
-import { useSearch } from '@context/search';
 import { forwardRef } from 'react';
+import { matchSorter } from 'match-sorter';
+import { useSearch } from '@context/search';
 import { useTranslation } from 'react-i18next';
+import user from '@config/me';
 
 const Input = forwardRef<HTMLInputElement>((props, ref) => {
   const { dispatch } = useSearch();

@@ -1,11 +1,11 @@
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
-import { Projects } from '@projects/index';
-import { ProjectProps } from '@Types/projects';
-import user from '@config/me';
-import { Client } from '@projects/lookup/client';
+import { useEffect, useState } from 'react';
+
 import Avatar from 'react-avatar';
+import { Client } from '@projects/lookup/client';
+import Link from 'next/link';
+import { Projects } from '@projects/index';
+import user from '@config/me';
 
 export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
   return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{ height: '2px' }}></span>;
@@ -42,9 +42,7 @@ export const Sidebar = () => {
       </span>
       <Divider className="mb-3" />
       <div className=" w-full flex flex-col items-center">
-        {projects.map(project => {
-          const { path, key, icon }: ProjectProps = project;
-          const Icon = icon;
+        {projects.map(({ path, key, icon: Icon }) => {
           return (
             <Link href={path} passHref={true} key={key}>
               <span className="px-4 py-3 rounded-15 h-full w-full cursor-pointer">

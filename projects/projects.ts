@@ -1,10 +1,10 @@
-import { ProjectArray } from '@Types/projects';
-
-import HubIcon from '@public/assets/projects/hub.svg';
-import PackageTrackerIcon from '@public/assets/projects/package_tracker.svg';
-import LookupIcon from '@public/assets/projects/lookup.svg';
-import DownloaderIcon from '@public/assets/projects/downloader.svg';
 import CodeSnippetsIcon from '@public/assets/projects/code_snippets.svg';
+import DownloaderIcon from '@public/assets/projects/downloader.svg';
+import FilmIcon from '@public/assets/projects/filmlist.svg';
+import HubIcon from '@public/assets/projects/hub.svg';
+import LookupIcon from '@public/assets/projects/lookup.svg';
+import PackageTrackerIcon from '@public/assets/projects/package_tracker.svg';
+import { ProjectArray } from '@Types/projects';
 import SearchIcon from '@public/assets/projects/search.svg';
 
 export const projects: ProjectArray = [
@@ -33,6 +33,28 @@ export const projects: ProjectArray = [
     description: 'Track deliveries easily',
     icon: PackageTrackerIcon,
     tags: ['package', 'delivery', 'find', 'track'],
+    badge: 'web',
+  },
+  {
+    enabled: true,
+    key: ':s',
+    name: 'Search',
+    path: '/s/search',
+    createdAt: 0,
+    description: 'Search for files, links, etc. in a well-designed page ',
+    icon: SearchIcon,
+    tags: ['find', 'get', 'link', 'files'],
+    badge: 'web',
+  },
+  {
+    enabled: true,
+    key: ':f',
+    name: 'Filmlist',
+    path: '/s/filmlist/all',
+    createdAt: 0,
+    description: "Browse all movies and series I've ever watched",
+    icon: FilmIcon,
+    tags: ['history', 'movie', 'watch', 'get', 'find', 'data'],
     badge: 'web',
   },
   {
@@ -71,17 +93,6 @@ export const projects: ProjectArray = [
     description: 'Frequently used code',
     icon: CodeSnippetsIcon,
     tags: ['code', 'example', 'hello world', 'get'],
-    badge: 'web',
-  },
-  {
-    enabled: true,
-    key: ':s',
-    name: 'Search',
-    path: '/s/search',
-    createdAt: 0,
-    description: 'Search for files, links, etc. in a well-designed page ',
-    icon: SearchIcon,
-    tags: ['find', 'get', 'link', 'files'],
     badge: 'web',
   },
 ];

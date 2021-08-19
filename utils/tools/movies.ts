@@ -261,7 +261,7 @@ export const filter = (key: string, value: any) => {
   }
 };
 
-export const sort = (sort: string, language?: 'en' | 'de') => {
+export const sort = (sort: string) => {
   switch (sort) {
     case 'all':
       return sortByKey(FilmListItems, 'name');

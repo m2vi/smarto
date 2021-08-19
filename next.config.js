@@ -15,8 +15,8 @@ module.exports = {
         permanent: true,
       },
       {
-        source: '/s/movielist',
-        destination: '/s/movielist/all',
+        source: '/s/filmlist',
+        destination: '/s/filmlist/all',
         permanent: true,
       },
     ];
