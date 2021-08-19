@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 interface CardCardProps extends CardProps {}
 
-const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, childish, release_date }: CardCardProps) => {
+const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, childish, release_date, original_name }: CardCardProps) => {
   const { t } = useTranslation();
   const genreList = genres(genre_ids, type);
   const release = moment(release_date).format(t('pages.filmlist.items.format'));
@@ -29,7 +29,7 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, child
           <IoVideocamOutline className="h-5 w-5" />
         )}
       </Wrapper>
-      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={name}>
+      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={original_name}>
         {name}
       </p>
       <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={genreList}>

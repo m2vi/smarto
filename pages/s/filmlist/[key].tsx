@@ -11,7 +11,7 @@ import { sort } from '@utils/tools/movies';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
-const Films = ({ items }) => {
+const Films = ({ items, _nextI18Next: { initialLocale } }) => {
   const { t } = useTranslation();
 
   return (

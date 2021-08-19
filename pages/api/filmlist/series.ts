@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import { MovieDb } from 'moviedb-promise';
 import { refactorSeries } from '@utils/tools/movies';
 

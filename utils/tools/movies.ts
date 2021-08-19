@@ -1,8 +1,9 @@
-import { FilmListItems } from '@config/filmlist';
 import { CardProps, FilmConfigProps, GenreArray } from '@Types/filmlist';
-import moment from 'moment';
 import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types';
 import { removeDuplicates, searchArray, shuffle, sortByKey } from './array';
+
+import { FilmListItems } from '@config/filmlist';
+import moment from 'moment';
 
 export const genreList: { films: GenreArray; series: GenreArray } = {
   films: [
@@ -256,26 +257,26 @@ export const filter = (key: string, value: any) => {
 
     return sortByKey(bin, 'release_date');
   } else {
-    return sortByKey(searchArray(FilmListItems, key, value), 'name');
+    return searchArray(FilmListItems, key, value);
   }
 };
 
-export const sort = (sort: string) => {
+export const sort = (sort: string, language?: 'en' | 'de') => {
   switch (sort) {
     case 'all':
       return sortByKey(FilmListItems, 'name');
     case 'favourites':
-      return filter('favoured', true);
+      return sortByKey(filter('favoured', true), 'name');
     case 'later':
-      return removeUnreleased(filter('watched', false));
+      return removeUnreleased(filter('watched', false)).reverse();
     case 'soon':
       return filter('soon', false);
     case 'childish':
-      return filter('childish', true);
+      return sortByKey(filter('childish', true), 'name');
     case 'films':
-      return filter('type', 'film');
+      return sortByKey(filter('type', 'film'), 'name');
     case 'series':
-      return filter('type', 'series');
+      return sortByKey(filter('type', 'series'), 'name');
     default:
       return [];
   }
