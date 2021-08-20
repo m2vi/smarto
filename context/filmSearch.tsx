@@ -7,6 +7,7 @@ const FilmSearchContext = createContext(null);
 const initalState: any = { items: [], render: [] };
 
 export const filmSearchReducer = (state, { items, query }) => {
+  console.log(query, items);
   let bin = items ? items : state.items;
 
   if (query) {
