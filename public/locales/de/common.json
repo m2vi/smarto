@@ -30,19 +30,34 @@
       "name": "filmliste",
       "menu": {
         "all": "Alle Einträge",
-        "fav": "Favoriten",
+        "favourites": "Favoriten",
         "later": "Später Ansehen",
         "soon": "Bald Verfügbar",
         "childish": "Kindisch",
         "films": "Filme",
         "series": "Serien",
-        "settings": "Einstellungen",
+        "streaming": "Streaming",
         "goback": "Zurückkehren",
         "search": "Suche Filme, Serien"
       },
       "items": {
         "released": "Veröffentlicht",
         "format": "MMM D, YYYY"
+      },
+      "streaming": {
+        "type": {
+          "default": "Kontent",
+          "films": "Filme",
+          "series": "Serien",
+          "sports": "Sport",
+          "games": "Spiele",
+          "abooks": "aBooks"
+        },
+        "languages": {
+          "default": "Sprache(n)",
+          "en": "Englisch",
+          "de": "Deutsch"
+        }
       }
     }
   }

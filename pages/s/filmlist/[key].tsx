@@ -6,6 +6,7 @@ import { GetStaticPaths } from 'next';
 import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import Page from '@components/pages/filmlist/index';
+import Page2 from '@components/pages/filmlist/index2';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { sort } from '@utils/tools/movies';
 import { useRouter } from 'next/router';
@@ -13,6 +14,19 @@ import { useTranslation } from 'react-i18next';
 
 const Films = ({ items }) => {
   const { t } = useTranslation();
+  const [el, setEl] = useState(<Full className="grid place-items-center" />);
+  const Router = useRouter();
+
+  useEffect(() => {
+    if (Router?.query && items) {
+      const curr = Router.query.key;
+      if (curr === 'streaming') {
+        setEl(<Page2 items={items} />);
+      } else {
+        setEl(<Page items={items} />);
+      }
+    }
+  }, [Router, items]);
 
   return (
     <FilmSearchProvider>
@@ -48,7 +62,7 @@ const Films = ({ items }) => {
         }
       `}</style>
       <NextSeo description="A filmlist with all movies and series I've ever watched" title={t('pages.hub.widgets.filmlist')} defaultTitle="Smarto" />
-      {items ? <Page items={items} /> : <Full className="grid place-items-center" />}
+      {el}
     </FilmSearchProvider>
   );
 };

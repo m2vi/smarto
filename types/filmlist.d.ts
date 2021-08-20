@@ -32,3 +32,13 @@ export interface FilmConfigProps {
   showUnpublished: boolean;
   sort: 'name' | 'release_date' | 'randomize';
 }
+
+export interface StreamingServiceProps {
+  href: string;
+  id: string;
+  languages: string[];
+  name: string;
+  original_name: string;
+  poster_path: string;
+  types: string[];
+}

@@ -31,19 +31,34 @@
       "name": "filmlist",
       "menu": {
         "all": "All Items",
-        "fav": "Favourites",
+        "favourites": "Favourites",
         "later": "Watch Later",
         "soon": "Soon Available",
         "childish": "Childish",
         "films": "Films",
         "series": "Series",
-        "settings": "Settings",
+        "streaming": "Streaming",
         "goback": "Go Back",
-        "search": "Search movies, series"
+        "search": "Search films, series"
       },
       "items": {
         "released": "Released",
         "format": "MMM D, YYYY"
+      },
+      "streaming": {
+        "type": {
+          "default": "Content",
+          "films": "Films",
+          "series": "Series",
+          "sports": "Sports",
+          "games": "Games",
+          "abooks": "aBooks"
+        },
+        "languages": {
+          "default": "Language(s)",
+          "en": "English",
+          "de": "German"
+        }
       }
     }
   }

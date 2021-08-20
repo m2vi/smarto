@@ -219,7 +219,7 @@ export const refactorSeries = ({
   poster_path,
   release_date: getReleaseDate(release_date).getTime(),
   type: 'series',
-  version: 2,
+  version: 3,
   watched: true,
 });
 
@@ -264,7 +264,7 @@ export const filter = (key: string, value: any) => {
 export const sort = (sort: string) => {
   switch (sort) {
     case 'all':
-      return sortByKey(FilmListItems, 'name');
+      return sortByKey(filter('version', 3), 'name');
     case 'favourites':
       return sortByKey(filter('favoured', true), 'name');
     case 'later':

@@ -1,18 +1,14 @@
-import Card from './Card';
+import Card from './Card2';
 import { CardProps } from '@Types/filmlist';
 import { Input } from './Input';
 import Sidebar from '@components/pages/filmlist/Sidebar';
+import { StreamingServices } from '@config/filmlist';
+import { sortByKey } from '@utils/tools/array';
 import { useEffect } from 'react';
 import { useFilmSearch } from '@context/filmSearch';
-import { useTranslation } from 'react-i18next';
 
 const Index = ({ items }) => {
-  const { dispatch, state } = useFilmSearch();
-  const { t } = useTranslation();
-
-  useEffect(() => {
-    dispatch({ items });
-  }, [dispatch, items]);
+  const state = sortByKey(StreamingServices, 'name');
 
   return (
     <div className="w-full h-screen flex justify-center">
@@ -20,12 +16,12 @@ const Index = ({ items }) => {
         <Sidebar />
         <div className="w-full flex flex-col">
           <div className="w-full flex justify-end mt-6">
-            <Input placeholder={t('pages.filmlist.menu.search')} className="max-w-xs mb-10" items={items} />
+            <Input placeholder="Search movie, series" className="max-w-xs mb-10" items={items} />
           </div>
 
           <div className="w-full p-4 py-0 grid gap-6 grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto overflow-y-auto dD5d-items place-items-center">
-            {state.render.map(({ ...props }, index: number) => {
-              return <Card {...(props as CardProps)} key={`${props.id}-${props.type}`} />;
+            {state.map(({ ...props }, index: number) => {
+              return <Card {...(props as any)} key={`${props.id}-${props.type}`} />;
             })}
           </div>
         </div>

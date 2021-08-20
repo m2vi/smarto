@@ -4,6 +4,7 @@ import {
   IoHappyOutline,
   IoHourglassOutline,
   IoLogOutOutline,
+  IoPlayOutline,
   IoSettingsOutline,
   IoStarOutline,
   IoTimerOutline,
@@ -18,38 +19,44 @@ import { useTranslation } from 'react-i18next';
 const sections = [
   {
     icon: IoBookOutline,
-    path: 'all',
     key: 'all',
   },
   {
     icon: IoStarOutline,
-    path: 'favourites',
-    key: 'fav',
+    key: 'favourites',
   },
   {
     icon: IoTimerOutline,
-    path: 'later',
     key: 'later',
   },
   {
     icon: IoHourglassOutline,
-    path: 'soon',
     key: 'soon',
   },
   {
     icon: IoHappyOutline,
-    path: 'childish',
     key: 'childish',
   },
   {
     icon: IoFilmOutline,
-    path: 'films',
     key: 'films',
   },
   {
     icon: IoTvOutline,
-    path: 'series',
     key: 'series',
+  },
+];
+
+const otherSections = [
+  {
+    icon: IoPlayOutline,
+    path: '/s/filmlist/streaming',
+    key: 'streaming',
+  },
+  {
+    icon: IoLogOutOutline,
+    path: '/',
+    key: 'goback',
   },
 ];
 
@@ -63,33 +70,29 @@ const Sidebar = () => {
   }, [Router]);
 
   return (
-    <div className="p-6 flex flex-col w-250">
+    <div className="p-6 flex flex-col w-250 overflow-hidden">
       <p className="text-3xl mb-8">
         {t('pages.filmlist.name')}
         <span style={{ color: '#d7b350' }}>.</span>
       </p>
       <div className="w-full flex flex-col items-start">
-        {sections.map(({ path, icon: Icon, key }) => (
-          <Link href={`/s/filmlist/${path}`} passHref={true} shallow={false} key={key}>
-            <span style={{ color: curr === path && '#d7b350' }} className="my-2 flex items-center cursor-pointer filmlist-hover">
+        {sections.map(({ icon: Icon, key }) => (
+          <Link href={`/s/filmlist/${key}`} passHref={true} shallow={false} key={key}>
+            <span style={{ color: curr === key && '#d7b350' }} className="my-2 flex items-center cursor-pointer filmlist-hover">
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
             </span>
           </Link>
         ))}
         <div className="w-full bg-primary-300 opacity-50 my-2" style={{ height: '1px' }}></div>
-        <Link href={'/'} passHref={true} shallow={false}>
-          <span className="my-2 flex items-center cursor-pointer filmlist-hover">
-            {<IoSettingsOutline className="h-4 2xl:w-4 mr-2" />}
-            {t(`pages.filmlist.menu.settings`)}
-          </span>
-        </Link>
-        <Link href={'/'} passHref={true} shallow={false}>
-          <span className="my-2 flex items-center cursor-pointer filmlist-hover">
-            {<IoLogOutOutline className="h-4 2xl:w-4 mr-2" />}
-            {t(`pages.filmlist.menu.goback`)}
-          </span>
-        </Link>
+        {otherSections.map(({ path, icon: Icon, key }) => (
+          <Link href={`${path}`} passHref={true} shallow={false} key={key}>
+            <span style={{ color: curr === key && '#d7b350' }} className="my-2 flex items-center cursor-pointer filmlist-hover">
+              {<Icon className="h-4 2xl:w-4 mr-2" />}
+              {t(`pages.filmlist.menu.${key}`)}
+            </span>
+          </Link>
+        ))}
       </div>
     </div>
   );
