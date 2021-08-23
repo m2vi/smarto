@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import { FilmListItems } from '@config/filmlist';
 import { FilmSearchProvider } from '@context/filmSearch';
 import Full from '@components/Full';
 import { GetStaticPaths } from 'next';
@@ -7,6 +8,7 @@ import Head from 'next/head';
 import { NextSeo } from 'next-seo';
 import Page from '@components/pages/filmlist/index';
 import Page2 from '@components/pages/filmlist/index2';
+import { apiBaseUrl } from '@utils/env/constants';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { sort } from '@utils/tools/movies';
 import { useRouter } from 'next/router';
@@ -67,19 +69,19 @@ const Films = ({ items }) => {
   );
 };
 
-export async function getStaticProps({ locale, params: { key } }) {
+export async function getStaticProps(context) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'footer'])),
-      items: sort(key),
+      ...(await serverSideTranslations(context.locale, ['common', 'footer'])),
+      items: sort(context.params.key, FilmListItems),
     },
   };
 }
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
   return {
-    paths: [], //indicates that no page needs be created at build time
-    fallback: 'blocking', //indicates the type of fallback
+    paths: [],
+    fallback: 'blocking',
   };
 };
 

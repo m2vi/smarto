@@ -13,12 +13,12 @@ export const items = async (_: NextApiRequest, res: NextApiResponse) => {
 
       return res.status(200).json({ success: true, length: items.length });
     } else if (q && sortType) {
-      const toCheck = sort(sortType.toString());
+      const toCheck = sort(sortType.toString(), FilmListItems);
       const found = matchSorter(toCheck, q.toString(), { keys: ['name', 'original_name'] });
 
       return res.status(200).json({ success: true, data: found });
     } else if (sortType && !q) {
-      const items = sort(sortType.toString());
+      const items = sort(sortType.toString(), FilmListItems);
 
       return res.status(200).json({ success: true, data: items });
     }

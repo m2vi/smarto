@@ -2,7 +2,6 @@ import { CardProps, FilmConfigProps, GenreArray } from '@Types/filmlist';
 import { MovieResult, TvResult } from 'moviedb-promise/dist/request-types';
 import { removeDuplicates, searchArray, shuffle, sortByKey } from './array';
 
-import { FilmListItems } from '@config/filmlist';
 import moment from 'moment';
 
 export const genreList: { films: GenreArray; series: GenreArray } = {
@@ -228,28 +227,15 @@ export const getReleaseDate = (release_date: string) => {
   return d;
 };
 
-export const applyConfig = ({ showChildish, showUnpublished, sort }: FilmConfigProps) => {
-  let bin: CardProps[] = FilmListItems;
-
-  if (showChildish === false) {
-    bin = bin.filter(item => item.childish === false);
-  }
-  if (showUnpublished === false) {
-    bin = bin.filter(({ release_date }) => {
-      return Math.sign(new Date().getTime() - release_date) === 1;
-    });
-  }
-};
-
 export const isReleased = (release_date: number) => {
   return Math.sign(new Date().getTime() - release_date) === 1;
 };
 
 export const removeUnreleased = (array: CardProps[]) => array.filter(({ release_date }) => isReleased(release_date));
 
-export const filter = (key: string, value: any) => {
+export const filter = (key: string, value: any, items: CardProps[]) => {
   if (key === 'soon') {
-    let bin = FilmListItems;
+    let bin = items;
 
     bin = bin.filter(({ release_date }) => {
       return !isReleased(release_date);
@@ -257,26 +243,26 @@ export const filter = (key: string, value: any) => {
 
     return sortByKey(bin, 'release_date');
   } else {
-    return searchArray(FilmListItems, key, value);
+    return searchArray(items, key, value);
   }
 };
 
-export const sort = (sort: string) => {
+export const sort = (sort: string, items: CardProps[]) => {
   switch (sort) {
     case 'all':
-      return sortByKey(filter('version', 3), 'name');
+      return sortByKey(filter('version', 3, items), 'name');
     case 'favourites':
-      return sortByKey(filter('favoured', true), 'name');
+      return sortByKey(filter('favoured', true, items), 'name');
     case 'later':
-      return removeUnreleased(filter('watched', false)).reverse();
+      return removeUnreleased(filter('watched', false, items)).reverse();
     case 'soon':
-      return filter('soon', false);
+      return filter('soon', false, items);
     case 'childish':
-      return sortByKey(filter('childish', true), 'name');
+      return sortByKey(filter('childish', true, items), 'name');
     case 'films':
-      return sortByKey(filter('type', 'film'), 'name');
+      return sortByKey(filter('type', 'film', items), 'name');
     case 'series':
-      return sortByKey(filter('type', 'series'), 'name');
+      return sortByKey(filter('type', 'series', items), 'name');
     default:
       return [];
   }
