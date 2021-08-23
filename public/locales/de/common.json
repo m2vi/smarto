@@ -14,7 +14,10 @@
       "timer": {
         "christmas": "Weihnachten",
         "newyear": "Neujahr",
-        "schoolstart": "Schulbeginn"
+        "schoolstart": "Schulbeginn",
+        "forza": "FH5 Release",
+        "jamesbond": "Neuer JB",
+        "bikerepair": "Reperatur"
       },
       "widgets": {
         "default": "Deine Widgets",
