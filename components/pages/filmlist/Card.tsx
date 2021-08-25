@@ -1,5 +1,5 @@
 import { CardProps, MoviePageProps } from '@Types/filmlist';
-import { genres, getReleaseDate } from '@utils/tools/movies';
+import { genres, getReleaseDate } from '@utils/tools/films';
 
 import Image from 'next/image';
 import { IoVideocamOutline } from 'react-icons/io5';

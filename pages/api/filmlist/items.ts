@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import { FilmListItems } from '@config/filmlist';
 import { matchSorter } from 'match-sorter';
-import { sort } from '@utils/tools/movies';
+import { sort } from '@utils/tools/films';
 
 export const items = async (_: NextApiRequest, res: NextApiResponse) => {
   try {

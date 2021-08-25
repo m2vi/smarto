@@ -10,7 +10,7 @@ import Page from '@components/pages/filmlist/index';
 import Page2 from '@components/pages/filmlist/index2';
 import { apiBaseUrl } from '@utils/env/constants';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import { sort } from '@utils/tools/movies';
+import { sort } from '@utils/tools/films';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 
