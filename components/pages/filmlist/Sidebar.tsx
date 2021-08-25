@@ -5,6 +5,7 @@ import {
   IoHourglassOutline,
   IoLogOutOutline,
   IoPlayOutline,
+  IoRefreshOutline,
   IoSettingsOutline,
   IoStarOutline,
   IoTimerOutline,
@@ -24,6 +25,10 @@ const sections = [
   {
     icon: IoStarOutline,
     key: 'favourites',
+  },
+  {
+    icon: IoRefreshOutline,
+    key: 'new',
   },
   {
     icon: IoTimerOutline,

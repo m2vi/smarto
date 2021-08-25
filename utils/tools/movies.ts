@@ -192,7 +192,7 @@ export const refactorMovie = ({
   poster_path,
   release_date: getReleaseDate(release_date).getTime(),
   type: 'film',
-  version: 2,
+  version: 3,
   watched: true,
 });
 
@@ -233,37 +233,65 @@ export const isReleased = (release_date: number) => {
 
 export const removeUnreleased = (array: CardProps[]) => array.filter(({ release_date }) => isReleased(release_date));
 
-export const filter = (key: string, value: any, items: CardProps[]) => {
-  if (key === 'soon') {
-    let bin = items;
-
-    bin = bin.filter(({ release_date }) => {
-      return !isReleased(release_date);
-    });
-
-    return sortByKey(bin, 'release_date');
-  } else {
-    return searchArray(items, key, value);
-  }
-};
-
-export const sort = (sort: string, items: CardProps[]) => {
-  switch (sort) {
+export const filter = (key: string, items: CardProps[]) => {
+  switch (key) {
     case 'all':
-      return sortByKey(filter('version', 3, items), 'name');
+      return sortByKey(searchArray(items, 'version', 3), 'name');
     case 'favourites':
-      return sortByKey(filter('favoured', true, items), 'name');
+      return sortByKey(searchArray(items, 'favoured', true), 'name');
+    case 'new':
+      return searchArray(items, 'version', 3).reverse();
     case 'later':
-      return removeUnreleased(filter('watched', false, items)).reverse();
+      return removeUnreleased(searchArray(items, 'watched', false).reverse());
     case 'soon':
-      return filter('soon', false, items);
+      return sortByKey(
+        items.filter(({ release_date }) => !isReleased(release_date)),
+        'release_date',
+      );
     case 'childish':
-      return sortByKey(filter('childish', true, items), 'name');
+      return sortByKey(searchArray(items, 'childish', true), 'name');
     case 'films':
-      return sortByKey(filter('type', 'film', items), 'name');
+      return sortByKey(searchArray(items, 'type', 'film'), 'name');
     case 'series':
-      return sortByKey(filter('type', 'series', items), 'name');
+      return sortByKey(searchArray(items, 'type', 'series'), 'name');
+    // other
+    case 'shuffle':
+      return shuffle(searchArray(items, 'version', 3));
+    case 'horror':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(27)),
+        'name',
+      );
+    case 'animation':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(16)),
+        'name',
+      );
+    case 'comedy':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(35)),
+        'name',
+      );
+    case 'action':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(28) || i.genre_ids.includes(10759)),
+        'name',
+      );
+    case 'crime':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(80)),
+        'name',
+      );
+    case 'kids':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10762)),
+        'name',
+      );
+    case 'streaming':
+      return sortByKey(searchArray(items, 'version', 3), 'name');
     default:
       return [];
   }
 };
+
+export const sort = (sort: string, items: CardProps[]) => filter(sort, items);
