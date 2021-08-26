@@ -171,54 +171,46 @@ export const genres = (genres: number[], type: 'series' | 'film'): string => {
 };
 
 export const refactorMovie = ({
-  backdrop_path,
   genre_ids,
   id,
   title: name,
   original_language,
   original_title: original_name,
-  overview,
   poster_path,
   release_date,
 }: MovieResult): CardProps => ({
-  backdrop_path,
   favoured: false,
   genre_ids,
   id,
   name,
   original_language,
   original_name,
-  overview,
   poster_path,
   release_date: getReleaseDate(release_date).getTime(),
   type: 'film',
-  version: 3,
+  version: 4,
   watched: true,
 });
 
 export const refactorSeries = ({
-  backdrop_path,
   genre_ids,
   id,
   name,
   original_language,
   original_name,
-  overview,
   poster_path,
   first_air_date: release_date,
 }: TvResult): CardProps => ({
-  backdrop_path,
   favoured: false,
   genre_ids,
   id,
   name,
   original_language,
   original_name,
-  overview,
   poster_path,
   release_date: getReleaseDate(release_date).getTime(),
   type: 'series',
-  version: 3,
+  version: 4,
   watched: true,
 });
 
@@ -236,11 +228,11 @@ export const removeUnreleased = (array: CardProps[]) => array.filter(({ release_
 export const filter = (key: string, items: CardProps[]) => {
   switch (key) {
     case 'all':
-      return sortByKey(searchArray(items, 'version', 3), 'name');
+      return sortByKey(searchArray(items, 'version', 4), 'name');
     case 'favourites':
       return sortByKey(searchArray(items, 'favoured', true), 'name');
     case 'new':
-      return searchArray(items, 'version', 3).reverse();
+      return searchArray(items, 'version', 4).reverse();
     case 'later':
       return removeUnreleased(searchArray(items, 'watched', false).reverse());
     case 'soon':
@@ -256,7 +248,7 @@ export const filter = (key: string, items: CardProps[]) => {
       return sortByKey(searchArray(items, 'type', 'series'), 'name');
     // other
     case 'shuffle':
-      return shuffle(searchArray(items, 'version', 3));
+      return shuffle(searchArray(items, 'version', 4));
     case 'horror':
       return sortByKey(
         items.filter(i => i.genre_ids.includes(27)),
@@ -288,7 +280,7 @@ export const filter = (key: string, items: CardProps[]) => {
         'name',
       );
     case 'streaming':
-      return sortByKey(searchArray(items, 'version', 3), 'name');
+      return sortByKey(searchArray(items, 'version', 4), 'name');
     default:
       return [];
   }
