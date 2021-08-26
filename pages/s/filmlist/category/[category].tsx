@@ -12,7 +12,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ['common', 'footer'])),
-      items: sort(context.params.key, FilmListItems, true),
+      items: sort(context.params.category, FilmListItems, true),
     },
   };
 }

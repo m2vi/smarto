@@ -1,6 +1,6 @@
 import Card from './Card';
 import { CardProps } from '@Types/filmlist';
-import Categories from './Categories';
+import Genres from './Genres';
 import { Input } from './Input';
 import Menu from '@components/pages/filmlist/Menu';
 import { useEffect } from 'react';
@@ -29,8 +29,8 @@ const Index = ({ items }) => {
             })}
           </div>
         </div>
-        {/* <div className="w-250"></div> */}
-        <Categories />
+        <div className="w-250"></div>
+        {/* <Genres /> */}
       </div>
     </div>
   );
