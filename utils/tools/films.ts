@@ -240,18 +240,38 @@ export const filter = (key: string, items: CardProps[]) => {
         items.filter(({ release_date }) => !isReleased(release_date)),
         'release_date',
       );
-    case 'childish':
-      return sortByKey(searchArray(items, 'childish', true), 'name');
+    case 'kids':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)),
+        'name',
+      );
     case 'films':
       return sortByKey(searchArray(items, 'type', 'film'), 'name');
     case 'series':
       return sortByKey(searchArray(items, 'type', 'series'), 'name');
-    // other
     case 'shuffle':
       return shuffle(searchArray(items, 'version', 4));
-    case 'horror':
+    default:
+      return [];
+  }
+};
+
+// GOTTA MAKE THIS BETTER
+export const filterCategories = (key: string, items: CardProps[]) => {
+  switch (key) {
+    case 'action':
       return sortByKey(
-        items.filter(i => i.genre_ids.includes(27)),
+        items.filter(i => i.genre_ids.includes(28)),
+        'name',
+      );
+    case 'action & adventure':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10759)),
+        'name',
+      );
+    case 'adventure':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(12)),
         'name',
       );
     case 'animation':
@@ -264,14 +284,39 @@ export const filter = (key: string, items: CardProps[]) => {
         items.filter(i => i.genre_ids.includes(35)),
         'name',
       );
-    case 'action':
-      return sortByKey(
-        items.filter(i => i.genre_ids.includes(28) || i.genre_ids.includes(10759)),
-        'name',
-      );
     case 'crime':
       return sortByKey(
         items.filter(i => i.genre_ids.includes(80)),
+        'name',
+      );
+    case 'documentary':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(99)),
+        'name',
+      );
+    case 'drama':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(18)),
+        'name',
+      );
+    case 'family':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10751)),
+        'name',
+      );
+    case 'fantasy':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(14)),
+        'name',
+      );
+    case 'history':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(36)),
+        'name',
+      );
+    case 'horror':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(27)),
         'name',
       );
     case 'kids':
@@ -279,11 +324,82 @@ export const filter = (key: string, items: CardProps[]) => {
         items.filter(i => i.genre_ids.includes(10762)),
         'name',
       );
-    case 'streaming':
-      return sortByKey(searchArray(items, 'version', 4), 'name');
+    case 'music':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10402)),
+        'name',
+      );
+    case 'mystery':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(9648)),
+        'name',
+      );
+    case 'news':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10763)),
+        'name',
+      );
+    case 'reality':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10764)),
+        'name',
+      );
+    case 'romance':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10749)),
+        'name',
+      );
+    case 'sci-fi & fantasy':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10765)),
+        'name',
+      );
+    case 'science fiction':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(878)),
+        'name',
+      );
+    case 'soap':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10766)),
+        'name',
+      );
+    case 'talk':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10767)),
+        'name',
+      );
+    case 'thriller':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(53)),
+        'name',
+      );
+    case 'tv movie':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10770)),
+        'name',
+      );
+    case 'war':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10752)),
+        'name',
+      );
+    case 'war & politics':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(10768)),
+        'name',
+      );
+    case 'western':
+      return sortByKey(
+        items.filter(i => i.genre_ids.includes(37)),
+        'name',
+      );
     default:
       return [];
   }
 };
 
-export const sort = (sort: string, items: CardProps[]) => filter(sort, items);
+export const sort = (sort: string, items: CardProps[], second?: boolean) => {
+  if (second) return filterCategories(sort, items);
+  return filter(sort, items);
+};

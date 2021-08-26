@@ -1,5 +1,9 @@
-export const sortByKey = (array: Array<any>, key: string) => {
-  return array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0));
+export const sortByKey = (array: Array<any>, key?: string) => {
+  if (key) {
+    return array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0));
+  } else {
+    return array.sort((a, b) => (a > b ? 1 : b > a ? -1 : 0));
+  }
 };
 
 export const removeDuplicates = (array: Array<any>) => {

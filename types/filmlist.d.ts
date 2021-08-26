@@ -1,5 +1,5 @@
 export interface CardProps {
-  favoured?: boolean;
+  favoured: boolean;
   genre_ids: number[];
   id: number;
   name: string;
@@ -10,8 +10,6 @@ export interface CardProps {
   type: 'series' | 'film';
   version: number;
   watched: boolean;
-
-  childish?: boolean;
 }
 
 export interface MoviePageProps {

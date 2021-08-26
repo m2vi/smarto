@@ -4,9 +4,8 @@ import {
   IoHappyOutline,
   IoHourglassOutline,
   IoLogOutOutline,
-  IoPlayOutline,
   IoRefreshOutline,
-  IoSettingsOutline,
+  IoShuffleOutline,
   IoStarOutline,
   IoTimerOutline,
   IoTvOutline,
@@ -40,7 +39,7 @@ const sections = [
   },
   {
     icon: IoHappyOutline,
-    key: 'childish',
+    key: 'kids',
   },
   {
     icon: IoFilmOutline,
@@ -54,9 +53,9 @@ const sections = [
 
 const otherSections = [
   {
-    icon: IoPlayOutline,
-    path: '/s/filmlist/streaming',
-    key: 'streaming',
+    icon: IoShuffleOutline,
+    path: '/s/filmlist/shuffle',
+    key: 'shuffle',
   },
   {
     icon: IoLogOutOutline,
@@ -83,7 +82,10 @@ const Sidebar = () => {
       <div className="w-full flex flex-col items-start">
         {sections.map(({ icon: Icon, key }) => (
           <Link href={`/s/filmlist/${key}`} passHref={true} shallow={false} key={key}>
-            <span style={{ color: curr === key && '#d7b350' }} className="my-2 flex items-center cursor-pointer filmlist-hover">
+            <span
+              style={{ color: curr === key && '#d7b350' }}
+              className="my-2 flex items-center cursor-pointer filmlist-hover overflow-hidden overflow-ellipsis whitespace-nowrap"
+            >
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
             </span>
@@ -92,7 +94,10 @@ const Sidebar = () => {
         <div className="w-full bg-primary-300 opacity-50 my-2" style={{ height: '1px' }}></div>
         {otherSections.map(({ path, icon: Icon, key }) => (
           <Link href={`${path}`} passHref={true} shallow={false} key={key}>
-            <span style={{ color: curr === key && '#d7b350' }} className="my-2 flex items-center cursor-pointer filmlist-hover">
+            <span
+              style={{ color: curr === key && '#d7b350' }}
+              className="my-2 flex items-center cursor-pointer filmlist-hover overflow-hidden overflow-ellipsis whitespace-nowrap"
+            >
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
             </span>

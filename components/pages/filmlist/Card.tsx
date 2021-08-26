@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 
 interface CardCardProps extends CardProps {}
 
-const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, childish, release_date, original_name }: CardCardProps) => {
+const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, release_date, original_name }: CardCardProps) => {
   const { t } = useTranslation();
   const genreList = genres(genre_ids, type);
   const release = moment(release_date).format(t('pages.filmlist.items.format'));
