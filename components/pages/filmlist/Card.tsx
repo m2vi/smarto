@@ -11,7 +11,6 @@ interface CardCardProps extends CardProps {}
 
 const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, release_date, original_name }: CardCardProps) => {
   const { t } = useTranslation();
-  const genreList = genres(genre_ids, type);
   const release = moment(release_date).format(t('pages.filmlist.items.format'));
 
   return (
@@ -32,9 +31,7 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, relea
       <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={original_name}>
         {name}
       </p>
-      <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={genreList}>
-        {genreList}
-      </p>
+      <Genres ids={genre_ids} />
       <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={release}>
         {t('pages.filmlist.items.released')} {release}
       </p>
@@ -43,3 +40,16 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, relea
 };
 
 export default Card;
+
+export const Genres = ({ ids }) => {
+  const { t } = useTranslation();
+  const g = genres(ids)
+    .map(name => t(`pages.filmlist.categories.${name}`))
+    .join(', ');
+
+  return (
+    <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={g}>
+      {g}
+    </p>
+  );
+};

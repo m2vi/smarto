@@ -151,23 +151,17 @@ export const genreList: { films: GenreArray; series: GenreArray } = {
   ],
 };
 
-export const genres = (genres: number[], type: 'series' | 'film'): string => {
+export const genres = (genres: number[]): string[] => {
   const { films, series } = genreList;
+  const all = removeDuplicates(films.concat(series));
   let g: string[] = [];
 
-  if (type === 'film') {
-    genres.forEach(genreId => {
-      const curr = films.find(genre => genreId === genre.id);
-      if (curr) g.push(curr.name);
-    });
-  } else if (type === 'series') {
-    genres.forEach(genreId => {
-      const curr = series.find(genre => genreId === genre.id);
-      if (curr) g.push(curr.name);
-    });
-  }
+  genres.forEach(genreId => {
+    const curr = all.find(genre => genreId === genre.id);
+    if (curr) g.push(curr.name.toLowerCase());
+  });
 
-  return g.join(', ');
+  return g;
 };
 
 export const refactorMovie = ({
