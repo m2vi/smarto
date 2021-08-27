@@ -74,7 +74,7 @@ const Sidebar = () => {
   }, [Router]);
 
   return (
-    <div className="m-6 flex flex-col w-250 overflow-hidden overflow-y-auto dD5d-items" style={{ maxHeight: '515px' }}>
+    <aside className="m-6 flex flex-col w-250 overflow-hidden overflow-y-auto dD5d-items" style={{ maxHeight: '515px' }}>
       <p className="text-3xl mb-8">
         {t('pages.filmlist.name')}
         <span style={{ color: '#d7b350' }}>.</span>
@@ -104,7 +104,7 @@ const Sidebar = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </aside>
   );
 };
 

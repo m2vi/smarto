@@ -31,7 +31,7 @@ const IfWrapper = ({ items }) => {
         }
 
         html {
-          --color-primary-300: #6c6f7c !important;
+          --color-primary-300: #797d8b !important;
         }
 
         #__next,

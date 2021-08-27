@@ -1,25 +1,26 @@
 import { CardProps, MoviePageProps } from '@Types/filmlist';
+import { IoEyeOff, IoStar, IoVideocamOutline } from 'react-icons/io5';
 import { genres, getReleaseDate } from '@utils/tools/films';
 
 import Image from 'next/image';
-import { IoVideocamOutline } from 'react-icons/io5';
 import { Wrapper } from './styles';
 import moment from 'moment';
 import { useTranslation } from 'react-i18next';
 
 interface CardCardProps extends CardProps {}
 
-const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, release_date, original_name }: CardCardProps) => {
+const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, release_date, original_name, original_language, url }: CardCardProps) => {
   return (
-    <div className="flex flex-col" style={{ width: '200px' }}>
-      <Wrapper className="h-full w-full grid place-items-center">
+    <a href={url} className="flex flex-col" style={{ width: '200px' }}>
+      <Wrapper className="h-full w-full grid place-items-center relative">
         {poster_path ? (
           <Image
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
             height="313px"
             width="200px"
             alt={`${id} poster`}
-            className="no-drag select-none w-full"
+            className="no-drag select-none w-full overflow-hidden relative"
+            objectFit={'cover'}
           />
         ) : (
           <IoVideocamOutline className="h-5 w-5" />
@@ -30,7 +31,7 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, relea
       </p>
       <Genres ids={genre_ids} />
       <Release release_date={release_date} />
-    </div>
+    </a>
   );
 };
 

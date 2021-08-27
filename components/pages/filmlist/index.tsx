@@ -20,14 +20,14 @@ const Index = ({ items }) => {
       <div className="flex w-full justify-between max-w-screen-2xl mx-8 lg:mx-11 2xl:mx-100 my-6">
         <Menu />
         <div className="w-full flex flex-col">
-          <div className="w-full flex justify-end mt-6">
+          <header className="w-full flex justify-end mt-6">
             <Input placeholder={t('pages.filmlist.menu.search')} className="max-w-xs mb-10" items={items} />
-          </div>
-          <div className="w-full p-4 py-0 grid gap-6 grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto overflow-y-auto dD5d-items place-items-center">
+          </header>
+          <main className="w-full p-4 py-0 grid gap-6 grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto overflow-y-auto dD5d-items place-items-center">
             {state.render.map(({ ...props }) => {
               return <Card {...(props as CardProps)} key={`${props.id}-${props.type}`} />;
             })}
-          </div>
+          </main>
         </div>
         <div className="w-250"></div>
         {/* <Genres /> */}
