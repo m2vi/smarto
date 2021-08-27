@@ -182,6 +182,7 @@ export const refactorMovie = ({
   poster_path,
   release_date: getReleaseDate(release_date).getTime(),
   type: 'film',
+  url: `https://www.themoviedb.org/movie/${id}`,
   version: 4,
   watched: true,
 });
@@ -204,6 +205,7 @@ export const refactorSeries = ({
   poster_path,
   release_date: getReleaseDate(release_date).getTime(),
   type: 'series',
+  url: `https://www.themoviedb.org/tv/${id}`,
   version: 4,
   watched: true,
 });

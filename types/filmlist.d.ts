@@ -8,6 +8,7 @@ export interface CardProps {
   poster_path: string;
   release_date: number;
   type: 'series' | 'film';
+  url: string;
   version: number;
   watched: boolean;
 }

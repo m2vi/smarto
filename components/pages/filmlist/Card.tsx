@@ -10,9 +10,6 @@ import { useTranslation } from 'react-i18next';
 interface CardCardProps extends CardProps {}
 
 const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, release_date, original_name }: CardCardProps) => {
-  const { t } = useTranslation();
-  const release = moment(release_date).format(t('pages.filmlist.items.format'));
-
   return (
     <div className="flex flex-col" style={{ width: '200px' }}>
       <Wrapper className="h-full w-full grid place-items-center">
@@ -32,9 +29,7 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, relea
         {name}
       </p>
       <Genres ids={genre_ids} />
-      <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={release}>
-        {t('pages.filmlist.items.released')} {release}
-      </p>
+      <Release release_date={release_date} />
     </div>
   );
 };
@@ -50,6 +45,17 @@ export const Genres = ({ ids }) => {
   return (
     <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={g}>
       {g}
+    </p>
+  );
+};
+
+export const Release = ({ release_date }) => {
+  const { t } = useTranslation();
+  const r = moment(release_date).format(t('pages.filmlist.items.format'));
+
+  return (
+    <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={r}>
+      {t('pages.filmlist.items.released')} {r}
     </p>
   );
 };
