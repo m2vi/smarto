@@ -36,6 +36,7 @@
       "menu": {
         "all": "All Items",
         "favourites": "Favourites",
+        "new": "New",
         "later": "Watch Later",
         "soon": "Soon Available",
         "kids": "Kids",
@@ -73,6 +74,23 @@
         "war": "War",
         "war & politics": "War & Politics",
         "western": "Western"
+      },
+      "languages": {
+        "da": "Danish",
+        "de": "German",
+        "en": "English",
+        "es": "Spanish",
+        "fr": "French",
+        "id": "Indonesian",
+        "it": "Italian",
+        "ja": "Japanese",
+        "ko": "Korean",
+        "no": "Norwegian",
+        "pl": "Polish",
+        "sv": "Swedish",
+        "th": "Thai",
+        "tr": "Turkish",
+        "zh": "Chinese"
       },
       "items": {
         "released": "Released",

@@ -73,6 +73,23 @@
         "war & politics": "War & Politics",
         "western": "Western"
       },
+      "languages": {
+        "da": "Dänisch",
+        "de": "Deutsch",
+        "en": "Englisch",
+        "es": "Spanisch",
+        "fr": "Französisch",
+        "id": "Bahasa Indonesia",
+        "it": "Italienisch",
+        "ja": "Japanisch",
+        "ko": "Koreanisch",
+        "no": "Norwegisch",
+        "pl": "Polnisch",
+        "sv": "Schwedisch",
+        "th": "Thailändisch",
+        "tr": "Türkisch",
+        "zh": "Chinesisch"
+      },
       "items": {
         "released": "Veröffentlicht",
         "format": "MMM D, YYYY"

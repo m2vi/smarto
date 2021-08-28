@@ -5,6 +5,7 @@ import { genres, getReleaseDate } from '@utils/tools/films';
 import Image from 'next/image';
 import { Wrapper } from './styles';
 import moment from 'moment';
+import { translation } from '@utils/validate/translation';
 import { useTranslation } from 'react-i18next';
 
 interface CardCardProps extends CardProps {}
@@ -39,9 +40,11 @@ export default Card;
 
 export const Genres = ({ ids }) => {
   const { t } = useTranslation();
-  const g = genres(ids)
-    .map(name => t(`pages.filmlist.categories.${name}`))
+  const g = genres
+    .getNames(ids)
+    .map(name => t(`pages.filmlist.categories.${name.toLowerCase()}`, { defaultValue: '...' }))
     .join(', ');
+  translation.checkJoin('...', g, ', ');
 
   return (
     <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={g}>
