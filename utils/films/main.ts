@@ -89,17 +89,28 @@ class FilmlistUtil {
   };
 
   private cut = (items: CardProps[], start: number, offset: number = 50) => {
-    return items.slice(start, offset + start);
+    return offset === 0 ? items : items.slice(start, offset + start);
   };
 
-  public find = (type: 'default' | 'categories' | 'language', key: string, start: number = 0, query?: string) => {
+  public find = (type: 'default' | 'categories' | 'language', key: string, start: number = 0, offset: number = 50, query?: string) => {
     const items = this.sort(type, key);
     if (query) {
-      return this.cut(this.search(query, items), start);
+      return this.cut(this.search(query, items), start, offset);
     } else {
-      return this.cut(items, start);
+      return this.cut(items, start, offset);
     }
   };
+
+  public max = () => ({
+    all: FilmListItems.length,
+    favourites: FilmListItems.filter(v => v.favoured).length,
+    new: FilmListItems.length,
+    later: FilmListItems.filter(v => !v.watched).length,
+    soon: FilmListItems.filter(v => !isReleased(v.release_date)).length,
+    kids: FilmListItems.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)).length,
+    films: FilmListItems.filter(v => v.type === 'film').length,
+    series: FilmListItems.filter(v => v.type === 'series').length,
+  });
 }
 
 export const filmlistUtil = new FilmlistUtil();

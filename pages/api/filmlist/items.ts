@@ -1,14 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { FilmListItems } from '@config/filmlist';
+import util from '@utils/films/main';
 
 const items = async (_: NextApiRequest, res: NextApiResponse) => {
-  const newStuff = FilmListItems.map(item => {
-    item.url = `https://www.themoviedb.org/${item.type === 'film' ? 'movie' : 'tv'}/${item.id}`;
-    return item;
-  });
+  const { type, key, start, offset, query } = _.query as any;
+  const data = util.find(type, key, parseInt(start), parseInt(offset), query);
 
-  res.json(newStuff);
+  res.json(data);
 };
 
 export default items;

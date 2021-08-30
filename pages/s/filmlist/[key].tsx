@@ -1,11 +1,10 @@
-import { FilmListItems } from '@config/filmlist';
 import { GetStaticPaths } from 'next';
 import IfWrapper from '@components/pages/filmlist/IfWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import util from '@utils/films/main';
 
-const Films = ({ items }) => {
-  return <IfWrapper items={items} />;
+const Films = ({ ...props }) => {
+  return <IfWrapper {...props} />;
 };
 
 export async function getStaticProps(context) {
@@ -13,6 +12,9 @@ export async function getStaticProps(context) {
     props: {
       ...(await serverSideTranslations(context.locale, ['common', 'footer'])),
       items: util.find('default', context.params.key),
+      sort: context.params.key,
+      type: 'default',
+      max: util.max()[context.params.key],
     },
   };
 }

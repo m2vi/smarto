@@ -3,6 +3,7 @@ import { IoEyeOff, IoStar, IoVideocamOutline } from 'react-icons/io5';
 import { genres, getReleaseDate } from '@utils/films/utils';
 
 import Image from 'next/image';
+import { Spinner } from '@components/Spinner';
 import { Wrapper } from './styles';
 import moment from 'moment';
 import { translation } from '@utils/validate/translation';
@@ -33,6 +34,16 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, relea
       <Genres ids={genre_ids} />
       <Release release_date={release_date} />
     </a>
+  );
+};
+
+export const LoaderCard = () => {
+  return (
+    <div className="flex flex-col" style={{ width: '200px' }}>
+      <Wrapper className="h-full w-full grid place-items-center">
+        <Spinner />
+      </Wrapper>
+    </div>
   );
 };
 

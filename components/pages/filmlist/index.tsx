@@ -1,30 +1,30 @@
-import Card from './Card';
+import Card, { LoaderCard } from './Card';
+import { useEffect, useState } from 'react';
+
 import { CardProps } from '@Types/filmlist';
 import Genres from './Genres';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Input } from './Input';
 import Menu from '@components/pages/filmlist/Menu';
-import { useEffect } from 'react';
 import { useFilmSearch } from '@context/filmSearch';
 import { useTranslation } from 'react-i18next';
 
-const Index = ({ items }) => {
+const Index = ({ items, type, sort, max }) => {
   const { dispatch, state } = useFilmSearch();
   const { t } = useTranslation();
+  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
-    dispatch({ items });
+    dispatch(items);
   }, [dispatch, items]);
 
   const fetchMoreData = () => {
-    // a fake async api call like which sends
-    // 20 more records in 1.5 secs
-    setTimeout(() => {
-      // dispatch({
-      //   items: this.state.items.concat(Array.from({ length: 20 })),
-      // });
-      console.log('Loaded..');
-    }, 500);
+    fetch(`/api/filmlist/items?type=${type}&key=${sort}&start=${state.length}&offset=50`)
+      .then(data => data.json())
+      .then(data => {
+        dispatch(state.concat(data));
+        setHasMore(state.length >= max);
+      });
   };
 
   return (
@@ -37,14 +37,14 @@ const Index = ({ items }) => {
           </header>
           <main className="w-full overflow-y-auto dD5d-items" id="scrollableDiv">
             <InfiniteScroll
-              dataLength={state.render.length}
+              dataLength={state.length}
               next={fetchMoreData}
-              hasMore={true}
-              loader={<h4>Loading...</h4>}
+              hasMore={hasMore}
+              loader={<LoaderCard />}
               scrollableTarget="scrollableDiv"
               className="w-full p-4 py-0 grid gap-6 grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto place-items-center"
             >
-              {state.render.map(({ ...props }) => {
+              {state.map(({ ...props }) => {
                 return <Card {...(props as CardProps)} key={`${props.id}-${props.type}`} />;
               })}
             </InfiniteScroll>

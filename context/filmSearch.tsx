@@ -1,19 +1,12 @@
 import { createContext, useContext, useReducer } from 'react';
 
-import { matchSorter } from 'match-sorter';
-
 const FilmSearchContext = createContext(null);
 
-const initalState: any = { items: [], render: [] };
+const initalState: any = [];
 
-export const filmSearchReducer = (state, { items, query }) => {
-  let bin = items ? items : state.items;
-
-  if (query) {
-    return { items: bin, render: matchSorter(bin, query, { keys: ['name', 'original_name'] }) };
-  }
-
-  return { items: bin, render: bin };
+export const filmSearchReducer = (state, items) => {
+  if (!items) return state;
+  return items;
 };
 
 export const FilmSearchProvider = ({ children }) => {

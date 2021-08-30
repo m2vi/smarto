@@ -4,7 +4,7 @@ import { NextSeo } from 'next-seo';
 import Page from '@components/pages/filmlist/index';
 import { useTranslation } from 'react-i18next';
 
-const IfWrapper = ({ items }) => {
+const IfWrapper = ({ ...props }) => {
   const { t } = useTranslation();
 
   return (
@@ -41,7 +41,7 @@ const IfWrapper = ({ items }) => {
         }
       `}</style>
       <NextSeo description="A filmlist with all movies and series I've ever watched" title={t('pages.hub.widgets.filmlist')} defaultTitle="Smarto" />
-      {items ? <Page items={items} /> : null}
+      {props.items ? <Page {...(props as any)} /> : null}
     </FilmSearchProvider>
   );
 };
