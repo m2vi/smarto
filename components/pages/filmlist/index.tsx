@@ -1,5 +1,5 @@
 import Card, { LoaderCard } from './Card';
-import { useEffect, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
 
 import { CardProps } from '@Types/filmlist';
 import Genres from './Genres';
@@ -17,13 +17,13 @@ const Index = ({ items, type, sort, max }) => {
   useEffect(() => {
     dispatch(items);
   }, [dispatch, items]);
-
   const fetchMoreData = () => {
     fetch(`/api/filmlist/items?type=${type}&key=${sort}&start=${state.length}&offset=50`)
       .then(data => data.json())
       .then(data => {
         dispatch(state.concat(data));
-        setHasMore(state.length >= max);
+        console.log(max, state.length);
+        setHasMore(!(state.length === max));
       });
   };
 
