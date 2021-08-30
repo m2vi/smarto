@@ -5,8 +5,8 @@ export class Console {
     console.log('%c[FETCH]', 'color: #07821d', { data: data, service });
   }
 
-  translation(details: any, name: string) {
-    console.log('%c[TRANSLATION]', 'color: #0362fc', { data: details, name });
+  translation(name: string) {
+    console.log('%c[TRANSLATION]', 'color: #0362fc', 'Initialized:', name);
   }
 
   search(query: string, result: any) {
@@ -15,6 +15,10 @@ export class Console {
 
   load(info: string, result: any) {
     console.log('%c[LOAD]', 'color: #f0b000', info, { result });
+  }
+
+  error(error: any) {
+    console.log('&c[ERROR]', 'color: red', error?.message, { error });
   }
 }
 
