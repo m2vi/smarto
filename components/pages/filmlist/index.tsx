@@ -17,6 +17,7 @@ const Index = ({ items, type, sort, max }) => {
   }, [dispatch, items]);
 
   const fetchMoreData = () => {
+    if (sort === 'unfiltered') return;
     util.load(type, sort, state.length, max).then(data => dispatch(state.concat(data)));
   };
 

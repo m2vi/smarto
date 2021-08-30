@@ -64,6 +64,8 @@ class FilmlistUtil {
         return sortByKey(searchArray(items, 'type', 'series'), 'name');
       case 'shuffle':
         return shuffle(searchArray(items, 'version', 4));
+      case 'unfiltered':
+        return sortByKey(items, 'name').slice(0, items.length);
       default:
         return [];
     }
@@ -96,6 +98,8 @@ class FilmlistUtil {
     const items = this.sort(type, key);
     if (query) {
       return this.cut(this.search(query, items), start, offset);
+    } else if (key === 'unfiltered') {
+      return items;
     } else {
       return this.cut(items, start, offset);
     }
@@ -111,6 +115,7 @@ class FilmlistUtil {
     films: FilmListItems.filter(v => v.type === 'film').length,
     series: FilmListItems.filter(v => v.type === 'series').length,
     shuffle: FilmListItems.length,
+    unfiltered: FilmListItems.length,
   });
 }
 
