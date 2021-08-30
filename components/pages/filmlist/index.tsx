@@ -1,30 +1,23 @@
-import Card, { LoaderCard } from './Card';
-import { createRef, useEffect, useState } from 'react';
-
+import Card from './Card';
 import { CardProps } from '@Types/filmlist';
-import Genres from './Genres';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Input } from './Input';
 import Menu from '@components/pages/filmlist/Menu';
+import { useEffect } from 'react';
 import { useFilmSearch } from '@context/filmSearch';
 import { useTranslation } from 'react-i18next';
+import { util } from '@utils/films/client';
 
 const Index = ({ items, type, sort, max }) => {
   const { dispatch, state } = useFilmSearch();
   const { t } = useTranslation();
-  const [hasMore, setHasMore] = useState(true);
 
   useEffect(() => {
     dispatch(items);
   }, [dispatch, items]);
+
   const fetchMoreData = () => {
-    fetch(`/api/filmlist/items?type=${type}&key=${sort}&start=${state.length}&offset=50`)
-      .then(data => data.json())
-      .then(data => {
-        dispatch(state.concat(data));
-        console.log(max, state.length);
-        setHasMore(!(state.length === max));
-      });
+    util.load(type, sort, state.length, max).then(data => dispatch(state.concat(data)));
   };
 
   return (
@@ -39,13 +32,13 @@ const Index = ({ items, type, sort, max }) => {
             <InfiniteScroll
               dataLength={state.length}
               next={fetchMoreData}
-              hasMore={hasMore}
-              loader={<LoaderCard />}
+              hasMore={true}
+              loader={null}
               scrollableTarget="scrollableDiv"
               className="w-full p-4 py-0 grid gap-6 grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto place-items-center"
             >
-              {state.map(({ ...props }) => {
-                return <Card {...(props as CardProps)} key={`${props.id}-${props.type}`} />;
+              {state.map(({ ...props }, i: number) => {
+                return <Card {...(props as CardProps)} key={i} />;
               })}
             </InfiniteScroll>
           </main>

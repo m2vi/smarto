@@ -110,6 +110,7 @@ class FilmlistUtil {
     kids: FilmListItems.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)).length,
     films: FilmListItems.filter(v => v.type === 'film').length,
     series: FilmListItems.filter(v => v.type === 'series').length,
+    shuffle: FilmListItems.length,
   });
 }
 

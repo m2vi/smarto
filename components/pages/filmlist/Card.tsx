@@ -1,17 +1,16 @@
-import { CardProps, MoviePageProps } from '@Types/filmlist';
-import { IoEyeOff, IoStar, IoVideocamOutline } from 'react-icons/io5';
-import { genres, getReleaseDate } from '@utils/films/utils';
+import { IoStar, IoVideocamOutline } from 'react-icons/io5';
 
+import { CardProps } from '@Types/filmlist';
 import Image from 'next/image';
-import { Spinner } from '@components/Spinner';
 import { Wrapper } from './styles';
+import { genres } from '@utils/films/utils';
 import moment from 'moment';
 import { translation } from '@utils/validate/translation';
 import { useTranslation } from 'react-i18next';
 
 interface CardCardProps extends CardProps {}
 
-const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, release_date, original_name, original_language, url }: CardCardProps) => {
+const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, url }: CardCardProps) => {
   return (
     <a href={url} className="flex flex-col" style={{ width: '200px' }}>
       <Wrapper className="h-full w-full grid place-items-center relative">
@@ -34,16 +33,6 @@ const Card = ({ genre_ids, poster_path, name, id, type, watched, favoured, relea
       <Genres ids={genre_ids} />
       <Release release_date={release_date} />
     </a>
-  );
-};
-
-export const LoaderCard = () => {
-  return (
-    <div className="flex flex-col" style={{ width: '200px' }}>
-      <Wrapper className="h-full w-full grid place-items-center">
-        <Spinner />
-      </Wrapper>
-    </div>
   );
 };
 

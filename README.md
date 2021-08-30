@@ -1,7 +1,6 @@
 ## TODO
 
-- [x] Fix swap between all and later (sort error or sth)
-      (Fixed it but strange fix (fix the fix))
+- [ ] fix search
 
 ## Big Apps
 

@@ -11,7 +11,7 @@ export async function getStaticProps(context) {
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ['common', 'footer'])),
-      items: util.find('default', context.params.category),
+      items: util.find('categories', context.params.category),
       sort: context.params.category,
       type: 'categories',
     },
