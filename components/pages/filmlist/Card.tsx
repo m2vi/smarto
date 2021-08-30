@@ -1,6 +1,6 @@
 import { CardProps, MoviePageProps } from '@Types/filmlist';
 import { IoEyeOff, IoStar, IoVideocamOutline } from 'react-icons/io5';
-import { genres, getReleaseDate } from '@utils/tools/films';
+import { genres, getReleaseDate } from '@utils/films/utils';
 
 import Image from 'next/image';
 import { Wrapper } from './styles';

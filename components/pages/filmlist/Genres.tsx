@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Console from '@utils/tools/console';
 import Link from 'next/link';
-import { genreList } from '@utils/tools/films';
+import { genreList } from '@utils/films/utils';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 

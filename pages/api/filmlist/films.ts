@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { MovieDb } from 'moviedb-promise';
-import { refactorMovie } from '@utils/tools/films';
+import { refactorMovie } from '@utils/films/utils';
 
 const films = async (_: NextApiRequest, res: NextApiResponse) => {
   try {
