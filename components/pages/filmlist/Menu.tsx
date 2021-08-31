@@ -1,4 +1,5 @@
 import {
+  IoAlbumsOutline,
   IoBookOutline,
   IoFilmOutline,
   IoHappyOutline,
@@ -58,6 +59,11 @@ const otherSections = [
     key: 'shuffle',
   },
   {
+    icon: IoAlbumsOutline,
+    path: '/s/filmlist/unfiltered',
+    key: 'unfiltered',
+  },
+  {
     icon: IoLogOutOutline,
     path: '/',
     key: 'goback',
@@ -74,7 +80,7 @@ const Sidebar = () => {
   }, [Router]);
 
   return (
-    <aside className="m-6 flex flex-col w-250 overflow-hidden overflow-y-auto dD5d-items" style={{ maxHeight: '515px' }}>
+    <aside className="m-6 flex flex-col w-250 overflow-hidden overflow-y-auto dD5d-items">
       <p className="text-3xl mb-8">
         {t('pages.filmlist.name')}
         <span style={{ color: '#d7b350' }}>.</span>

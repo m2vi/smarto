@@ -14,6 +14,7 @@ export async function getStaticProps(context) {
       items: util.find('language', context.params.language),
       sort: context.params.language,
       type: 'language',
+      max: util.max().all?.[context.params.language],
     },
   };
 }

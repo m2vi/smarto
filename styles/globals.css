@@ -614,3 +614,20 @@ body,
 .filmlist-hover:hover {
   color: #d7b350;
 }
+
+.invisible-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.invisible-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+}
+
+.invisible-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b3afb3;
+}
+
+.filmlist-accent {
+  color: #d7b350;
+}

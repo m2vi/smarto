@@ -13,11 +13,11 @@ interface CardCardProps extends CardProps {}
 const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, url }: CardCardProps) => {
   return (
     <a href={url} className="flex flex-col" style={{ width: '200px' }}>
-      <Wrapper className="h-full w-full grid place-items-center relative">
+      <Wrapper className="h-full w-full grid place-items-center relative ">
         {poster_path ? (
           <Image
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
-            height="313px"
+            height="300px"
             width="200px"
             alt={`${id} poster`}
             className="no-drag select-none w-full overflow-hidden relative"
@@ -42,7 +42,7 @@ export const Genres = ({ ids }) => {
   const { t } = useTranslation();
   const g = genres
     .getNames(ids)
-    .map(name => t(`pages.filmlist.categories.${name.toLowerCase()}`, { defaultValue: '...' }))
+    .map(name => t(`pages.filmlist.genres.${name.toLowerCase()}`, { defaultValue: '...' }))
     .join(', ');
   translation.checkJoin('...', g, ', ');
 

@@ -1,24 +1,32 @@
 export class Console {
   constructor() {}
 
-  fetch(data: any, service: string) {
-    console.log('%c[FETCH]', 'color: #07821d', { data: data, service });
+  fetch(data: any, service: string, ...props: any) {
+    console.log('%c[FETCH]', 'color: #07821d', { data: data, service }, ...props);
   }
 
-  translation(name: string) {
-    console.log('%c[TRANSLATION]', 'color: #0362fc', 'Initialized:', name);
+  translation(name: string, ...props: any) {
+    console.log('%c[TRANSLATION]', 'color: #0362fc', 'Initialized:', name, ...props);
   }
 
-  search(query: string, result: any) {
-    console.log('%c[SEARCH]', 'color: #f0b000', query, { result });
+  search(query: string, result: any, ...props: any) {
+    console.log('%c[SEARCH]', 'color: #f0b000', query, { result }, ...props);
   }
 
-  load(info: string, result: any) {
-    console.log('%c[LOAD]', 'color: #f0b000', info, { result });
+  load(info: string, result: any, ...props: any) {
+    console.log('%c[LOAD]', 'color: #fce303', info, { result }, ...props);
   }
 
-  error(error: any) {
-    console.log('&c[ERROR]', 'color: red', error?.message, { error });
+  error(message: string, error: any, ...props: any) {
+    console.log('&c[ERROR]', 'color: #f54242', message, { error }, ...props);
+  }
+
+  good(message: string, ...props: any) {
+    console.log('&c[GOOD]', 'color: #75f542', ...props);
+  }
+
+  log(message: string, ...props: any) {
+    console.log('%c[LOG]', 'color: #8c7086', message, ...props);
   }
 }
 

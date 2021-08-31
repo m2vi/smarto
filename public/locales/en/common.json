@@ -44,9 +44,11 @@
         "series": "Series",
         "shuffle": "Shuffle",
         "goback": "Go Back",
-        "search": "Search films, series"
+        "search": "Search films, series",
+        "unfiltered": "Unfiltered"
       },
-      "categories": {
+      "genres": {
+        "default": "Genres",
         "action": "Action",
         "action & adventure": "Action & Adventure",
         "adventure": "Adventure",
@@ -76,6 +78,7 @@
         "western": "Western"
       },
       "languages": {
+        "default": "Original Language",
         "da": "Danish",
         "de": "German",
         "en": "English",

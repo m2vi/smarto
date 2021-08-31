@@ -33,7 +33,7 @@ class FilmlistUtil {
     return sortByKey(filtered, 'name');
   };
 
-  private filterCategories = (key: string, items: CardProps[]) => {
+  private filterGenres = (key: string, items: CardProps[]) => {
     const filtered = items.filter(i => i.genre_ids.includes(this.genre.getIDs([key])[0]));
     return sortByKey(filtered, 'name');
   };
@@ -65,20 +65,20 @@ class FilmlistUtil {
       case 'shuffle':
         return shuffle(searchArray(items, 'version', 4));
       case 'unfiltered':
-        return sortByKey(items, 'name').slice(0, items.length);
+        return items.slice(0, items.length);
       default:
         return [];
     }
   };
 
-  private sort = (type: 'default' | 'categories' | 'language', key: string) => {
+  private sort = (type: 'default' | 'genres' | 'language', key: string) => {
     const items = FilmListItems;
 
     switch (type) {
       case 'default':
         return this.filterSort(key, items);
-      case 'categories':
-        return this.filterCategories(key, items);
+      case 'genres':
+        return this.filterGenres(key, items);
       case 'language':
         return this.filterLanguage(key, items);
       default:
@@ -94,7 +94,7 @@ class FilmlistUtil {
     return offset === 0 ? items : items.slice(start, offset + start);
   };
 
-  public find = (type: 'default' | 'categories' | 'language', key: string, start: number = 0, offset: number = 50, query?: string) => {
+  public find = (type: 'default' | 'genres' | 'language', key: string, start: number = 0, offset: number = 50, query?: string) => {
     const items = this.sort(type, key);
     if (query) {
       return this.cut(this.search(query, items), start, offset);
@@ -105,18 +105,55 @@ class FilmlistUtil {
     }
   };
 
-  public max = () => ({
-    all: FilmListItems.length,
-    favourites: FilmListItems.filter(v => v.favoured).length,
-    new: FilmListItems.length,
-    later: FilmListItems.filter(v => !v.watched).length,
-    soon: FilmListItems.filter(v => !isReleased(v.release_date)).length,
-    kids: FilmListItems.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)).length,
-    films: FilmListItems.filter(v => v.type === 'film').length,
-    series: FilmListItems.filter(v => v.type === 'series').length,
-    shuffle: FilmListItems.length,
-    unfiltered: FilmListItems.length,
-  });
+  public max = () => {
+    const genres = () => {
+      const allGenres = [];
+      FilmListItems.forEach(v => {
+        v.genre_ids.forEach(v => allGenres.push(v));
+      });
+
+      const counts = {} as any;
+      allGenres.forEach(x => {
+        const y = this.genre.getNames([x])[0].toLowerCase();
+
+        counts[y] = (counts[y] || 0) + 1;
+      });
+
+      return counts;
+    };
+
+    const languages = () => {
+      const allLanguages = FilmListItems.map(({ original_language }) => original_language);
+      const counts = {} as any;
+      allLanguages.forEach(x => {
+        counts[x] = (counts[x] || 0) + 1;
+      });
+
+      return counts;
+    };
+
+    const defaultSort = () => {
+      return {
+        all: FilmListItems.length,
+        favourites: FilmListItems.filter(v => v.favoured).length,
+        new: FilmListItems.length,
+        later: FilmListItems.filter(v => !v.watched).length,
+        soon: FilmListItems.filter(v => !isReleased(v.release_date)).length,
+        kids: FilmListItems.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)).length,
+        films: FilmListItems.filter(v => v.type === 'film').length,
+        series: FilmListItems.filter(v => v.type === 'series').length,
+        shuffle: FilmListItems.length,
+        unfiltered: FilmListItems.length,
+      };
+    };
+
+    return {
+      genres: genres(),
+      languages: languages(),
+      default: defaultSort(),
+      all: Object.assign({}, genres(), languages(), defaultSort()),
+    };
+  };
 }
 
 export const filmlistUtil = new FilmlistUtil();

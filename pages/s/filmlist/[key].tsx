@@ -14,7 +14,7 @@ export async function getStaticProps(context) {
       items: util.find('default', context.params.key),
       sort: context.params.key,
       type: 'default',
-      max: util.max()[context.params.key],
+      max: util.max().all?.[context.params.key],
     },
   };
 }

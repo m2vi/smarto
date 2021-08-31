@@ -1,6 +1,7 @@
 ## TODO
 
 - [ ] fix search
+- [ ] remove duplicated code
 
 ## Big Apps
 

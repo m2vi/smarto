@@ -11,9 +11,10 @@ export async function getStaticProps(context) {
   return {
     props: {
       ...(await serverSideTranslations(context.locale, ['common', 'footer'])),
-      items: util.find('categories', context.params.category),
-      sort: context.params.category,
-      type: 'categories',
+      items: util.find('genres', context.params.genre),
+      sort: context.params.genre,
+      type: 'genres',
+      max: util?.max().all?.[context.params.genre],
     },
   };
 }

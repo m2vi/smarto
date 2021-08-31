@@ -152,7 +152,7 @@ export const genreList: { films: GenreArray; series: GenreArray } = {
 };
 
 class Genres {
-  private array() {
+  public array() {
     const { films, series } = genreList;
     const all = removeDuplicates(films.concat(series));
     return all as { id: number; name: string }[];
