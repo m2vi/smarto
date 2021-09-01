@@ -11,7 +11,7 @@ import { useFilmSearch } from '@context/filmSearch';
 import { useTranslation } from 'react-i18next';
 import { util } from '@utils/films/client';
 
-const Index = ({ items, type, sort, max }) => {
+const Index = ({ items, type, sort, max, genres, languages }) => {
   const { dispatch, state } = useFilmSearch();
   const { t } = useTranslation();
   const ScrollRef = createRef<HTMLDivElement>();
@@ -58,7 +58,7 @@ const Index = ({ items, type, sort, max }) => {
             </InfiniteScroll>
           </main>
         </div>
-        <Genres />
+        <Genres genres={genres} languages={languages} />
       </div>
     </div>
   );

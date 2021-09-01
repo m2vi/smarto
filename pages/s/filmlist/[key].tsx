@@ -1,6 +1,7 @@
 import { GetStaticPaths } from 'next';
 import IfWrapper from '@components/pages/filmlist/IfWrapper';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
+import { sortByKey } from '@utils/tools/array';
 import util from '@utils/films/main';
 
 const Films = ({ ...props }) => {
@@ -15,6 +16,8 @@ export async function getStaticProps(context) {
       sort: context.params.key,
       type: 'default',
       max: util.max().all?.[context.params.key],
+      genres: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/genres')).json(), 'name'),
+      languages: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/languages')).json(), 'count'),
     },
   };
 }
