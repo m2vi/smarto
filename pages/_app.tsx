@@ -1,7 +1,6 @@
 import 'nprogress/nprogress.css';
 import 'tailwindcss/tailwind.css';
 import '@styles/globals.css';
-import '@styles/bootstrap-grid.css';
 import '@styles/notifications.css';
 
 import { AppProps } from 'next/app';
