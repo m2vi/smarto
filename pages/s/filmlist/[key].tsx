@@ -15,9 +15,9 @@ export async function getStaticProps(context) {
       items: util.find('default', context.params.key),
       sort: context.params.key,
       type: 'default',
-      max: util.max().all?.[context.params.key],
+      max: util?.max().all?.[context.params.key],
       genres: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/genres')).json(), 'name'),
-      languages: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/languages')).json(), 'count'),
+      languages: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/languages')).json(), 'count').reverse(),
     },
   };
 }

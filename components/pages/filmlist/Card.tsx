@@ -1,8 +1,6 @@
-import { IoStar, IoVideocamOutline } from 'react-icons/io5';
-
 import { CardProps } from '@Types/filmlist';
 import Image from 'next/image';
-import { Wrapper } from './styles';
+import { IoVideocamOutline } from 'react-icons/io5';
 import { genres } from '@utils/films/utils';
 import moment from 'moment';
 import { translation } from '@utils/validate/translation';
@@ -12,8 +10,8 @@ interface CardCardProps extends CardProps {}
 
 const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, url }: CardCardProps) => {
   return (
-    <a href={url} className="flex flex-col" style={{ width: '200px' }}>
-      <Wrapper className="h-full w-full grid place-items-center relative ">
+    <a href={url} className="flex flex-col w-200">
+      <div className="h-full w-full grid place-items-center relative mb-2">
         {poster_path ? (
           <Image
             src={`https://image.tmdb.org/t/p/original${poster_path}`}
@@ -26,7 +24,7 @@ const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, u
         ) : (
           <IoVideocamOutline className="h-5 w-5" />
         )}
-      </Wrapper>
+      </div>
       <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={original_name}>
         {name}
       </p>
