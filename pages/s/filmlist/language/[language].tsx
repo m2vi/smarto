@@ -1,31 +1,25 @@
-import { GetStaticPaths } from 'next';
 import IfWrapper from '@components/pages/filmlist/IfWrapper';
+import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { sortByKey } from '@utils/tools/array';
 import util from '@utils/films/main';
 
-const Films = ({ ...props }) => {
+const Language = ({ ...props }) => {
   return <IfWrapper {...props} />;
 };
 
-export async function getStaticProps(context) {
+export async function getServerSideProps({ query: { language: key }, locale, req }) {
   return {
     props: {
-      ...(await serverSideTranslations(context.locale, ['common', 'footer'])),
-      items: util.find('language', context.params.language),
-      sort: context.params.language,
+      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      items: util.find('language', key),
+      sort: key,
       type: 'language',
-      max: util?.max().all?.[context.params.language],
-      genres: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/genres')).json(), 'name'),
-      languages: sortByKey(await (await fetch('http://localhost:3000/api/filmlist/languages')).json(), 'count').reverse(),
+      max: util?.max().all?.[key],
+      genres: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/genres`)).json(), 'name'),
+      languages: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/languages`)).json(), 'count').reverse(),
     },
   };
 }
-export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
-};
 
-export default Films;
+export default Language;
