@@ -1,7 +1,7 @@
+import { TimerItems } from '@config/timer';
 import moment from 'moment';
 import { sortByKey } from '@utils/tools/array';
 import { useTranslation } from 'react-i18next';
-import user from '@config/me';
 
 const Timers = () => {
   const { t } = useTranslation();
@@ -9,7 +9,7 @@ const Timers = () => {
   return (
     <div className="h-full grid" style={{ width: 'calc(905px - 504px - 30px)' }}>
       <div className="grid grid-rows-2 grid-cols-3 w-full rounded-8 gap-6">
-        {sortByKey(user.timers, 'date').map(({ icon: Icon, date, name }) => {
+        {sortByKey(TimerItems, 'date').map(({ icon: Icon, date, name }) => {
           const time = [moment(date).fromNow(true), `${moment(date).diff(this, 'days').toString()} days`];
 
           return (

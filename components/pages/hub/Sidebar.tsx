@@ -1,7 +1,7 @@
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
-import Avatar from 'react-avatar';
+import Avatar from '@components/Avatar';
 import { Client } from '@projects/lookup/client';
 import Link from 'next/link';
 import { Projects } from '@projects/index';
@@ -30,15 +30,7 @@ export const Sidebar = () => {
   return (
     <div className={`max-h-screen h-full flex flex-col items-center w-80 relative bg-primary-800`}>
       <span className="flex justify-center items-center p-4 cursor-pointer">
-        <Avatar
-          src={src}
-          round="50%"
-          size="40px"
-          className="no-drag bg-primary-700 h-4 w-4 select-none"
-          alt="m2vi"
-          color="#1f2733"
-          fgColor="#1f2733"
-        />
+        <Avatar src={src} alt="m2vi" />
       </span>
       <Divider className="mb-3" />
       <div className=" w-full flex flex-col items-center">
