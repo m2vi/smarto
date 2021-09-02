@@ -17,7 +17,7 @@ const Index = ({ items, type, sort, max, genres, languages }) => {
   const ScrollRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
-    dispatch(items);
+    dispatch({ items });
     console.log(`items: ${max}, sort group: ${type}, sort: ${sort}`);
   }, [dispatch, items, max, sort, type]);
 
@@ -32,7 +32,7 @@ const Index = ({ items, type, sort, max, genres, languages }) => {
 
   const fetchMoreData = () => {
     if (sort === 'unfiltered') return;
-    util.load(type, sort, state.length, max).then(data => dispatch(state.concat(data)));
+    util.load(type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
   };
 
   return (
@@ -45,14 +45,14 @@ const Index = ({ items, type, sort, max, genres, languages }) => {
           </header>
           <main className="w-full overflow-y-auto dD5d-items" ref={ScrollRef} id="scrollableDiv">
             <InfiniteScroll
-              dataLength={state.length}
+              dataLength={state.items.length}
               next={fetchMoreData}
               hasMore={true}
               loader={null}
               scrollableTarget="scrollableDiv"
               className="w-full p-4 py-0 grid gap-6 grid-cols-1 fmd:grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto place-items-center"
             >
-              {state.map(({ ...props }, i: number) => {
+              {state.items.map(({ ...props }, i: number) => {
                 return <Card {...(props as CardProps)} key={i} />;
               })}
             </InfiniteScroll>

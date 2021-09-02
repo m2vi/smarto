@@ -11,8 +11,10 @@ export const removeDuplicates = (array: Array<any>) => {
 };
 
 export const searchArray = (array: any[], key: string, value: any) => {
-  if (array) {
+  if (array && key) {
     return array.filter(item => item[key] === value);
+  } else if (array) {
+    return array;
   } else {
     return [];
   }

@@ -13,14 +13,14 @@ export const Input = ({ className, items, ...props }) => {
   const ref = React.useRef<HTMLInputElement>(null);
   const { dispatch } = useFilmSearch();
 
-  const handleSubmit = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
-    if (!value || value === '' || value.length < 2 || e.code !== 'Enter') return;
+    if (!value || value === '') return dispatch({ restore: true });
 
-    fetch(`/api/filmlist/items?type=default&key=all&start=0&offset=0&query=${value}`)
+    fetch(`/api/filmlist/items?type=default&key=all&start=0&offset=50&query=${value}`)
       .then(data => data.json())
-      .then(data => dispatch(data));
+      .then(data => dispatch({ items: data }));
   };
 
-  return <input ref={ref} className={cn} {...props} data-testid="input" style={{ background: '#2d2c31' }} />;
+  return <input ref={ref} className={cn} {...props} data-testid="input" style={{ background: '#2d2c31' }} onChange={handleChange} />;
 };

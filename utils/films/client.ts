@@ -7,8 +7,8 @@ class Util {
     return data;
   }
 
-  public async load(type: string, sort: string, start: number, max: number) {
-    const data = await (await fetch(`/api/filmlist/items?type=${type}&key=${sort}&start=${start}&offset=50`)).json();
+  public async load(type: string, sort: string, start: number, max: number, query?: string) {
+    const data = await (await fetch(`/api/filmlist/items?type=${type}&key=${sort}&start=${start}&offset=50${query && `&query=${query}`}`)).json();
     console.load(`max: ${max}, current: ${start}`, data);
     return data;
   }

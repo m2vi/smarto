@@ -2,11 +2,13 @@ import { createContext, useContext, useReducer } from 'react';
 
 const FilmSearchContext = createContext(null);
 
-const initalState: any = [];
+const initalState: any = {
+  items: [],
+  query: null,
+};
 
-export const filmSearchReducer = (state, items) => {
-  if (!items) return state;
-  return items;
+export const filmSearchReducer = (state, { items, query }) => {
+  return { items, query: query ? query : null };
 };
 
 export const FilmSearchProvider = ({ children }) => {

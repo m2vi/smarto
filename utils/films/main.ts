@@ -38,6 +38,11 @@ class FilmlistUtil {
     return sortByKey(filtered, 'name');
   };
 
+  private reverse(a: any[]) {
+    return a.map((item, idx) => a[a.length - 1 - idx]);
+    // Somehow the normal reverse doesn't work
+  }
+
   private filterSort = (key: string, items: CardProps[]) => {
     switch (key) {
       case 'all':
@@ -45,7 +50,7 @@ class FilmlistUtil {
       case 'favourites':
         return sortByKey(searchArray(items, 'favoured', true), 'name');
       case 'new':
-        return items.reverse();
+        return this.reverse(items);
       case 'later':
         return removeUnreleased(searchArray(items, 'watched', false).reverse());
       case 'soon':
