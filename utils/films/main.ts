@@ -46,7 +46,7 @@ class FilmlistUtil {
   private filterSort = (key: string, items: CardProps[]) => {
     switch (key) {
       case 'all':
-        return sortByKey(items, 'name');
+        return sortByKey(searchArray(items, 'watched', null), 'name');
       case 'favourites':
         return sortByKey(searchArray(items, 'favoured', true), 'name');
       case 'new':
@@ -68,11 +68,11 @@ class FilmlistUtil {
       case 'series':
         return sortByKey(searchArray(items, 'type', 'series'), 'name');
       case 'shuffle':
-        return shuffle(items);
+        return shuffle(searchArray(items, 'watched', null));
       case 'unfiltered':
         return items.slice(0, items.length);
       case 'release':
-        return sortByKey(items, 'release_date').reverse();
+        return sortByKey(searchArray(items, 'watched', null), 'release_date').reverse();
       default:
         return [];
     }

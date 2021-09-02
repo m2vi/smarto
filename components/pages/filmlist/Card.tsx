@@ -25,7 +25,7 @@ const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, u
           <IoVideocamOutline className="h-5 w-5" />
         )}
       </div>
-      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={original_name}>
+      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={name}>
         {name}
       </p>
       <Genres ids={genre_ids} />

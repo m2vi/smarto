@@ -20,12 +20,12 @@ const Genres = ({ genres, languages }) => {
       <p className="text-primary-300" style={{ marginTop: '87px' }}>
         {t('pages.filmlist.genres.default')}
       </p>
-      <div className="w-full flex flex-col items-start overflow-y-auto invisible-scrollbar mt-1" style={{ maxHeight: '180px' }}>
+      <div className="w-full flex flex-col items-start overflow-y-auto invisible-scrollbar mt-1" style={{ maxHeight: '210px' }}>
         {genres.map(({ id, count, name }) => (
           <Link href={`/s/filmlist/genre/${name.toLowerCase()}`} passHref={true} shallow={false} key={id}>
             <span
               style={{ color: currGenre === name.toLowerCase() && '#d7b350' }}
-              className="mt-1 first:mt-0 flex items-center justify-between cursor-pointer filmlist-hover w-full"
+              className="my-1 first:mt-0 flex items-center justify-between cursor-pointer filmlist-hover w-full"
             >
               <span className="overflow-hidden overflow-ellipsis whitespace-nowrap">{t(`pages.filmlist.genres.${name.toLowerCase()}`)}</span>
               <span className="ml-4 mr-2 filmlist-accent">{count}</span>
@@ -33,13 +33,13 @@ const Genres = ({ genres, languages }) => {
           </Link>
         ))}
       </div>
-      <p className="text-primary-300 mt-2">{t('pages.filmlist.languages.default')}</p>
-      <div className="w-full flex flex-col items-start overflow-y-auto invisible-scrollbar mt-1" style={{ maxHeight: '180px' }}>
+      <p className="text-primary-300 mt-4">{t('pages.filmlist.languages.default')}</p>
+      <div className="w-full flex flex-col items-start overflow-y-auto invisible-scrollbar mt-1" style={{ maxHeight: '210px' }}>
         {languages.map(({ id, count }) => (
           <Link href={`/s/filmlist/language/${id}`} passHref={true} shallow={false} key={id}>
             <span
               style={{ color: currLanguage === id && '#d7b350' }}
-              className="mt-1 first:mt-0 flex items-center justify-between cursor-pointer filmlist-hover w-full"
+              className="my-1 first:mt-0 flex items-center justify-between cursor-pointer filmlist-hover w-full"
             >
               <span className="overflow-hidden overflow-ellipsis whitespace-nowrap">{t(`pages.filmlist.languages.${id}`)}</span>
               <span className="ml-4 mr-2 filmlist-accent">{count}</span>

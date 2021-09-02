@@ -11,15 +11,15 @@ import { useFilmSearch } from '@context/filmSearch';
 import { useTranslation } from 'react-i18next';
 import { util } from '@utils/films/client';
 
-const Index = ({ items, type, sort, max, genres, languages }) => {
+const Index = ({ items, type, sort, max, genres, languages, query }) => {
   const { dispatch, state } = useFilmSearch();
   const { t } = useTranslation();
   const ScrollRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
     dispatch({ items });
-    console.log(`items: ${max}, sort group: ${type}, sort: ${sort}`);
-  }, [dispatch, items, max, sort, type]);
+    console.log(`items: ${max}, sort group: ${type}, sort: ${sort}, query: "${query}"`);
+  }, [dispatch, items, max, sort, type, query]);
 
   useEffect(() => {
     if (ScrollRef.current) {
@@ -28,20 +28,35 @@ const Index = ({ items, type, sort, max, genres, languages }) => {
       ScrollRef.current.scrollTop = 0;
     }
     // eslint-disable-next-line
-  }, [max, sort, type]);
+  }, [max, sort, type, genres, languages, query]);
 
   const fetchMoreData = () => {
     if (sort === 'unfiltered') return;
-    util.load(type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
+    if (query && query !== '*') {
+      util.load(type, sort, state.items.length, max, query).then(data => dispatch({ items: state.items.concat(data) }));
+    } else {
+      util.load(type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
+    }
   };
 
   return (
     <div className="w-full h-screen flex justify-center">
+      {query && (
+        <style jsx global>{`
+          #nprogress {
+            display: none !important;
+          }
+        `}</style>
+      )}
       <div className="flex w-full justify-between max-w-screen-f2xl my-6">
         <Menu />
         <div className="w-full flex flex-col">
           <header className="w-full flex justify-end mt-6">
-            <Input placeholder={t('pages.filmlist.menu.search')} className="max-w-xs mb-10" items={items} />
+            {query ? (
+              <Input placeholder={t('pages.filmlist.menu.search')} className="max-w-xs mb-10" items={items} />
+            ) : (
+              <div className="mb-10 h-8 w-full"></div>
+            )}
           </header>
           <main className="w-full overflow-y-auto dD5d-items" ref={ScrollRef} id="scrollableDiv">
             <InfiniteScroll

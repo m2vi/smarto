@@ -1,5 +1,5 @@
 export const sortByKey = (array: Array<any>, key?: string) => {
-  if (key) {
+  if (array && key) {
     return array.sort((a, b) => (a[key] > b[key] ? 1 : b[key] > a[key] ? -1 : 0));
   } else {
     return array.sort((a, b) => (a > b ? 1 : b > a ? -1 : 0));
@@ -12,9 +12,7 @@ export const removeDuplicates = (array: Array<any>) => {
 
 export const searchArray = (array: any[], key: string, value: any) => {
   if (array && key) {
-    return array.filter(item => item[key] === value);
-  } else if (array) {
-    return array;
+    return array.filter(item => item[key] === (value !== null ? value : item[key]));
   } else {
     return [];
   }

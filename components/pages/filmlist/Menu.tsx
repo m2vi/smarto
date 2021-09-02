@@ -6,6 +6,7 @@ import {
   IoHourglassOutline,
   IoLogOutOutline,
   IoRefreshOutline,
+  IoSearchOutline,
   IoShuffleOutline,
   IoStarOutline,
   IoTimerOutline,
@@ -54,9 +55,9 @@ const sections = [
 
 const otherSections = [
   {
-    icon: IoShuffleOutline,
-    path: '/s/filmlist/shuffle',
-    key: 'shuffle',
+    icon: IoSearchOutline,
+    path: '/s/filmlist/find/*',
+    key: 'find',
   },
   {
     icon: IoLogOutOutline,

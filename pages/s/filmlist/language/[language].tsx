@@ -15,7 +15,7 @@ export async function getServerSideProps({ query: { language: key }, locale, req
       items: util.find('language', key),
       sort: key,
       type: 'language',
-      max: util?.max().all?.[key],
+      max: util?.max().all?.[key] ? util?.max().all?.[key] : 0,
       genres: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/genres`)).json(), 'name'),
       languages: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/languages`)).json(), 'count').reverse(),
     },

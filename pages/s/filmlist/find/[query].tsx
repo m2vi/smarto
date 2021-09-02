@@ -4,22 +4,23 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { sortByKey } from '@utils/tools/array';
 import util from '@utils/films/main';
 
-const Key = ({ ...props }) => {
+const Find = ({ ...props }) => {
   return <IfWrapper {...props} />;
 };
 
-export async function getServerSideProps({ query: { key: key }, locale, req }) {
+export async function getServerSideProps({ query: { query: key }, locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'footer'])),
-      items: util.find('default', key),
-      sort: key,
+      query: key,
+      items: key === '*' ? util.find('default', 'all') : util.find('default', 'all', 0, 50, key),
+      sort: 'all',
       type: 'default',
-      max: util?.max().all?.[key] ? util?.max().all?.[key] : 0,
+      max: util.max().all['all'] ? util.max().all['all'] : 0,
       genres: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/genres`)).json(), 'name'),
       languages: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/languages`)).json(), 'count').reverse(),
     },
   };
 }
 
-export default Key;
+export default Find;
