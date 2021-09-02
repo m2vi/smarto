@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { FilmListItems } from '@config/filmlist';
-import { genres } from '@utils/films/utils';
+import util from '@utils/films/main';
 
-const films = async (_: NextApiRequest, res: NextApiResponse) => {
+const genres = async (_: NextApiRequest, res: NextApiResponse) => {
   const allGenres = [];
   FilmListItems.forEach(v => {
     v.genre_ids.forEach(v => allGenres.push(v));
@@ -18,11 +18,11 @@ const films = async (_: NextApiRequest, res: NextApiResponse) => {
     Object.entries(counts).map(a => {
       const id = a[0];
       const count = a[1];
-      const name = genres.getNames([parseInt(id)])[0];
+      const name = util.genre.getNames([parseInt(id)])[0];
 
       return { id, count, name };
     }),
   );
 };
 
-export default films;
+export default genres;

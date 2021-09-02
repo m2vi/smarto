@@ -15,7 +15,7 @@ const series = async (_: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(bin);
   } catch (error) {
-    res.status(400).json({ message: 'Failed' });
+    res.status(400).json({ message: error.message });
   }
 };
 

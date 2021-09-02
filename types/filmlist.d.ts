@@ -9,7 +9,6 @@ export interface CardProps {
   release_date: number;
   type: 'series' | 'film';
   url: string;
-  version: number;
   watched: boolean;
 }
 
