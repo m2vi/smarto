@@ -1,12 +1,12 @@
-import { useRef } from 'react';
-import ReactModal from 'react-modal';
 import { Input } from '@components/Input';
+import ReactModal from 'react-modal';
 import { useLookupModal } from '@context/lookupModal';
+import { useRef } from 'react';
 import { useRouter } from 'next/router';
 
 const Modal = () => {
   const Router = useRouter();
-  const { state, dispatch } = useLookupModal();
+  const { state } = useLookupModal();
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
 
   const handleClick = () => {
@@ -27,11 +27,6 @@ const Modal = () => {
       >
         <Input placeholder="Id" ref={inputRef} onKeyDown={e => e.key === 'Enter' && handleClick()} />
       </ReactModal>
-      {/* <div className={`absolute inset-0 w-screen h-full`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        <div className="max-w-md w-full h-12 bg-primary-700 rounded-15 grid place-items-center p-3">
-          <Input placeholder="Id" ref={inputRef} onKeyDown={e => e.key === 'Enter' && handleClick(`${showModal[1]}/${inputRef.current.value}`)} />
-        </div>
-      </div> */}
     </>
   );
 };

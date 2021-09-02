@@ -9,7 +9,7 @@ export const items = async (_: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json(u);
   } catch (err) {
-    res.status(400).json({ success: false, message: 'Mission failed' });
+    res.status(400).json({ success: false, message: err.message });
   }
 };
 

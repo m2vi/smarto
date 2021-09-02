@@ -1,9 +1,9 @@
-import Full from '@components/Full';
-import Head from 'next/head';
-import { useEffect } from 'react';
 import Favicon from '@components/Favicon';
+import Full from '@components/Full';
 import GoBack from '@components/GoBack';
+import Head from 'next/head';
 import Page from '@components/pages/lookup/discord';
+import { useEffect } from 'react';
 
 const Discord = ({ data, error }) => {
   useEffect(() => {

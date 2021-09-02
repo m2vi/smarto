@@ -1,7 +1,7 @@
 import Favicon from '@components/Favicon';
 import Head from 'next/head';
-import Page from '@components/pages/lookup/index';
 import { LookupModalProvider } from '@context/lookupModal';
+import Page from '@components/pages/lookup/index';
 
 const Home = () => {
   return (

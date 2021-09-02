@@ -1,9 +1,8 @@
-import Link from 'next/link';
-import Head from 'next/head';
-
 import { ButtonLink } from '@components/ButtonLink';
-import { IoArrowBackOutline } from 'react-icons/io5';
 import Favicon from '@components/Favicon';
+import Head from 'next/head';
+import { IoArrowBackOutline } from 'react-icons/io5';
+import Link from 'next/link';
 
 export default function FourOhFour() {
   return (

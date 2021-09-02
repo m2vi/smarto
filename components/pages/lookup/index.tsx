@@ -1,5 +1,5 @@
-import Full from '@components/Full';
 import DiscordLogo from '@public/assets/logos/discord.svg';
+import Full from '@components/Full';
 import Modal from '@components/pages/lookup/Modal';
 import { useLookupModal } from '@context/lookupModal';
 
@@ -22,5 +22,3 @@ const Home = () => {
 };
 
 export default Home;
-
-// TODO: Use react-modal and context

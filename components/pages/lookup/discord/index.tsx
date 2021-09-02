@@ -1,13 +1,14 @@
-import Full from '@components/Full';
-import Head from 'next/head';
 import { HeaderTop, ModalWrapper, NameTag, Wrapper } from '@components/pages/lookup/discord/styles';
-import { FormatedProps } from '@Types/lookup';
-import Favicon from '@components/Favicon';
-import GoBack from '@components/GoBack';
-import Banner from '@components/pages/lookup/discord/Banner';
+
 import AvatarEl from '@components/pages/lookup/discord/Avatar';
-import Details from '@components/pages/lookup/discord/Details';
+import Banner from '@components/pages/lookup/discord/Banner';
 import BotBadge from './BotBadge';
+import Details from '@components/pages/lookup/discord/Details';
+import Favicon from '@components/Favicon';
+import { FormatedProps } from '@Types/lookup';
+import Full from '@components/Full';
+import GoBack from '@components/GoBack';
+import Head from 'next/head';
 
 const Discord = ({ data }) => {
   const {

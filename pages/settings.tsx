@@ -1,7 +1,7 @@
 import Favicon from '@components/Favicon';
 import Full from '@components/Full';
-import { Spinner } from '@components/Spinner';
 import Head from 'next/head';
+import { Spinner } from '@components/Spinner';
 
 const settings = () => {
   return (

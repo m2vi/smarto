@@ -1,11 +1,9 @@
 import Full from '@components/Full';
 import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
 import Sidebar from '@components/pages/hub/Sidebar';
-import Time from '@components/Time';
+import Time from '@components/pages/filmlist/Time';
 import Timers from './Timers';
 import Widgets from './Widgets';
-import moment from 'moment';
-import { useTranslation } from 'react-i18next';
 
 export const Hub = () => {
   return (
@@ -33,36 +31,3 @@ export const Hub = () => {
 };
 
 export default Hub;
-
-// <div className="h-screen w-full max-w-screen-xl flex-col flex ml-5 bg-primary-800 px-4">
-//   <Topbar />
-//   <main className="h-full w-full py-6">
-//     {state.length === 0 || state === [false] ? (
-//       <>
-//         <Discover />
-//         <Projects />
-//       </>
-//     ) : (
-//       state.map((project: ProjectProps) => {
-//         if (!project) return;
-//         const { icon, description, badge, language, name, path, updatedAt, key } = project;
-
-//         return (
-//           <Project
-//             icon={icon}
-//             description={description}
-//             badge={badge}
-//             language={language}
-//             name={name}
-//             path={path}
-//             updatedAt={updatedAt}
-//             Key={key}
-//             key={key}
-//             className="mb-3"
-//           />
-//         );
-//       })
-//     )}
-//   </main>
-//   <div className="mt-4"></div>
-// </div>;
