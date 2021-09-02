@@ -66,6 +66,8 @@ class FilmlistUtil {
         return shuffle(items);
       case 'unfiltered':
         return items.slice(0, items.length);
+      case 'release':
+        return sortByKey(items, 'release_date').reverse();
       default:
         return [];
     }
@@ -144,6 +146,7 @@ class FilmlistUtil {
         series: FilmListItems.filter(v => v.type === 'series').length,
         shuffle: FilmListItems.length,
         unfiltered: FilmListItems.length,
+        release: FilmListItems.length,
       };
     };
 

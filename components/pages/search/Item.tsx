@@ -1,27 +1,20 @@
 import { IoLinkOutline, IoReturnDownBackSharp } from 'react-icons/io5';
 
 import { SearchItemProps } from '@Types/search';
-import { useRouter } from 'next/router';
 
-export const Item = ({ icon: Icon = IoLinkOutline, name, path, me }: SearchItemProps) => {
-  const Router = useRouter();
-
-  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.ctrlKey || me.settings.search.openInNewTab) return window.open(path, '_ blank');
-
-    Router.push(path);
-  };
-
+export const Item = ({ icon: Icon = IoLinkOutline, name, path }: SearchItemProps) => {
   return (
-    <div className="flex items-center justify-between px-3 py-2 rounded-8 cursor-pointer dD5d-search" onClick={stuff => handleClick(stuff)}>
-      <div className="flex items-center justify-start">
-        <span className="h-3 w-3 grid place-items-center mr-3">
-          <Icon />
-        </span>
-        <span className="small font-light l-1">{name}</span>
+    <a href={path}>
+      <div className="flex items-center justify-between px-3 py-2 rounded-8 cursor-pointer dD5d-search">
+        <div className="flex items-center justify-start">
+          <span className="h-3 w-3 grid place-items-center mr-3">
+            <Icon />
+          </span>
+          <span className="small font-light l-1">{name}</span>
+        </div>
+        <IoReturnDownBackSharp className="h-3 w-3 dD5d-icon" />
       </div>
-      <IoReturnDownBackSharp className="h-3 w-3 dD5d-icon" />
-    </div>
+    </a>
   );
 };
 
