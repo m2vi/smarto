@@ -3,10 +3,11 @@ import Head from 'next/head';
 import Hub from '@components/pages/hub';
 import { HubSearchProvider } from '@context/hubSearch';
 import { WidgetStateProvider } from '@context/widgetState';
+import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 
-export const Discover = () => {
+export const Discover = ({ widgets }) => {
   const { t } = useTranslation();
 
   return (
@@ -18,17 +19,18 @@ export const Discover = () => {
 
       <HubSearchProvider>
         <WidgetStateProvider>
-          <Hub />
+          <Hub widgets={widgets} />
         </WidgetStateProvider>
       </HubSearchProvider>
     </>
   );
 };
 
-export async function getStaticProps({ locale }) {
+export async function getServerSideProps({ locale, req }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common'])),
+      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      widgets: await (await fetch(`${baseUrl(req)}/api/@widgets`)).json(),
     },
   };
 }

@@ -1,11 +1,11 @@
 import Full from '@components/Full';
 import { IoEllipsisHorizontalOutline } from 'react-icons/io5';
 import Sidebar from '@components/pages/hub/Sidebar';
-import Time from '@components/pages/filmlist/Time';
+import Time from '@components/pages/hub/Time';
 import Timers from './Timers';
 import Widgets from './Widgets';
 
-export const Hub = () => {
+export const Hub = ({ widgets }) => {
   return (
     <Full className="flex flex-row">
       <Sidebar />
@@ -18,7 +18,7 @@ export const Hub = () => {
       <div className="h-screen w-full ml-3 bg-transparent p-4 pl-1  max-w-6xl">
         <Time className="text-primary-300" wrapperClassName="flex flex-col font-medium mb-5" />
         <div className="flex mb-6">
-          <Widgets />
+          <Widgets widgets={widgets} />
           <div className="ml-6 mt-9 w-full bg-primary-800 rounded-8 p-4"></div>
         </div>
         <div className="w-full max-h-250 h-full flex">

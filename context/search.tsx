@@ -1,16 +1,15 @@
-import user from '@config/me';
 import { createContext, useContext, useReducer } from 'react';
 
 const SearchContext = createContext(null);
 
-const initalState: any = user.search;
+const initalState = {
+  items: [],
+  render: [],
+};
 
-export interface actionProps {
-  value: any;
-}
-
-export const searchReducer = (state, { value }: actionProps) => {
-  return value;
+export const searchReducer = (state, { render, items }: any) => {
+  if (items) return { items, render: items };
+  return { items: state.items, render };
 };
 
 export const SearchProvider = ({ children }) => {

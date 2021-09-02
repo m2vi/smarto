@@ -1,12 +1,15 @@
 import { useEffect, useRef } from 'react';
+
+import Body from '@components/pages/search/Body';
 import Full from '@components/Full';
 import GoBack from '@components/GoBack';
-import { Wrapper } from '@components/pages/search/styles';
 import Input from '@components/pages/search/Input';
-import Body from '@components/pages/search/Body';
+import { Wrapper } from '@components/pages/search/styles';
+import { useSearch } from '@context/search';
 
-export const Search = () => {
+export const Search = ({ items }) => {
   const inputRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  const { dispatch } = useSearch();
 
   const handleKeyDown = (e: any) => {
     if (e.key === 'f' && e.ctrlKey === true) {
@@ -18,6 +21,8 @@ export const Search = () => {
   };
 
   useEffect(() => window.addEventListener('keydown', e => handleKeyDown(e)), []);
+
+  useEffect(() => dispatch({ items }), [dispatch, items]);
 
   return (
     <>

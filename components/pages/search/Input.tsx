@@ -4,16 +4,15 @@ import { forwardRef } from 'react';
 import { matchSorter } from 'match-sorter';
 import { useSearch } from '@context/search';
 import { useTranslation } from 'react-i18next';
-import user from '@config/me';
 
 const Input = forwardRef<HTMLInputElement>((props, ref) => {
-  const { dispatch } = useSearch();
+  const { dispatch, state } = useSearch();
   const { t } = useTranslation();
 
   const handleChange = ({ currentTarget: { value } }: React.FormEvent<HTMLInputElement>) => {
-    const results = searchItems(value);
+    const results = searchItems(value, state.items);
 
-    dispatch({ value: results });
+    dispatch({ render: results });
   };
 
   return (
@@ -35,9 +34,9 @@ const Input = forwardRef<HTMLInputElement>((props, ref) => {
 
 Input.displayName = 'Input';
 
-export const searchItems = (value: string) => {
-  if (value === '' || value === '*') return user.search;
-  const items = matchSorter(user.search, value, { keys: ['name', 'path', 'tags'] });
+export const searchItems = (value: string, state: any) => {
+  if (value === '' || value === '*') return state;
+  const items = matchSorter(state, value, { keys: ['name', 'path', 'tags'] });
   return items;
 };
 

@@ -59,11 +59,6 @@ const otherSections = [
     key: 'shuffle',
   },
   {
-    icon: IoAlbumsOutline,
-    path: '/s/filmlist/unfiltered',
-    key: 'unfiltered',
-  },
-  {
     icon: IoLogOutOutline,
     path: '/',
     key: 'goback',
