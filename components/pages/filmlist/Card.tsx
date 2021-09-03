@@ -12,7 +12,7 @@ interface CardCardProps extends CardProps {
 
 const Card = ({ genre_ids, id, locale, name, poster_path, release_date, url, original_name }: CardCardProps) => {
   const getName = (locale: string) => {
-    return name[locale] ? name[locale] : original_name;
+    return name[locale] ? name[locale] : name['en'] ? name['en'] : original_name;
   };
 
   return (

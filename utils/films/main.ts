@@ -29,14 +29,14 @@ class FilmlistUtil {
     this.genre = new Genres();
   }
 
-  private filterLanguage = (key: string, items: CardProps[]) => {
+  private filterLanguage = (key: string, items: CardProps[], locale: string) => {
     const filtered = items.filter(i => i.original_language === key);
     return sortByKey(filtered, 'name');
   };
 
-  private filterGenres = (key: string, items: CardProps[]) => {
+  private filterGenres = (key: string, items: CardProps[], locale: string) => {
     const filtered = items.filter(i => i.genre_ids.includes(this.genre.getIDs([key])[0]));
-    return sortByKey(filtered, 'name');
+    return sortByKey(filtered, 'name', locale);
   };
 
   private reverse(a: any[]) {
@@ -44,12 +44,12 @@ class FilmlistUtil {
     // Somehow the normal reverse doesn't work
   }
 
-  private filterSort = (key: string, items: CardProps[]) => {
+  private filterSort = (key: string, items: CardProps[], locale: string) => {
     switch (key) {
       case 'all':
-        return sortByKey(searchArray(items, 'watched', null), 'name', 'en');
+        return sortByKey(searchArray(items, 'watched', null), 'name', locale);
       case 'favourites':
-        return sortByKey(searchArray(items, 'favoured', true), 'name', 'en');
+        return sortByKey(searchArray(items, 'favoured', true), 'name', locale);
       case 'new':
         return this.reverse(items);
       case 'later':
@@ -63,12 +63,12 @@ class FilmlistUtil {
         return sortByKey(
           items.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)),
           'name',
-          'en',
+          locale,
         );
       case 'films':
-        return sortByKey(searchArray(items, 'type', 'film'), 'name', 'en');
+        return sortByKey(searchArray(items, 'type', 'film'), 'name', locale);
       case 'series':
-        return sortByKey(searchArray(items, 'type', 'series'), 'name', 'en');
+        return sortByKey(searchArray(items, 'type', 'series'), 'name', locale);
       case 'shuffle':
         return shuffle(searchArray(items, 'watched', null));
       case 'unfiltered':
@@ -80,16 +80,16 @@ class FilmlistUtil {
     }
   };
 
-  private sort = (type: 'default' | 'genres' | 'language', key: string) => {
+  private sort = (type: 'default' | 'genres' | 'language', key: string, locale: string) => {
     const items = FilmListItems;
 
     switch (type) {
       case 'default':
-        return this.filterSort(key, items);
+        return this.filterSort(key, items, locale);
       case 'genres':
-        return this.filterGenres(key, items);
+        return this.filterGenres(key, items, locale);
       case 'language':
-        return this.filterLanguage(key, items);
+        return this.filterLanguage(key, items, locale);
       default:
         return [];
     }
@@ -103,8 +103,8 @@ class FilmlistUtil {
     return offset === 0 ? items : items.slice(start, offset + start);
   };
 
-  public find = (type: 'default' | 'genres' | 'language', key: string, start: number = 0, offset: number = 50, query?: string) => {
-    const items = this.sort(type, key);
+  public find = (locale: string, type: 'default' | 'genres' | 'language', key: string, start: number = 0, offset: number = 50, query?: string) => {
+    const items = this.sort(type, key, locale);
     if (query) {
       return this.cut(this.search(query, items), start, offset);
     } else if (key === 'unfiltered') {

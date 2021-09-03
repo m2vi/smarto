@@ -12,7 +12,7 @@ export async function getServerSideProps({ query: { key: key }, locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'footer'])),
-      items: util.find('default', key),
+      items: util.find(locale, 'default', key),
       sort: key,
       type: 'default',
       locale,
