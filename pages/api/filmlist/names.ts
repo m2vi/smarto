@@ -6,7 +6,7 @@ export const insert = async (_: NextApiRequest, res: NextApiResponse) => {
   const { id, type } = _.query;
 
   const db = new MovieDb(process.env.MOVIE_TOKEN);
-  let bin = ['de-DE', 'en', 'it'];
+  let bin = ['de-DE', 'en-UK', 'it'];
 
   const stuff = await Promise.all(
     bin.map(async language => {
@@ -16,7 +16,11 @@ export const insert = async (_: NextApiRequest, res: NextApiResponse) => {
     }),
   );
 
-  res.json(stuff);
+  res.json({
+    de: stuff[0],
+    en: stuff[1],
+    it: stuff[2],
+  });
 };
 
 export default insert;

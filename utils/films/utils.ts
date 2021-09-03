@@ -169,52 +169,14 @@ class Genres {
 
 export const genres = new Genres();
 
-export const refactorMovie = ({
-  genre_ids,
-  id,
-  title: name,
-  original_language,
-  original_title: original_name,
-  poster_path,
-  release_date,
-}: MovieResult): CardProps => ({
-  favoured: false,
-  genre_ids,
-  id,
-  name,
-  original_language,
-  original_name,
-  poster_path,
-  release_date: getReleaseDate(release_date).getTime(),
-  type: 'film',
-  url: `https://www.themoviedb.org/movie/${id}`,
-  watched: true,
-});
-
-export const refactorSeries = ({
-  genre_ids,
-  id,
-  name,
-  original_language,
-  original_name,
-  poster_path,
-  first_air_date: release_date,
-}: TvResult): CardProps => ({
-  favoured: false,
-  genre_ids,
-  id,
-  name,
-  original_language,
-  original_name,
-  poster_path,
-  release_date: getReleaseDate(release_date).getTime(),
-  type: 'series',
-  url: `https://www.themoviedb.org/tv/${id}`,
-  watched: true,
-});
-
 export const getReleaseDate = (release_date: string) => moment(release_date).toDate();
 
-export const isReleased = (release_date: number) => Math.sign(new Date().getTime() - release_date) === 1;
+export const isReleased = (release_date: any) => {
+  if (typeof release_date === 'number') {
+    return Math.sign(new Date().getTime() - release_date) === 1;
+  } else {
+    return false;
+  }
+};
 
 export const removeUnreleased = (array: CardProps[]) => array.filter(({ release_date }) => isReleased(release_date));

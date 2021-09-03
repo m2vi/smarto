@@ -14,7 +14,7 @@ export const Input = ({ className, items, ...props }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.currentTarget.value;
     if (!value || value === '') return Router.push(`/s/filmlist/find/*`);
-    Router.push(`/s/filmlist/find/${value}`);
+    Router.push(`/s/filmlist/find/${encodeURIComponent(value)}`);
   };
 
   return <input ref={ref} className={cn} {...props} data-testid="input" style={{ background: '#2d2c31', height: '40px' }} onChange={handleChange} />;

@@ -6,9 +6,15 @@ import moment from 'moment';
 import { translation } from '@utils/validate/translation';
 import { useTranslation } from 'react-i18next';
 
-interface CardCardProps extends CardProps {}
+interface CardCardProps extends CardProps {
+  locale: string;
+}
 
-const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, url }: CardCardProps) => {
+const Card = ({ genre_ids, id, locale, name, poster_path, release_date, url, original_name }: CardCardProps) => {
+  const getName = (locale: string) => {
+    return name[locale] ? name[locale] : original_name;
+  };
+
   return (
     <a href={url} className="flex flex-col w-200">
       <div className="h-full w-full grid place-items-center relative mb-2">
@@ -25,8 +31,8 @@ const Card = ({ genre_ids, poster_path, name, id, release_date, original_name, u
           <IoVideocamOutline className="h-5 w-5" />
         )}
       </div>
-      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={name}>
-        {name}
+      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={getName(locale)}>
+        {getName(locale)}
       </p>
       <Genres ids={genre_ids} />
       <Release release_date={release_date} />

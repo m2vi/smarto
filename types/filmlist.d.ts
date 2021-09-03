@@ -2,13 +2,18 @@ export interface CardProps {
   favoured: boolean;
   genre_ids: number[];
   id: number;
-  name: string;
+  name: {
+    de: string;
+    en: string;
+    it: string;
+  };
   original_language: string;
   original_name: string;
   poster_path: string;
-  release_date: number;
+  release_date: number | boolean;
   type: 'series' | 'film';
   url: string;
+
   watched: boolean;
 }
 

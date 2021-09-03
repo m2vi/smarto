@@ -46,9 +46,9 @@ class FilmlistUtil {
   private filterSort = (key: string, items: CardProps[]) => {
     switch (key) {
       case 'all':
-        return sortByKey(searchArray(items, 'watched', null), 'name');
+        return sortByKey(searchArray(items, 'watched', null), 'name', 'en');
       case 'favourites':
-        return sortByKey(searchArray(items, 'favoured', true), 'name');
+        return sortByKey(searchArray(items, 'favoured', true), 'name', 'en');
       case 'new':
         return this.reverse(items);
       case 'later':
@@ -62,11 +62,12 @@ class FilmlistUtil {
         return sortByKey(
           items.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)),
           'name',
+          'en',
         );
       case 'films':
-        return sortByKey(searchArray(items, 'type', 'film'), 'name');
+        return sortByKey(searchArray(items, 'type', 'film'), 'name', 'en');
       case 'series':
-        return sortByKey(searchArray(items, 'type', 'series'), 'name');
+        return sortByKey(searchArray(items, 'type', 'series'), 'name', 'en');
       case 'shuffle':
         return shuffle(searchArray(items, 'watched', null));
       case 'unfiltered':
@@ -94,7 +95,7 @@ class FilmlistUtil {
   };
 
   private search = (query: string, items: CardProps[]) => {
-    return matchSorter(items, query, { keys: ['name', 'original_name'] });
+    return matchSorter(items, query, { keys: ['name.en', 'name.de', 'name.it', 'original_name'] });
   };
 
   private cut = (items: CardProps[], start: number, offset: number = 50) => {

@@ -2,29 +2,29 @@ import { createRef, useEffect } from 'react';
 
 import Card from './Card';
 import { CardProps } from '@Types/filmlist';
+import Console from '@utils/tools/console';
 import Genres from './Genres';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Input } from './Input';
 import Menu from '@components/pages/filmlist/Menu';
-import console from '@utils/tools/console';
 import { useFilmSearch } from '@context/filmSearch';
 import { useTranslation } from 'react-i18next';
 import { util } from '@utils/films/client';
 
-const Index = ({ items, type, sort, max, genres, languages, query }) => {
+const Index = ({ items, type, sort, max, genres, languages, query, locale }) => {
   const { dispatch, state } = useFilmSearch();
   const { t } = useTranslation();
   const ScrollRef = createRef<HTMLDivElement>();
 
   useEffect(() => {
     dispatch({ items });
-    console.log(`items: ${max}, sort group: ${type}, sort: ${sort}, query: "${query}"`);
+    Console.log(`items: ${max}, sort group: ${type}, sort: ${sort}, query: "${query}"`);
   }, [dispatch, items, max, sort, type, query]);
 
   useEffect(() => {
     if (ScrollRef.current) {
       if (ScrollRef.current.scrollTop === 0) return;
-      console.log(`Scrolled from ${ScrollRef.current.scrollTop} to 0`);
+      Console.log(`Scrolled from ${ScrollRef.current.scrollTop} to 0`);
       ScrollRef.current.scrollTop = 0;
     }
     // eslint-disable-next-line
@@ -68,7 +68,7 @@ const Index = ({ items, type, sort, max, genres, languages, query }) => {
               className="w-full p-4 py-0 grid gap-6 grid-cols-1 fmd:grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto place-items-center"
             >
               {state.items.map(({ ...props }, i: number) => {
-                return <Card {...(props as CardProps)} key={i} />;
+                return <Card locale={locale} {...(props as CardProps)} key={i} />;
               })}
             </InfiniteScroll>
           </main>
