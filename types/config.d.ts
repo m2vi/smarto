@@ -28,13 +28,10 @@ export interface userData {
     country?: string;
   };
   accounts?: accountProps;
-  search?: SearchItemProps[];
-  timers?: TimerProps[];
-  markedProjects?: string[];
-  settings?: ProjectSettingsProps;
 }
 
-export interface ProjectSettingsProps {
+export interface userSettings {
+  markedProjects?: string[];
   search?: {
     openInNewTab?: boolean;
   };
