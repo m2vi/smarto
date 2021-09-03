@@ -9,7 +9,11 @@ export interface CardProps {
   };
   original_language: string;
   original_name: string;
-  poster_path: string;
+  poster_path: {
+    de: string;
+    en: string;
+    it: string;
+  };
   release_date: number | boolean;
   type: 'series' | 'film';
   url: string;

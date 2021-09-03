@@ -20,7 +20,7 @@ const Card = ({ genre_ids, id, locale, name, poster_path, release_date, url, ori
       <div className="h-full w-full grid place-items-center relative mb-2">
         {poster_path ? (
           <Image
-            src={`https://image.tmdb.org/t/p/original${poster_path}`}
+            src={`https://image.tmdb.org/t/p/original${poster_path[locale]}`}
             height="300px"
             width="200px"
             alt={`${id} poster`}

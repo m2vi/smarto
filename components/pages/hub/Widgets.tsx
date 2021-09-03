@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 
 import Icon from '@components/Icon';
 import { WidgetProps } from '@Types/config';
+import settings from '@config/settings';
 import { sortByKey } from '@utils/tools/array';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import user from '@config/me';
 
 const Widgets = ({ widgets, ...props }) => {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ const Widgets = ({ widgets, ...props }) => {
       </span>
       <div className="grid grid-cols-2 grid-rows-3 gap-6 w-full">
         {sortByKey(widgets, 'name').map(({ icon, name, unit, openInNewTab, path, func, removeSpace }) => {
-          const { includeUnits } = user.settings.hub.widgets;
+          const { includeUnits } = settings.hub.widgets;
 
           return (
             <Widget

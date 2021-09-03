@@ -1,8 +1,9 @@
-import { genreList, isReleased, removeUnreleased } from './utils';
+import { genreList, getReleaseDate, isReleased, removeUnreleased } from './utils';
 import { removeDuplicates, searchArray, shuffle, sortByKey } from '@utils/tools/array';
 
 import { CardProps } from '@Types/filmlist';
 import { FilmListItems } from '@config/filmlist';
+import { MovieDb } from 'moviedb-promise';
 import { matchSorter } from 'match-sorter';
 
 class Genres {
@@ -163,6 +164,79 @@ class FilmlistUtil {
       all: Object.assign({}, genres(), languages(), defaultSort()),
     };
   };
+
+  public async get(id: string | number, type: string, favoured: boolean = false, watched: boolean = true) {
+    const db = new MovieDb(process.env.MOVIE_TOKEN);
+    const data = (type === 'film' ? await db.movieInfo({ id: id.toString() }) : await db.tvInfo({ id: id.toString() })) as any;
+
+    const names = async () => {
+      let bin = ['de-DE', 'en-UK', 'it'];
+
+      const stuff = await Promise.all(
+        bin.map(async language => {
+          return type?.toString() === 'film'
+            ? (await db.movieInfo({ id: id?.toString(), language })).title
+            : (await db.tvInfo({ id: id?.toString(), language })).name;
+        }),
+      );
+
+      let bin2 = ['de-DE', 'en-UK', 'it'];
+
+      const stuff2 = await Promise.all(
+        bin2.map(async language => {
+          return type?.toString() === 'film'
+            ? (await db.movieInfo({ id: id?.toString(), language })).poster_path
+            : (await db.tvInfo({ id: id?.toString(), language })).poster_path;
+        }),
+      );
+
+      return [
+        {
+          de: stuff[0],
+          en: stuff[1],
+          it: stuff[2],
+        },
+        {
+          de: stuff2[0],
+          en: stuff2[1],
+          it: stuff2[2],
+        },
+      ];
+    };
+
+    // TODO: get both from one request
+    const np = await names();
+
+    if (type.toString() === 'film') {
+      return {
+        favoured: favoured?.toString() === 'true' ? true : false,
+        genre_ids: data?.genres.map(g => g.id),
+        id: data?.id,
+        name: np[0],
+        original_language: data?.original_language,
+        original_name: data?.original_title,
+        poster_path: np[1],
+        release_date: data?.release_date ? getReleaseDate(data?.release_date).getTime() : false,
+        type: 'film',
+        url: `https://www.themoviedb.org/movie/${data?.id}`,
+        watched: watched?.toString() === 'false' ? false : true,
+      } as CardProps;
+    } else {
+      return {
+        favoured: favoured ? true : false,
+        genre_ids: data?.genres.map(g => g.id),
+        id: data?.id,
+        name: np[0],
+        original_language: data?.original_language,
+        original_name: data?.original_name,
+        poster_path: np[1],
+        release_date: data?.first_air_date ? getReleaseDate(data?.first_air_date).getTime() : false,
+        type: 'film',
+        url: `https://www.themoviedb.org/movie/${data?.id}`,
+        watched: watched?.toString() === 'false' ? false : true,
+      } as CardProps;
+    }
+  }
 }
 
 export const filmlistUtil = new FilmlistUtil();

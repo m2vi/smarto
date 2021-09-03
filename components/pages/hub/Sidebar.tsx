@@ -5,6 +5,7 @@ import Avatar from '@components/Avatar';
 import { Client } from '@projects/lookup/client';
 import Link from 'next/link';
 import { Projects } from '@projects/index';
+import settings from '@config/settings';
 import user from '@config/me';
 
 export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
@@ -16,7 +17,7 @@ export const Sidebar = () => {
   const [src, setSrc] = useState('');
 
   useEffect(() => {
-    const projects = new Projects(user.markedProjects).getMarked();
+    const projects = new Projects(settings.markedProjects).getMarked();
     setProjects(projects);
 
     const api = new Client('discord');
