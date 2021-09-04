@@ -33,9 +33,9 @@ const Index = ({ items, type, sort, max, genres, languages, query, locale }) => 
   const fetchMoreData = () => {
     if (sort === 'unfiltered') return;
     if (query && query !== '*') {
-      util.load(type, sort, state.items.length, max, query).then(data => dispatch({ items: state.items.concat(data) }));
+      util.load(locale, type, sort, state.items.length, max, query).then(data => dispatch({ items: state.items.concat(data) }));
     } else {
-      util.load(type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
+      util.load(locale, type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
     }
   };
 
@@ -68,7 +68,7 @@ const Index = ({ items, type, sort, max, genres, languages, query, locale }) => 
               className="w-full p-4 py-0 grid gap-6 grid-cols-1 fmd:grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto place-items-center"
             >
               {state.items.map(({ ...props }, i: number) => {
-                return <Card locale={locale} {...(props as CardProps)} key={i} />;
+                return <Card locale={locale} {...(props as CardProps)} key={`${props.id}-${props.name.en}`} />;
               })}
             </InfiniteScroll>
           </main>

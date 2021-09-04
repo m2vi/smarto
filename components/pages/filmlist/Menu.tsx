@@ -83,7 +83,7 @@ const Sidebar = () => {
       </p>
       <div className="w-full flex flex-col items-start">
         {sections.map(({ icon: Icon, key }) => (
-          <Link href={`/s/filmlist/${key}`} passHref={true} shallow={false} key={key}>
+          <Link href={`/s/filmlist/default/${key}`} passHref={true} shallow={false} key={key}>
             <span
               style={{ color: curr === key && '#d7b350' }}
               className="my-2 flex items-center cursor-pointer filmlist-hover overflow-hidden overflow-ellipsis whitespace-nowrap"

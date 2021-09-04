@@ -1,24 +1,30 @@
 export interface CardProps {
   favoured: boolean;
   genre_ids: number[];
-  id: number;
-  name: {
-    de: string;
-    en: string;
-    it: string;
-  };
+  _id?: number;
+  id_db: number;
+  name:
+    | {
+        de: string;
+        en: string;
+        it: string;
+      }
+    | string;
   original_language: string;
   original_name: string;
-  poster_path: {
-    de: string;
-    en: string;
-    it: string;
-  };
+  poster_path:
+    | {
+        de: string;
+        en: string;
+        it: string;
+      }
+    | string;
   release_date: number | boolean;
   type: 'series' | 'film';
   url: string;
-
   watched: boolean;
+
+  static?: string[];
 }
 
 export interface MoviePageProps {
@@ -36,14 +42,4 @@ export interface FilmConfigProps {
   showChildish: boolean;
   showUnpublished: boolean;
   sort: 'name' | 'release_date' | 'randomize';
-}
-
-export interface StreamingServiceProps {
-  href: string;
-  id: string;
-  languages: string[];
-  name: string;
-  original_name: string;
-  poster_path: string;
-  types: string[];
 }

@@ -8,15 +8,15 @@ const Key = ({ ...props }) => {
   return <IfWrapper {...props} />;
 };
 
-export async function getServerSideProps({ query: { key: key }, locale, req }) {
+export async function getServerSideProps({ query: { type, key }, locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'footer'])),
-      items: util.find(locale, 'default', key),
+      items: util.find(locale, type, key),
       sort: key,
-      type: 'default',
+      type: type,
       locale,
-      max: util?.max().all?.[key] ? util?.max().all?.[key] : 0,
+      max: (await util?.max()).all?.[key] ? (await util?.max()).all?.[key] : 0,
       genres: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/genres`)).json(), 'name'),
       languages: sortByKey(await (await fetch(`${baseUrl(req)}/api/filmlist/languages`)).json(), 'count').reverse(),
     },

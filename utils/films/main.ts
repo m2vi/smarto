@@ -31,7 +31,7 @@ class FilmlistUtil {
 
   private filterLanguage = (key: string, items: CardProps[], locale: string) => {
     const filtered = items.filter(i => i.original_language === key);
-    return sortByKey(filtered, 'name');
+    return sortByKey(filtered, 'name', locale);
   };
 
   private filterGenres = (key: string, items: CardProps[], locale: string) => {
@@ -69,6 +69,8 @@ class FilmlistUtil {
         return sortByKey(searchArray(items, 'type', 'film'), 'name', locale);
       case 'series':
         return sortByKey(searchArray(items, 'type', 'series'), 'name', locale);
+      case 'find':
+        return;
       case 'shuffle':
         return shuffle(searchArray(items, 'watched', null));
       case 'unfiltered':
@@ -80,13 +82,13 @@ class FilmlistUtil {
     }
   };
 
-  private sort = (type: 'default' | 'genres' | 'language', key: string, locale: string) => {
+  private sort = (type: 'default' | 'genre' | 'language' | 'find', key: string, locale: string) => {
     const items = FilmListItems;
 
     switch (type) {
       case 'default':
         return this.filterSort(key, items, locale);
-      case 'genres':
+      case 'genre':
         return this.filterGenres(key, items, locale);
       case 'language':
         return this.filterLanguage(key, items, locale);
@@ -103,9 +105,19 @@ class FilmlistUtil {
     return offset === 0 ? items : items.slice(start, offset + start);
   };
 
-  public find = (locale: string, type: 'default' | 'genres' | 'language', key: string, start: number = 0, offset: number = 50, query?: string) => {
-    const items = this.sort(type, key, locale);
-    if (query) {
+  public find = (
+    locale: string,
+    type: 'default' | 'genre' | 'language' | 'find',
+    key: string,
+    start: number = 0,
+    offset: number = 50,
+    query?: string,
+    reverse?: boolean,
+  ) => {
+    const items = !reverse ? this.sort(type, key, locale) : this.sort(type, key, locale).reverse();
+    if (query || (type === 'find' && key)) {
+      if (type === 'find' && key) query = key;
+
       return this.cut(this.search(query, items), start, offset);
     } else if (key === 'unfiltered') {
       return items;
@@ -211,7 +223,7 @@ class FilmlistUtil {
       return {
         favoured: favoured?.toString() === 'true' ? true : false,
         genre_ids: data?.genres.map(g => g.id),
-        id: data?.id,
+        id_db: data?.id,
         name: np[0],
         original_language: data?.original_language,
         original_name: data?.original_title,
@@ -225,7 +237,7 @@ class FilmlistUtil {
       return {
         favoured: favoured ? true : false,
         genre_ids: data?.genres.map(g => g.id),
-        id: data?.id,
+        id_db: data?.id,
         name: np[0],
         original_language: data?.original_language,
         original_name: data?.original_name,

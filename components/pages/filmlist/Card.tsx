@@ -10,7 +10,7 @@ interface CardCardProps extends CardProps {
   locale: string;
 }
 
-const Card = ({ genre_ids, id, locale, name, poster_path, release_date, url, original_name }: CardCardProps) => {
+const Card = ({ genre_ids, id_db, locale, name, poster_path, release_date, url, original_name }: CardCardProps) => {
   const getName = (locale: string) => {
     return name[locale] ? name[locale] : name['en'] ? name['en'] : original_name;
   };
@@ -23,7 +23,7 @@ const Card = ({ genre_ids, id, locale, name, poster_path, release_date, url, ori
             src={`https://image.tmdb.org/t/p/original${poster_path[locale]}`}
             height="300px"
             width="200px"
-            alt={`${id} poster`}
+            alt={`${id_db} poster`}
             className="no-drag select-none w-full overflow-hidden relative"
             objectFit={'cover'}
           />
@@ -35,7 +35,7 @@ const Card = ({ genre_ids, id, locale, name, poster_path, release_date, url, ori
         {getName(locale)}
       </p>
       <Genres ids={genre_ids} />
-      <Release release_date={release_date} />
+      {release_date ? <Release release_date={release_date} /> : <div style={{ height: '22px' }} />}
     </a>
   );
 };
@@ -48,7 +48,6 @@ export const Genres = ({ ids }) => {
     .getNames(ids)
     .map(name => t(`pages.filmlist.genres.${name.toLowerCase()}`, { defaultValue: '...' }))
     .join(', ');
-  translation.checkJoin('...', g, ', ');
 
   return (
     <p className="font-normal text-base text-primary-300 overflow-hidden overflow-ellipsis whitespace-nowrap" title={g}>
