@@ -50,7 +50,7 @@ export const projects: ProjectArray = [
     enabled: true,
     key: ':f',
     name: 'Filmlist',
-    path: '/s/filmlist/all',
+    path: '/s/filmlist/default/all',
     createdAt: 0,
     description: "Browse all movies and series I've ever watched",
     icon: FilmIcon,

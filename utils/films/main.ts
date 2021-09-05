@@ -6,6 +6,7 @@ import { MovieDb } from 'moviedb-promise';
 import { NextApiResponse } from 'next';
 import { baseUrl } from '@utils/tools/utils';
 import { matchSorter } from 'match-sorter';
+import cacheData from 'memory-cache';
 
 class Genres {
   private array() {
@@ -23,8 +24,21 @@ class Genres {
   }
 }
 
-export const fetchItems = async req => {
-  return await (await fetch(`${baseUrl(req)}/api/filmlist/all`)).json();
+export const fetchItems = async (req: any) => {
+  async function fetchWithCache(url: string) {
+    const value = cacheData.get(url);
+    if (value) {
+      return value;
+    } else {
+      const minutes = 5;
+      const res = await fetch(url);
+      const data = await res.json();
+      cacheData.put(url, data, 1000 * 60 * minutes);
+      return data;
+    }
+  }
+
+  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all`);
 };
 
 export class FilmlistUtil {

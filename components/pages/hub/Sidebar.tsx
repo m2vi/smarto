@@ -13,13 +13,10 @@ export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) =>
 };
 
 export const Sidebar = () => {
-  const [projects, setProjects] = useState([]);
+  const projects = new Projects(settings.markedProjects).getMarked();
   const [src, setSrc] = useState('');
 
   useEffect(() => {
-    const projects = new Projects(settings.markedProjects).getMarked();
-    setProjects(projects);
-
     const api = new Client('discord');
     const id = user.accounts.discord.toString();
 
