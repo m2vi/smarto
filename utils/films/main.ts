@@ -7,6 +7,7 @@ import { NextApiResponse } from 'next';
 import { baseUrl } from '@utils/tools/utils';
 import { matchSorter } from 'match-sorter';
 import cacheData from 'memory-cache';
+import { isProduction } from '@utils/env/constants';
 
 class Genres {
   private array() {
@@ -27,7 +28,7 @@ class Genres {
 export const fetchItems = async (req: any) => {
   async function fetchWithCache(url: string) {
     const value = cacheData.get(url);
-    if (value) {
+    if (value && isProduction) {
       return value;
     } else {
       const minutes = 5;
