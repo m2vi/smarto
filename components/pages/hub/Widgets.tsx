@@ -1,15 +1,17 @@
 import { IoAddCircleOutline, IoAddOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
-import Icon from '@components/Icon';
 import { WidgetProps } from '@Types/config';
 import settings from '@config/settings';
 import { sortByKey } from '@utils/tools/array';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { WidgetItems } from '@config/widgets';
 
 const Widgets = ({ widgets, ...props }) => {
   const { t } = useTranslation();
+
+  widgets = widgets.map(name => WidgetItems.find(n => n.name === name));
 
   return (
     <div className="w-full max-w-xxs" {...props}>
@@ -43,7 +45,7 @@ const Widgets = ({ widgets, ...props }) => {
   );
 };
 
-const Widget = ({ icon, name, unit, openInNewTab, path, func, removeSpace }: WidgetProps) => {
+const Widget = ({ icon: Icon, name, unit, openInNewTab, path, func, removeSpace }: WidgetProps) => {
   const [value, setValue] = useState('');
   const Router = useRouter();
 
@@ -69,7 +71,7 @@ const Widget = ({ icon, name, unit, openInNewTab, path, func, removeSpace }: Wid
       className="bg-primary-800 h-widget rounded-8 text-primary-200 cursor-pointer text-center py-4 flex flex-col items-center border-primary-800"
       onClick={handleClick}
     >
-      {/* <Icon icon={icon} className="h-4 w-4 mb-2" /> */}
+      <Icon className="h-4 w-4 mb-2" />
       <p className="small font-semibold text-primary-100 mb-1">{name}</p>
       <p className="reallySmall">
         {value}

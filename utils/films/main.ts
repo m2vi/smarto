@@ -3,11 +3,9 @@ import { removeDuplicates, searchArray, shuffle, sortByKey } from '@utils/tools/
 
 import { CardProps } from '@Types/filmlist';
 import { MovieDb } from 'moviedb-promise';
-import { NextApiResponse } from 'next';
 import { baseUrl } from '@utils/tools/utils';
 import { matchSorter } from 'match-sorter';
-import cacheData from 'memory-cache';
-import { isProduction } from '@utils/env/constants';
+import { fetchWithCache } from '@utils/db/fetch';
 
 class Genres {
   private array() {
@@ -26,20 +24,7 @@ class Genres {
 }
 
 export const fetchItems = async (req: any) => {
-  async function fetchWithCache(url: string) {
-    const value = cacheData.get(url);
-    if (value && isProduction) {
-      return value;
-    } else {
-      const minutes = 5;
-      const res = await fetch(url);
-      const data = await res.json();
-      cacheData.put(url, data, 1000 * 60 * minutes);
-      return data;
-    }
-  }
-
-  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all`);
+  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all`, 30);
 };
 
 export class FilmlistUtil {

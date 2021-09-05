@@ -30,7 +30,7 @@ export async function getServerSideProps({ locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'footer'])),
-      widgets: await (await fetch(`${baseUrl(req)}/api/@widgets`)).json(),
+      widgets: (await (await fetch(`${baseUrl(req)}/api/@widgets`)).json()).map(w => w.name),
     },
   };
 }

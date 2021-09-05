@@ -32,6 +32,7 @@ export interface userData {
 
 export interface userSettings {
   markedProjects?: string[];
+  markedWidgets?: string[];
   search?: {
     openInNewTab?: boolean;
   };
