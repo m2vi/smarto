@@ -2,8 +2,9 @@ import { genreList, getReleaseDate, isReleased, removeUnreleased } from './utils
 import { removeDuplicates, searchArray, shuffle, sortByKey } from '@utils/tools/array';
 
 import { CardProps } from '@Types/filmlist';
-import { FilmListItems } from '@config/filmlist';
 import { MovieDb } from 'moviedb-promise';
+import { NextApiResponse } from 'next';
+import { baseUrl } from '@utils/tools/utils';
 import { matchSorter } from 'match-sorter';
 
 class Genres {
@@ -22,10 +23,14 @@ class Genres {
   }
 }
 
-class FilmlistUtil {
+export const fetchItems = async req => {
+  return await (await fetch(`${baseUrl(req)}/api/filmlist/all`)).json();
+};
+
+export class FilmlistUtil {
   genre: Genres;
 
-  constructor() {
+  constructor(public items: CardProps[]) {
     this.genre = new Genres();
   }
 
@@ -83,7 +88,7 @@ class FilmlistUtil {
   };
 
   private sort = (type: 'default' | 'genre' | 'language' | 'find', key: string, locale: string) => {
-    const items = FilmListItems;
+    const items = this.items;
 
     switch (type) {
       case 'default':
@@ -129,7 +134,7 @@ class FilmlistUtil {
   public max = () => {
     const genres = () => {
       const allGenres = [];
-      FilmListItems.forEach(v => {
+      this.items.forEach(v => {
         v.genre_ids.forEach(v => allGenres.push(v));
       });
 
@@ -144,7 +149,7 @@ class FilmlistUtil {
     };
 
     const languages = () => {
-      const allLanguages = FilmListItems.map(({ original_language }) => original_language);
+      const allLanguages = this.items.map(({ original_language }) => original_language);
       const counts = {} as any;
       allLanguages.forEach(x => {
         counts[x] = (counts[x] || 0) + 1;
@@ -155,17 +160,17 @@ class FilmlistUtil {
 
     const defaultSort = () => {
       return {
-        all: FilmListItems.length,
-        favourites: FilmListItems.filter(v => v.favoured).length,
-        new: FilmListItems.length,
-        later: FilmListItems.filter(v => !v.watched).length,
-        soon: FilmListItems.filter(v => !isReleased(v.release_date)).length,
-        kids: FilmListItems.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)).length,
-        films: FilmListItems.filter(v => v.type === 'film').length,
-        series: FilmListItems.filter(v => v.type === 'series').length,
-        shuffle: FilmListItems.length,
-        unfiltered: FilmListItems.length,
-        release: FilmListItems.length,
+        all: this.items.length,
+        favourites: this.items.filter(v => v.favoured).length,
+        new: this.items.length,
+        later: this.items.filter(v => !v.watched).length,
+        soon: this.items.filter(v => !isReleased(v.release_date)).length,
+        kids: this.items.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)).length,
+        films: this.items.filter(v => v.type === 'film').length,
+        series: this.items.filter(v => v.type === 'series').length,
+        shuffle: this.items.length,
+        unfiltered: this.items.length,
+        release: this.items.length,
       };
     };
 
@@ -250,7 +255,3 @@ class FilmlistUtil {
     }
   }
 }
-
-export const filmlistUtil = new FilmlistUtil();
-
-export default new FilmlistUtil();

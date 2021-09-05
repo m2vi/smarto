@@ -68,7 +68,7 @@ const Index = ({ items, type, sort, max, genres, languages, query, locale }) => 
               className="w-full p-4 py-0 grid gap-6 grid-cols-1 fmd:grid-cols-2 flg:grid-cols-3 fxl:grid-cols-4 f2xl:grid-cols-5 auto-rows-auto place-items-center"
             >
               {state.items.map(({ ...props }, i: number) => {
-                return <Card locale={locale} {...(props as CardProps)} key={`${props.id}-${props.name.en}`} />;
+                return <Card locale={locale} {...(props as CardProps)} key={`${props.id_db}-${props.name.en}`} />;
               })}
             </InfiniteScroll>
           </main>

@@ -5,3 +5,9 @@ export const kelvinToCelsius = (k: number) => {
 export class Temperature {
   from() {}
 }
+
+export class Percent {
+  outOf(w: number, g: number) {
+    return (w / g) * 100;
+  }
+}

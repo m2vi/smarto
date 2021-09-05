@@ -1,11 +1,12 @@
+import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { FilmListItems } from '@config/filmlist';
-import util from '@utils/films/main';
-
 const genres = async (_: NextApiRequest, res: NextApiResponse) => {
+  const util = new FilmlistUtil(await fetchItems(_));
+
   const allGenres = [];
-  FilmListItems.forEach(v => {
+
+  util.items.forEach(v => {
     v.genre_ids.forEach(v => allGenres.push(v));
   });
 

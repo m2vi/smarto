@@ -1,9 +1,9 @@
+import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { FilmListItems } from '@config/filmlist';
-
 const languages = async (_: NextApiRequest, res: NextApiResponse) => {
-  const allLanguages = FilmListItems.map(({ original_language }) => original_language);
+  const util = new FilmlistUtil(await fetchItems(_));
+  const allLanguages = util.items.map(({ original_language }) => original_language);
   const counts = {} as any;
   allLanguages.forEach(x => {
     counts[x] = (counts[x] || 0) + 1;

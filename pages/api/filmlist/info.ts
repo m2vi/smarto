@@ -1,9 +1,9 @@
+import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import util from '@utils/films/main';
-
 export const info = async (_: NextApiRequest, res: NextApiResponse) => {
-  res.status(200).json((await util.max()).all);
+  const util = new FilmlistUtil(await fetchItems(_));
+  res.status(200).json(util.max().all);
 };
 
 export default info;

@@ -1,18 +1,17 @@
+import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { FilmListItems } from '@config/filmlist';
-import main from '@utils/films/main';
-
 export const refresh = async (_: NextApiRequest, res: NextApiResponse) => {
+  const util = new FilmlistUtil(await fetchItems(_));
   let bin = [];
   let e = [];
 
-  for (let item of FilmListItems) {
+  for (let item of util.items) {
     try {
-      const data = await main.get(item.id, item.type, item.favoured, item.watched);
+      const data = await util.get(item.id_db, item.type, item.favoured, item.watched);
 
-      item.poster_path = data.poster_path;
-      item.release_date = data.release_date;
+      !item?.static?.includes('poster_path') && (item.poster_path = data.poster_path);
+      !item?.static?.includes('release_data') && (item.release_date = data.release_date);
 
       bin.push(item);
     } catch (error) {
@@ -20,7 +19,7 @@ export const refresh = async (_: NextApiRequest, res: NextApiResponse) => {
       e.push(item);
     }
 
-    console.log(`${FilmListItems.findIndex(i => i === item)}/${FilmListItems.length}`);
+    console.log(`${util.items.findIndex(i => i === item)}/${util.items.length}`);
   }
 
   res.status(200).json(bin);
