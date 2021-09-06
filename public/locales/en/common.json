@@ -42,7 +42,9 @@
         "kids": "Kids",
         "films": "Films",
         "series": "Series",
+        "edit": "Edit",
         "find": "Find",
+
         "shuffle": "Shuffle",
         "goback": "Go Back",
         "search": "Search films, series",

@@ -1,6 +1,7 @@
 import {
   IoAlbumsOutline,
   IoBookOutline,
+  IoCreateOutline,
   IoFilmOutline,
   IoHappyOutline,
   IoHourglassOutline,
@@ -54,6 +55,11 @@ const sections = [
 ];
 
 const otherSections = [
+  {
+    icon: IoCreateOutline,
+    path: '/s/filmlist/edit',
+    key: 'edit',
+  },
   {
     icon: IoSearchOutline,
     path: '/s/filmlist/find/*',
