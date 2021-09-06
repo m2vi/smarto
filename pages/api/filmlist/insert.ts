@@ -1,6 +1,6 @@
 import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
-
+import { CardProps } from '@Types/filmlist';
 import filmlistSchema from '@models/filmlistSchema';
 import mongoose from 'mongoose';
 
@@ -21,10 +21,17 @@ const insert = async (_: NextApiRequest, res: NextApiResponse) => {
       watched.toString() === 'false' ? false : true,
     );
 
-    const obj = new filmlistSchema(data);
-    await obj.save();
+    const allItems = (await fetchItems(_, true)) as CardProps[];
 
-    res.status(200).json(data);
+    const exists = allItems.find(item => item.id_db === parseInt(id.toString())) ? true : false;
+
+    if (!exists) {
+      const obj = new filmlistSchema(data);
+      await obj.save();
+      res.status(200).json(await filmlistSchema.find(data));
+    } else {
+      res.status(400).json({ message: 'Item already exists' });
+    }
   } catch (error) {
     res.status(200).json(error.message);
   }

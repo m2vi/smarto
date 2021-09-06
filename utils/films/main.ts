@@ -23,8 +23,8 @@ class Genres {
   }
 }
 
-export const fetchItems = async (req: any) => {
-  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all`, 30);
+export const fetchItems = async (req: any, dontCache?: boolean) => {
+  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all`, 30, dontCache);
 };
 
 export class FilmlistUtil {

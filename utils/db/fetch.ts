@@ -3,9 +3,9 @@ import { isProduction } from '@utils/env/constants';
 
 export const defaultFetch = async (url: string) => await (await fetch(url)).json();
 
-export async function fetchWithCache(url: string, minutes: number) {
+export async function fetchWithCache(url: string, minutes: number, dontCache?: boolean) {
   const value = cache.get(url);
-  if (value && isProduction) {
+  if (value && isProduction && !dontCache) {
     return value;
   } else {
     const data = await defaultFetch(url);
