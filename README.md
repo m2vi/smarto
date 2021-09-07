@@ -8,18 +8,13 @@
 - [ ] Lookup (lookup.vercel.app)
 - [ ] Downloader [YouTube, Instagram, Twitter, Reddit, Spotify]
 - [ ] Package Tracker for [Post, DHL, UPS, DPD, ...]
-- [ ] Code Snippets
 - [ ] Search
 - [ ] Math Stuff
-- [ ] Search
 
 ## Small Apps
 
-- [ ] Todo List (Ideas)
 - [ ] Shopping List
 - [ ] Validator
-- [ ] Text tools
-- [ ] Privacy Tracker
 
 ## Hub
 
