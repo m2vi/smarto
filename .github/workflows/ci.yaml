@@ -8,7 +8,8 @@ on:
 
 env:
   IMAGE_NAME: m2vi/smarto
-  DOCKER_PLATFORMS: linux/amd64 #,linux/arm/v7,linux/arm64,linux/arm/v6,linux/386,linux/ppc64le,linux/s390x
+  DOCKER_PLATFORMS: linux/amd64,linux/arm/v7,linux/arm64,linux/arm/v6,linux/386 #,linux/ppc64le,linux/s390x
+  NODE_VERSION: '14'
 
 jobs:
   lint:
@@ -19,7 +20,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: ${{ env.NODE_VERSION }}
 
       - run: npm install
 
@@ -33,7 +34,7 @@ jobs:
 
       - uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: ${{ env.NODE_VERSION }}
 
       - run: npm install
 
