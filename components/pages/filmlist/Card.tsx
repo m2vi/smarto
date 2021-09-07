@@ -12,16 +12,12 @@ interface CardCardProps extends CardProps {
 }
 
 const Card = ({ genre_ids, id_db, locale, name, poster_path, release_date, url, original_name }: CardCardProps) => {
-  const getName = (locale: string) => {
-    return name[locale] ? name[locale] : name['en'] ? name['en'] : original_name;
-  };
-
   return (
     <a href={url} className="flex flex-col w-200">
       <div className="h-full w-full grid place-items-center relative mb-2">
         {poster_path ? (
           <Image
-            src={`https://image.tmdb.org/t/p/original${poster_path[locale]}`}
+            src={`https://image.tmdb.org/t/p/original${poster_path}`}
             height="300px"
             width="200px"
             alt={`${id_db} poster`}
@@ -32,8 +28,8 @@ const Card = ({ genre_ids, id_db, locale, name, poster_path, release_date, url, 
           <IoVideocamOutline className="h-5 w-5" />
         )}
       </div>
-      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={getName(locale)}>
-        {getName(locale)}
+      <p className="font-normal text-lg overflow-hidden overflow-ellipsis whitespace-nowrap" title={name.toString()}>
+        {name}
       </p>
       <Genres ids={genre_ids} />
       {release_date ? <Release release_date={release_date} locale={locale} /> : <div style={{ height: '22px' }} />}

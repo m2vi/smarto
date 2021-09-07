@@ -10,7 +10,7 @@ const Find = ({ ...props }) => {
 };
 
 export async function getServerSideProps({ query: { query: key }, locale, req }) {
-  const util = new FilmlistUtil(await fetchItems(req));
+  const util = new FilmlistUtil(await fetchItems(req, locale));
 
   return {
     props: {

@@ -10,7 +10,7 @@ const Key = ({ ...props }) => {
 };
 
 export async function getServerSideProps({ query: { type, key }, locale, req }) {
-  const util = new FilmlistUtil(await fetchItems(req));
+  const util = new FilmlistUtil(await fetchItems(req, locale));
 
   return {
     props: {

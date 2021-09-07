@@ -23,8 +23,8 @@ class Genres {
   }
 }
 
-export const fetchItems = async (req: any, dontCache?: boolean) => {
-  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all`, 30, dontCache);
+export const fetchItems = async (req: any, locale: string, dontCache?: boolean) => {
+  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all?locale=${locale}`, 30, dontCache);
 };
 
 export class FilmlistUtil {
@@ -34,14 +34,14 @@ export class FilmlistUtil {
     this.genre = new Genres();
   }
 
-  private filterLanguage = (key: string, items: CardProps[], locale: string) => {
+  private filterLanguage = (key: string, items: CardProps[]) => {
     const filtered = items.filter(i => i.original_language === key);
-    return sortByKey(filtered, 'name', locale);
+    return sortByKey(filtered, 'name');
   };
 
-  private filterGenres = (key: string, items: CardProps[], locale: string) => {
+  private filterGenres = (key: string, items: CardProps[]) => {
     const filtered = items.filter(i => i.genre_ids.includes(this.genre.getIDs([key])[0]));
-    return sortByKey(filtered, 'name', locale);
+    return sortByKey(filtered, 'name');
   };
 
   private reverse(a: any[]) {
@@ -49,12 +49,12 @@ export class FilmlistUtil {
     // Somehow the normal reverse doesn't work
   }
 
-  private filterSort = (key: string, items: CardProps[], locale: string) => {
+  private filterSort = (key: string, items: CardProps[]) => {
     switch (key) {
       case 'all':
-        return sortByKey(searchArray(items, 'watched', null), 'name', locale);
+        return sortByKey(searchArray(items, 'watched', null), 'name');
       case 'favourites':
-        return sortByKey(searchArray(items, 'favoured', true), 'name', locale);
+        return sortByKey(searchArray(items, 'favoured', true), 'name');
       case 'new':
         return this.reverse(items);
       case 'later':
@@ -68,12 +68,11 @@ export class FilmlistUtil {
         return sortByKey(
           items.filter(i => i.genre_ids.includes(10762) || i.genre_ids.includes(10751)),
           'name',
-          locale,
         );
       case 'films':
-        return sortByKey(searchArray(items, 'type', 'film'), 'name', locale);
+        return sortByKey(searchArray(items, 'type', 'film'), 'name');
       case 'series':
-        return sortByKey(searchArray(items, 'type', 'series'), 'name', locale);
+        return sortByKey(searchArray(items, 'type', 'series'), 'name');
       // other
       case 'shuffle':
         return shuffle(searchArray(items, 'watched', null));
@@ -91,11 +90,11 @@ export class FilmlistUtil {
 
     switch (type) {
       case 'default':
-        return this.filterSort(key, items, locale);
+        return this.filterSort(key, items);
       case 'genre':
-        return this.filterGenres(key, items, locale);
+        return this.filterGenres(key, items);
       case 'language':
-        return this.filterLanguage(key, items, locale);
+        return this.filterLanguage(key, items);
       default:
         return [];
     }
