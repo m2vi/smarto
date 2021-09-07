@@ -6,7 +6,7 @@ import { WidgetStateProvider } from '@context/widgetState';
 import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
-
+import * as uuid from 'uuid';
 export const Discover = ({ widgets }) => {
   const { t } = useTranslation();
 

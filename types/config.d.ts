@@ -18,6 +18,7 @@ export type accountProps = {
 };
 
 export interface userData {
+  client_id?: string;
   nickname?: string;
   firstname?: string;
   lastname?: string;
