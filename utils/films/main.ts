@@ -74,8 +74,7 @@ export class FilmlistUtil {
         return sortByKey(searchArray(items, 'type', 'film'), 'name', locale);
       case 'series':
         return sortByKey(searchArray(items, 'type', 'series'), 'name', locale);
-      case 'find':
-        return;
+      // other
       case 'shuffle':
         return shuffle(searchArray(items, 'watched', null));
       case 'unfiltered':

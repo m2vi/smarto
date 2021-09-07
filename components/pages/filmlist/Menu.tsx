@@ -18,6 +18,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
+import { util } from '@utils/films/client';
 
 const sections = [
   {
@@ -56,11 +57,6 @@ const sections = [
 
 const otherSections = [
   {
-    icon: IoCreateOutline,
-    path: '/s/filmlist/edit',
-    key: 'edit',
-  },
-  {
     icon: IoSearchOutline,
     path: '/s/filmlist/find/*',
     key: 'find',
@@ -81,9 +77,15 @@ const Sidebar = () => {
     setCurr(Router.query?.key?.toString());
   }, [Router]);
 
+  const reloadCache = () => {
+    util.reload().then(() => {
+      Router.reload();
+    });
+  };
+
   return (
     <aside className="m-6 flex flex-col w-250 overflow-hidden overflow-y-auto dD5d-items">
-      <p className="text-3xl mb-8">
+      <p className="text-3xl mb-8 cursor-pointer" onClick={reloadCache}>
         {t('pages.filmlist.name')}
         <span style={{ color: '#d7b350' }}>.</span>
       </p>

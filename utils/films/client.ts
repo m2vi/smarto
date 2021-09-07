@@ -14,6 +14,11 @@ class Util {
     console.load(`max: ${max}, current: ${start}`, data);
     return data;
   }
+
+  public async reload() {
+    const data = await (await fetch(`/api/cache/clear`)).json();
+    return data;
+  }
 }
 
 export const util = new Util();

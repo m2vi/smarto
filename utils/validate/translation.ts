@@ -6,7 +6,7 @@ class Translation {
     const regex = new RegExp('/(w+)(W+)?/gm');
 
     if (bad && bad.length !== 0) {
-      Console.translation({ text }, 'Filmlist Card');
+      Console.translation(text, 'Filmlist Card');
     }
   }
 }

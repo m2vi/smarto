@@ -3,8 +3,9 @@ import Image from 'next/image';
 import { IoVideocamOutline } from 'react-icons/io5';
 import { genres } from '@utils/films/utils';
 import moment from 'moment';
-import { translation } from '@utils/validate/translation';
 import { useTranslation } from 'react-i18next';
+import 'moment/locale/de';
+import 'moment/locale/it';
 
 interface CardCardProps extends CardProps {
   locale: string;
@@ -35,7 +36,7 @@ const Card = ({ genre_ids, id_db, locale, name, poster_path, release_date, url, 
         {getName(locale)}
       </p>
       <Genres ids={genre_ids} />
-      {release_date ? <Release release_date={release_date} /> : <div style={{ height: '22px' }} />}
+      {release_date ? <Release release_date={release_date} locale={locale} /> : <div style={{ height: '22px' }} />}
     </a>
   );
 };
@@ -56,8 +57,9 @@ export const Genres = ({ ids }) => {
   );
 };
 
-export const Release = ({ release_date }) => {
+export const Release = ({ release_date, locale }) => {
   const { t } = useTranslation();
+  moment.locale(locale);
   const r = moment(release_date).format(t('pages.filmlist.items.format'));
 
   return (
