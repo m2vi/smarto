@@ -3,8 +3,13 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { CardProps } from '@Types/filmlist';
 import filmlistSchema from '@models/filmlistSchema';
 import mongoose from 'mongoose';
+import { restricted } from '@utils/db/protection';
 
 const insert = async (_: NextApiRequest, res: NextApiResponse) => {
+  const { access } = await restricted(_, res);
+
+  if (!access) return;
+
   try {
     const { id, type, favoured, watched } = _.query;
     const util = new FilmlistUtil([]);

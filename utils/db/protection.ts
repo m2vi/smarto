@@ -16,3 +16,19 @@ export const withProtection = async (_: NextApiRequest, res: NextApiResponse, ca
 };
 
 export default withProtection;
+
+export const restricted = async (_: NextApiRequest, res: NextApiResponse) => {
+  const token = _.query?.token?.toString();
+
+  if (token === process.env.API_TOKEN) {
+    return {
+      access: true,
+    };
+  }
+
+  res.status(200).json({ error: 'Restricted Route' });
+
+  return {
+    access: false,
+  };
+};
