@@ -13,4 +13,4 @@ RUN npm install --production
 COPY . /app
 RUN npm build
 
-CMD "npm start"
+CMD "npm run start"

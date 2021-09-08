@@ -1,14 +1,19 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { AES } from '@utils/security/aes';
-import user from '@config/me';
+import mongoose from 'mongoose';
 
 export const me = async (_: NextApiRequest, res: NextApiResponse) => {
-  const aes = new AES();
+  await mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true,
+  });
+  const db = mongoose.connection;
 
-  const u = aes.encrypt(JSON.stringify(user));
-  const plain = aes.decrypt(u);
-  res.status(200).json(plain);
+  const docs = await db.collection('me').findOne({});
+
+  res.status(200).json(Object.keys(docs));
 };
 
 export default me;
