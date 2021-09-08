@@ -7,7 +7,7 @@ import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 
-export const Discover = ({ widgets }) => {
+export const Discover = ({ widgets, settings, user, timer }) => {
   const { t } = useTranslation();
 
   return (
@@ -19,7 +19,7 @@ export const Discover = ({ widgets }) => {
 
       <HubSearchProvider>
         <WidgetStateProvider>
-          <Hub widgets={widgets} />
+          <Hub timer={timer} settings={settings} widgets={widgets} user={user} />
         </WidgetStateProvider>
       </HubSearchProvider>
     </>
@@ -31,6 +31,9 @@ export async function getServerSideProps({ locale, req }) {
     props: {
       ...(await serverSideTranslations(locale, ['common', 'footer'])),
       widgets: (await (await fetch(`${baseUrl(req)}/api/@widgets`)).json()).map(w => w.name),
+      user: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),
+      settings: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),
+      timer: await (await fetch(`${baseUrl(req)}/api/@timer`)).json(),
     },
   };
 }

@@ -2,7 +2,7 @@ import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export const refresh = async (_: NextApiRequest, res: NextApiResponse) => {
-  const util = new FilmlistUtil(await fetchItems(_));
+  const util = new FilmlistUtil(await fetchItems(_, undefined));
   let bin = [];
   let e = [];
 

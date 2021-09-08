@@ -3,8 +3,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 export const insert = async (_: NextApiRequest, res: NextApiResponse) => {
   try {
-    const { id, type, favoured, watched } = _.query;
-    const util = new FilmlistUtil(await fetchItems(_));
+    const { id, type, favoured, watched, locale } = _.query;
+    const util = new FilmlistUtil(await fetchItems(_, locale.toString()));
     const data = await util.get(
       id.toString(),
       type.toString(),

@@ -1,15 +1,15 @@
-import { TimerItems } from '@config/timer';
 import moment from 'moment';
 import { sortByKey } from '@utils/tools/array';
 import { useTranslation } from 'react-i18next';
+import Icon from '@components/Icon';
 
-const Timers = () => {
+const Timers = ({ TimerItems }) => {
   const { t } = useTranslation();
 
   return (
     <div className="h-full grid" style={{ width: 'calc(905px - 504px - 30px)' }}>
       <div className="grid grid-rows-2 grid-cols-3 w-full rounded-8 gap-6">
-        {sortByKey(TimerItems, 'date').map(({ icon: Icon, date, name }) => {
+        {sortByKey(TimerItems, 'date').map(({ icon: iconKey, date, name }) => {
           const time = [moment(date).fromNow(true), `${moment(date).diff(this, 'days').toString()} days`];
 
           return (
@@ -18,7 +18,7 @@ const Timers = () => {
               key={name}
               title={time[1]}
             >
-              <Icon className="h-4 w-4 mb-2" />
+              <Icon icon={iconKey} className="h-4 w-4 mb-2" />
               <p className="small font-semibold text-primary-100 mb-1">{t(`pages.hub.timer.${name}`)}</p>
               <p className="reallySmall">{time[0]}</p>
             </div>

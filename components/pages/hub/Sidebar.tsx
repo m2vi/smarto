@@ -5,14 +5,12 @@ import Avatar from '@components/Avatar';
 import { Client } from '@projects/lookup/client';
 import Link from 'next/link';
 import { Projects } from '@projects/index';
-import settings from '@config/settings';
-import user from '@config/me';
 
 export const Divider = ({ className }: React.HTMLAttributes<HTMLSpanElement>) => {
   return <span className={`bg-primary-700 mx-4 w-8 ${className}`} style={{ height: '2px' }}></span>;
 };
 
-export const Sidebar = () => {
+export const Sidebar = ({ settings, user }) => {
   const projects = new Projects(settings.markedProjects).getMarked();
   const [src, setSrc] = useState('');
 
@@ -23,7 +21,7 @@ export const Sidebar = () => {
     api.get(id).then(res => {
       res && res.success ? setSrc(`${res.avatar.url}?size=128`) : null;
     });
-  }, []);
+  }, [user]);
 
   return (
     <div className={`max-h-screen h-full flex flex-col items-center w-80 relative bg-primary-800`}>

@@ -21,7 +21,7 @@ const insert = async (_: NextApiRequest, res: NextApiResponse) => {
       watched.toString() === 'false' ? false : true,
     );
 
-    const allItems = (await fetchItems(_, true)) as CardProps[];
+    const allItems = (await fetchItems(_, 'en', true)) as CardProps[];
 
     const exists = allItems.find(item => item.id_db === parseInt(id.toString())) ? true : false;
 

@@ -2,7 +2,7 @@ import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const genres = async (_: NextApiRequest, res: NextApiResponse) => {
-  const util = new FilmlistUtil(await fetchItems(_));
+  const util = new FilmlistUtil(await fetchItems(_, 'en'));
 
   const allGenres = [];
 

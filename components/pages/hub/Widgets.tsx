@@ -2,16 +2,15 @@ import { IoAddCircleOutline, IoAddOutline } from 'react-icons/io5';
 import { useEffect, useState } from 'react';
 
 import { WidgetProps } from '@Types/config';
-import settings from '@config/settings';
 import { sortByKey } from '@utils/tools/array';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
-import { WidgetItems } from '@config/widgets';
+import { WidgetItems } from '@utils/widgets';
 
-const Widgets = ({ widgets, ...props }) => {
+const Widgets = ({ widgets, settings, user, ...props }) => {
   const { t } = useTranslation();
 
-  widgets = widgets.map(name => WidgetItems.find(n => n.name === name));
+  const Widgets = widgets.map(name => WidgetItems(user).find(n => n.name === name));
 
   return (
     <div className="w-full max-w-xxs" {...props}>
@@ -20,7 +19,7 @@ const Widgets = ({ widgets, ...props }) => {
         <IoAddCircleOutline className="h-4 w-4 text-primary-200 hover:text-primary-100 cursor-pointer" />
       </span>
       <div className="grid grid-cols-2 grid-rows-3 gap-6 w-full">
-        {sortByKey(widgets, 'name').map(({ icon, name, unit, openInNewTab, path, func, removeSpace }) => {
+        {sortByKey(Widgets, 'name').map(({ icon, name, unit, openInNewTab, path, func, removeSpace }) => {
           const { includeUnits } = settings.hub.widgets;
 
           return (
