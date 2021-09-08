@@ -1,8 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import { AES } from '@utils/security/aes';
+import { restricted } from '@utils/db/protection';
 
 export const encrypt = async (_: NextApiRequest, res: NextApiResponse) => {
+  const { access } = await restricted(_, res);
+  if (!access) return;
   const aes = new AES();
 
   try {
