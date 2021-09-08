@@ -30,9 +30,9 @@ export async function getServerSideProps({ locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
-      widgets: (await (await fetch(`${baseUrl(req)}/api/@widgets`)).json()).map(w => w.name),
+      widgets: await (await fetch(`${baseUrl(req)}/api/@widgets`)).json(),
       user: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),
-      settings: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),
+      settings: await (await fetch(`${baseUrl(req)}/api/@settings`)).json(),
       timer: await (await fetch(`${baseUrl(req)}/api/@timer`)).json(),
     },
   };
