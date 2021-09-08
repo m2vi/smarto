@@ -7,7 +7,6 @@ import { restricted } from '@utils/db/protection';
 
 const insert = async (_: NextApiRequest, res: NextApiResponse) => {
   const { access } = await restricted(_, res);
-
   if (!access) return;
 
   try {
