@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { AES } from '@utils/security/aes';
 import mongoose from 'mongoose';
 
 export const me = async (_: NextApiRequest, res: NextApiResponse) => {
@@ -11,9 +10,9 @@ export const me = async (_: NextApiRequest, res: NextApiResponse) => {
   });
   const db = mongoose.connection;
 
-  const docs = await db.collection('me').findOne({});
+  const doc = await db.collection('me').findOne({});
 
-  res.status(200).json(Object.keys(docs));
+  res.status(200).json(doc);
 };
 
 export default me;

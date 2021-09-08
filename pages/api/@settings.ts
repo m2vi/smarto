@@ -1,7 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import mongoose from 'mongoose';
 
-export const search = async (_: NextApiRequest, res: NextApiResponse) => {
+export const me = async (_: NextApiRequest, res: NextApiResponse) => {
   await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,
@@ -9,9 +10,9 @@ export const search = async (_: NextApiRequest, res: NextApiResponse) => {
   });
   const db = mongoose.connection;
 
-  const doc = await db.collection('search').findOne({});
+  const doc = await db.collection('settings').findOne({});
 
-  res.status(200).json(doc.items);
+  res.status(200).json(doc.data);
 };
 
-export default search;
+export default me;

@@ -1,11 +1,12 @@
-FROM node:lts-alpine
+FROM node:lts-slim
 
 ENV NODE_ENV=production
 
 WORKDIR /app
 
 # install dependencies
-RUN apk add --update --no-cache git
+RUN apt update
+RUN apt install git
 COPY package.json /app/package.json
 RUN npm install --production
 
@@ -13,4 +14,4 @@ RUN npm install --production
 COPY . /app
 RUN npm build
 
-CMD "npm run start"
+CMD npm run start
