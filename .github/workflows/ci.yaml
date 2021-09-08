@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - run: npm install
+      - run: npm ci
 
       - run: npm run lint
 
@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
 
-      - run: npm install
+      - run: npm ci
 
       - run: npm run test
 
@@ -49,14 +49,16 @@ jobs:
 
       - name: Docker meta
         id: docker_meta
-        uses: marcelcoding/ghaction-docker-meta@v1
+        uses: docker/metadata-action@v3
         with:
-          tag-edge: true
           images: |
             ghcr.io/${{ env.IMAGE_NAME }}
-          tag-semver: |
-            {{version}}
-            {{major}}.{{minor}}
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=ref,event=pr
+            type=edge
 
       - uses: docker/setup-qemu-action@v1
       - uses: docker/setup-buildx-action@v1
