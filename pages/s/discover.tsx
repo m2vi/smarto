@@ -29,7 +29,7 @@ export const Discover = ({ widgets, settings, user, timer }) => {
 export async function getServerSideProps({ locale, req }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      ...(await serverSideTranslations(locale, ['common'])),
       widgets: (await (await fetch(`${baseUrl(req)}/api/@widgets`)).json()).map(w => w.name),
       user: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),
       settings: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),

@@ -23,7 +23,7 @@ export const Search = ({ items }) => {
 export async function getServerSideProps({ query: { key: key }, locale, req }) {
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      ...(await serverSideTranslations(locale, ['common'])),
       items: sortByKey(await (await fetch(`${baseUrl(req)}/api/@search`)).json(), 'name'),
     },
   };

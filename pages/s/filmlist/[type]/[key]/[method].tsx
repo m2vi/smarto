@@ -14,7 +14,7 @@ export async function getServerSideProps({ query: { type, key, method }, locale,
 
   return {
     props: {
-      ...(await serverSideTranslations(locale, ['common', 'footer'])),
+      ...(await serverSideTranslations(locale, ['common'])),
       items: util.find(locale, type, key, 0, 50, null, method === 'reverse' && true),
       sort: key,
       type: type,
