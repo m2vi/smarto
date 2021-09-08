@@ -1,7 +1,7 @@
-import Login from '@components/Login';
+import LoginPage from '@components/Login';
 
-const login = () => {
-  return <Login />;
+const Login = () => {
+  return <LoginPage />;
 };
 
-export default login;
+export default Login;

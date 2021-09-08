@@ -3,6 +3,7 @@ import { forwardRef, useState } from 'react';
 
 import Full from './Full';
 import { IoLockClosed } from 'react-icons/io5';
+import jwt from 'jsonwebtoken';
 
 const Login = () => {
   return (

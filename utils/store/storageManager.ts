@@ -1,4 +1,4 @@
-export class SessionManager {
+export class StorageManager {
   constructor() {}
 
   private cb(func: Function, ...params: any): void {
@@ -8,22 +8,22 @@ export class SessionManager {
   }
 
   public get(key: string, cb?: Function): any {
-    const item = JSON.parse(sessionStorage.getItem(key));
+    const item = JSON.parse(localStorage.getItem(key));
     this.cb(cb, item ? true : false, item);
-    return cb;
+    return item;
   }
 
   public store(key: string, dataz: any): void {
-    sessionStorage.setItem(key, JSON.stringify(dataz));
+    localStorage.setItem(key, JSON.stringify(dataz));
   }
 
   public remove(key: string): void {
-    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 
   public clear(): void {
-    sessionStorage.clear();
+    localStorage.clear();
   }
 }
 
-export default new SessionManager();
+export default new StorageManager();

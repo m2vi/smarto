@@ -14,3 +14,5 @@ export class AES {
     return CryptoJS.AES.decrypt(ciphertext, this.#PRIVATE_KEY).toString(CryptoJS.enc.Utf8);
   }
 }
+
+export default new AES();
