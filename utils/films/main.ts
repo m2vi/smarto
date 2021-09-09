@@ -24,7 +24,7 @@ class Genres {
 }
 
 export const fetchItems = async (req: any, locale: string, dontCache?: boolean) => {
-  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all?locale=${locale}`, 30, dontCache);
+  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all?locale=${locale}`, 60 * 24, dontCache);
 };
 
 export class FilmlistUtil {

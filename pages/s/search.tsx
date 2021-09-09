@@ -5,6 +5,7 @@ import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { sortByKey } from '@utils/tools/array';
 import { useTranslation } from 'react-i18next';
+import { fetchBasicProps } from '@utils/db/props';
 
 export const Search = ({ items }) => {
   const { t } = useTranslation();
@@ -24,6 +25,7 @@ export async function getServerSideProps({ query: { key: key }, locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
+      ...(await fetchBasicProps(locale, req)),
       items: sortByKey(await (await fetch(`${baseUrl(req)}/api/@search`)).json(), 'name'),
     },
   };

@@ -6,6 +6,8 @@ import { WidgetStateProvider } from '@context/widgetState';
 import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
+import { fetchBasicProps } from '@utils/db/props';
+import { fetchWithCache } from '@utils/db/fetch';
 
 export const Discover = ({ widgets, settings, user, timer }) => {
   const { t } = useTranslation();
@@ -30,10 +32,9 @@ export async function getServerSideProps({ locale, req }) {
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
-      widgets: await (await fetch(`${baseUrl(req)}/api/@widgets`)).json(),
-      user: await (await fetch(`${baseUrl(req)}/api/@me`)).json(),
-      settings: await (await fetch(`${baseUrl(req)}/api/@settings`)).json(),
-      timer: await (await fetch(`${baseUrl(req)}/api/@timer`)).json(),
+      ...(await fetchBasicProps(locale, req)),
+      widgets: await fetchWithCache(`${baseUrl(req)}/api/@widgets`, 60 * 24),
+      timer: await fetchWithCache(`${baseUrl(req)}/api/@timer`, 60 * 24),
     },
   };
 }
