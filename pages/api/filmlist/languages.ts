@@ -1,4 +1,5 @@
 import { FilmlistUtil, fetchItems } from '@utils/films/main';
+import { sortByKey } from '@utils/tools/array';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const languages = async (_: NextApiRequest, res: NextApiResponse) => {
@@ -9,11 +10,11 @@ const languages = async (_: NextApiRequest, res: NextApiResponse) => {
     counts[x] = (counts[x] || 0) + 1;
   });
 
-  res.status(200).json(
-    Object.entries(counts).map(([key, value]) => {
-      return { id: key, count: value };
-    }),
-  );
+  const items = Object.entries(counts).map(([key, value]) => {
+    return { id: key, count: value };
+  });
+
+  res.status(200).json(sortByKey(items, 'count').reverse());
 };
 
 export default languages;

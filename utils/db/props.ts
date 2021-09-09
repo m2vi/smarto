@@ -25,8 +25,8 @@ export const fetchFilmlistProps = async (req, locale, type, key, method = 'norma
     sort: key,
     type: type,
     max: util?.max().all?.[key] ? util?.max().all?.[key] : 0,
-    genres: sortByKey(await fetchWithCache(`${baseUrl(req)}/api/filmlist/genres`, 60 * 24), 'name'),
-    languages: sortByKey(await fetchWithCache(`${baseUrl(req)}/api/filmlist/languages`, 60 * 24), 'count').reverse(),
+    genres: await fetchWithCache(`${baseUrl(req)}/api/filmlist/genres`, 60 * 24),
+    languages: await fetchWithCache(`${baseUrl(req)}/api/filmlist/languages`, 60 * 24),
     locale,
   };
 };
