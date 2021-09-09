@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { fetchBasicProps } from '@utils/db/props';
 import { fetchWithCache } from '@utils/db/fetch';
 
-export const Discover = ({ widgets, settings, user, timer }) => {
+export const Discover = ({ widgets, settings, me, timer }) => {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +21,7 @@ export const Discover = ({ widgets, settings, user, timer }) => {
 
       <HubSearchProvider>
         <WidgetStateProvider>
-          <Hub timer={timer} settings={settings} widgets={widgets} user={user} />
+          <Hub timer={timer} settings={settings} widgets={widgets} user={me} />
         </WidgetStateProvider>
       </HubSearchProvider>
     </>
