@@ -1,9 +1,9 @@
 import { IoCloudOutline, IoListOutline, IoMedalOutline, IoTimerOutline, IoVideocamOutline } from 'react-icons/io5';
 
 import { Client } from '@projects/lookup/client';
-import { WidgetProps } from '@Types/config';
 import console from '@utils/tools/console';
 import { kelvinToCelsius } from '@utils/math/formula';
+import { fetchWithCache } from './db/fetch';
 
 export const WidgetItems = user => {
   const items = [
@@ -23,11 +23,11 @@ export const WidgetItems = user => {
       openInNewTab: false,
       func: async () => {
         try {
-          const data = await (await fetch('/api/@me')).json();
-          console.fetch(data, '@me');
-          return data.timers.length;
+          const data = await fetchWithCache('/api/@timer', 60 * 3);
+          console.fetch(data, '@timer');
+          return data?.length;
         } catch (error) {
-          console.error('Failed to fetch @me', error);
+          console.error('Failed to fetch @timer', error);
           return null;
         }
       },
@@ -85,7 +85,7 @@ export const WidgetItems = user => {
       openInNewTab: false,
       func: async () => {
         try {
-          const data = await (await fetch('/api/filmlist/info')).json();
+          const data = await fetchWithCache('/api/filmlist/info', 60 * 3);
           console.fetch(data, 'filmlist/info');
           return data.all;
         } catch (error) {
