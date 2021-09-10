@@ -6,7 +6,7 @@ export const withProtection = async (_: NextApiRequest, res: NextApiResponse) =>
   const token = await auth.getToken(_);
 
   try {
-    if (token === process.env.KEY || _?.query?.token === process.env.API_KEY) {
+    if (token === process.env.KEY || (process.env.API_KEY && _?.query?.token === process.env.API_KEY)) {
       return {
         access: true,
       };
