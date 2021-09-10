@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import withProtection from '@utils/db/protection';
 
 const all = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { access } = withProtection(_, res);
+  const { access, token } = await withProtection(_, res);
   if (!access) return;
 
   let { locale } = _.query;

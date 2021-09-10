@@ -6,7 +6,7 @@ export const refresh = async (_: NextApiRequest, res: NextApiResponse) => {
   const { access } = await restricted(_, res);
   if (!access) return;
 
-  const util = new FilmlistUtil(await fetchItems(_, undefined));
+  const util = new FilmlistUtil(await fetchItems(process.env.KEY, _, undefined));
   let bin = [];
   let e = [];
 

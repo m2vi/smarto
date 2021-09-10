@@ -1,0 +1,11 @@
+{
+  "name": "Smarto",
+  "short_name": "Smarto",
+  "icons": [],
+  "theme_color": "#0a84ff",
+  "background_color": "#141724",
+  "display": "browser",
+  "orientation": "landscape",
+  "scope": "/",
+  "start_url": "/"
+}

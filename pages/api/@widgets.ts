@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import withProtection from '@utils/db/protection';
 
 export const widgets = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { access } = withProtection(_, res);
+  const { access } = await withProtection(_, res);
   if (!access) return;
 
   await mongoose.connect(process.env.MONGO_URI, {

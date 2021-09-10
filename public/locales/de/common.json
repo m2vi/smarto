@@ -7,6 +7,10 @@
     "search": "Suche"
   },
   "pages": {
+    "login": {
+      "title": "Anmeldung",
+      "secret": "passwort"
+    },
     "search": {
       "input": "Suche"
     },

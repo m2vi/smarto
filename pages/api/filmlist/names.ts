@@ -4,7 +4,7 @@ import { MovieDb } from 'moviedb-promise';
 import withProtection from '@utils/db/protection';
 
 export const insert = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { access } = withProtection(_, res);
+  const { access } = await withProtection(_, res);
   if (!access) return;
 
   const { id, type } = _.query;

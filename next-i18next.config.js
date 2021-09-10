@@ -1,3 +1,4 @@
+// const withPWA = require('next-pwa');
 const path = require('path');
 
 module.exports = {

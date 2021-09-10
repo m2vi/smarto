@@ -3,12 +3,12 @@ import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export const insert = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { access } = withProtection(_, res);
+  const { access, token } = await withProtection(_, res);
   if (!access) return;
 
   try {
     const { id, type, favoured, watched, locale } = _.query;
-    const util = new FilmlistUtil(await fetchItems(_, locale.toString()));
+    const util = new FilmlistUtil(await fetchItems(token, _, locale.toString()));
     const data = await util.get(
       id.toString(),
       type.toString(),

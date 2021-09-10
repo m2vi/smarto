@@ -1,15 +1,25 @@
-import { VscEye, VscEyeClosed } from 'react-icons/vsc';
 import React, { forwardRef, useState } from 'react';
 
 import Full from './Full';
 import { IoLockClosed } from 'react-icons/io5';
-import jwt from 'jsonwebtoken';
 import { useRouter } from 'next/router';
+import auth from '@utils/security/auth';
+import Eye from '@public/assets/icons/eye.svg';
+import EyeOff from '@public/assets/icons/eyeOff.svg';
+import { useTranslation } from 'react-i18next';
+import Head from 'next/head';
+import Favicon from './Favicon';
 
 const Login = () => {
+  const { t } = useTranslation();
+
   return (
     <Full className="grid place-items-center">
-      <Input placeholder="secret" className="max-w-xs mb-8" />
+      <Head>
+        <title>{t('pages.login.title')}</title>
+        <Favicon project="hub" />
+      </Head>
+      <Input placeholder={t('pages.login.secret').toLowerCase()} className="max-w-xs mb-8" />
     </Full>
   );
 };
@@ -23,9 +33,9 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef
 
   const Icon = () => {
     if (type === 'password') {
-      return <VscEyeClosed className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('text')} />;
+      return <Eye className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('text')} />;
     } else {
-      return <VscEye className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('password')} />;
+      return <EyeOff className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('password')} />;
     }
   };
 
@@ -41,7 +51,7 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef
           if (data.error) return;
 
           if (data.token) {
-            localStorage.setItem('token', data.token);
+            auth.createCookie(data.token);
             Router.replace('/');
           }
         });

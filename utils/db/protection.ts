@@ -1,8 +1,10 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
+import auth from '@utils/security/auth';
 
-export const withProtection = (_: NextApiRequest, res: NextApiResponse) => {
-  const token = _.headers.authorization;
+export const withProtection = async (_: NextApiRequest, res: NextApiResponse) => {
+  const token = await auth.getToken(_);
+
   try {
     if (token === process.env.KEY) {
       return {
@@ -18,7 +20,7 @@ export const withProtection = (_: NextApiRequest, res: NextApiResponse) => {
 
   return {
     access: false,
-    token,
+    token: token?.toString(),
   };
 };
 

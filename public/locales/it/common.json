@@ -7,6 +7,10 @@
     "search": "Cerca"
   },
   "pages": {
+    "login": {
+      "title": "Iscrizione",
+      "secret": "password"
+    },
     "search": {
       "input": "Cerca"
     },
