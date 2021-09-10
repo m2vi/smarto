@@ -4,9 +4,24 @@ import auth from '@utils/security/auth';
 
 export const withProtection = async (_: NextApiRequest, res: NextApiResponse) => {
   const token = await auth.getToken(_);
+  const queryToken = _?.query?.token?.toString();
+
+  const checkAccess = () => {
+    if (token === process.env.KEY || token === process.env.API_KEY) {
+      return true;
+    } else if (process.env.API_TOKEN && queryToken === process.env.API_TOKEN) {
+      return true;
+    } else if (process.env.KEY && process.env.KEY === jwt.decode(_?.query?.token?.toString())) {
+      return true;
+    } else if (process.env.KEY && queryToken === process.env.KEY) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   try {
-    if (token === process.env.KEY || (process.env.API_KEY && _?.query?.token === process.env.API_KEY)) {
+    if (checkAccess()) {
       return {
         access: true,
       };

@@ -1,13 +1,12 @@
 import { fetchItems, FilmlistUtil } from '@utils/films/main';
-import { sortByKey } from '@utils/tools/array';
 import { baseUrl } from '@utils/tools/utils';
 import { fetchWithCache } from './fetch';
 
-export const fetchBasicProps = async (locale, req) => {
+export const fetchBasicProps = async (token, locale, req) => {
   const base = `${baseUrl(req)}/api`;
 
-  const me = await fetchWithCache(`${base}/@me`, 60 * 24 * 3);
-  const settings = await fetchWithCache(`${base}/@settings`, 60 * 24 * 3);
+  const me = await fetchWithCache(`${base}/@me?token=${token}`, 60 * 24 * 3);
+  const settings = await fetchWithCache(`${base}/@settings?token=${token}`, 60 * 24 * 3);
 
   return {
     me,

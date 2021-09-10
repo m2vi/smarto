@@ -9,6 +9,14 @@ interface AuthOptions {
 }
 
 export class Auth {
+  public async pageAuth(req: NextApiRequest) {
+    const token = await this.getToken(req);
+    const cipher = await this.getTokenFromRequest(req);
+    if (!token) return false;
+
+    return cipher;
+  }
+
   private getCookie(name, value) {
     value = `; ${value}`;
     const parts = value.split(`; ${name}=`);

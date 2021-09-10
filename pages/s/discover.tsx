@@ -8,8 +8,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'react-i18next';
 import { fetchBasicProps } from '@utils/db/props';
 import { fetchWithCache } from '@utils/db/fetch';
+import auth from '@utils/security/auth';
 
-export const Discover = ({ widgets, settings, me, timer }) => {
+export const Discover = ({ ...props }) => {
   const { t } = useTranslation();
 
   return (
@@ -21,7 +22,7 @@ export const Discover = ({ widgets, settings, me, timer }) => {
 
       <HubSearchProvider>
         <WidgetStateProvider>
-          <Hub timer={timer} settings={settings} widgets={widgets} user={me} />
+          <Hub {...(props as any)} />
         </WidgetStateProvider>
       </HubSearchProvider>
     </>
@@ -29,12 +30,22 @@ export const Discover = ({ widgets, settings, me, timer }) => {
 };
 
 export async function getServerSideProps({ locale, req }) {
+  const token = await auth.pageAuth(req);
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
+    };
+  }
+
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
-      ...(await fetchBasicProps(locale, req)),
-      widgets: await fetchWithCache(`${baseUrl(req)}/api/@widgets`, 60 * 24),
-      timer: await fetchWithCache(`${baseUrl(req)}/api/@timer`, 60 * 24),
+      ...(await fetchBasicProps(token, locale, req)),
+      widgets: await fetchWithCache(`${baseUrl(req)}/api/@widgets?token=${token}`, 60 * 24),
+      timer: await fetchWithCache(`${baseUrl(req)}/api/@timer?token=${token}`, 60 * 24),
     },
   };
 }
