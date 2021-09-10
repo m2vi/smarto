@@ -16,8 +16,8 @@ export const fetchBasicProps = async (locale, req) => {
   };
 };
 
-export const fetchFilmlistProps = async (req, locale, type, key, method = 'normal', query?, items?) => {
-  const util = new FilmlistUtil(await fetchItems(req, locale));
+export const fetchFilmlistProps = async (auth, req, locale, type, key, method = 'normal', query?, items?) => {
+  const util = new FilmlistUtil(await fetchItems(auth, req, locale));
 
   return {
     query: query ? query : null,

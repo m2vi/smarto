@@ -9,7 +9,7 @@ const create = async (_: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json({ verified: token ? true : false });
   } catch (error) {
-    res.status(401).json({ verified: false });
+    res.status(200).json({ verified: false });
   }
 };
 

@@ -1,7 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import mongoose from 'mongoose';
+import withProtection from '@utils/db/protection';
 
 export const search = async (_: NextApiRequest, res: NextApiResponse) => {
+  const { access } = withProtection(_, res);
+  if (!access) return;
+
   await mongoose.connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useCreateIndex: true,

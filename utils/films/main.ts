@@ -23,8 +23,8 @@ class Genres {
   }
 }
 
-export const fetchItems = async (req: any, locale: string, dontCache?: boolean) => {
-  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all?locale=${locale}`, 60 * 24, dontCache);
+export const fetchItems = async (auth: string, req: any, locale: string, dontCache?: boolean) => {
+  return await fetchWithCache(`${baseUrl(req)}/api/filmlist/all?locale=${locale}`, 60 * 24, dontCache, auth);
 };
 
 export class FilmlistUtil {

@@ -1,7 +1,11 @@
+import withProtection from '@utils/db/protection';
 import { FilmlistUtil, fetchItems } from '@utils/films/main';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 export const insert = async (_: NextApiRequest, res: NextApiResponse) => {
+  const { access } = withProtection(_, res);
+  if (!access) return;
+
   try {
     const { id, type, favoured, watched, locale } = _.query;
     const util = new FilmlistUtil(await fetchItems(_, locale.toString()));

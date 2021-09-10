@@ -1,18 +1,33 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
-export const withProtection = async (_: NextApiRequest, res: NextApiResponse, callback: (_: NextApiRequest, res: NextApiResponse) => any) => {
+export const withProtection = (_: NextApiRequest, res: NextApiResponse) => {
+  const token = _.headers.authorization;
   try {
-    const token = jwt.decode(_.headers.authorization);
-
     if (token === process.env.KEY) {
-      await callback(_, res);
+      return {
+        access: true,
+      };
     } else {
       res.status(401).json({ error: 'Unauthorized' });
+      res.end();
     }
   } catch (error) {
     res.status(401).json({ error: error.message });
   }
+
+  return {
+    access: false,
+    token,
+  };
+};
+
+export const hasAccess = (jsonwebtoken: string) => {
+  const token = jwt.decode(jsonwebtoken);
+
+  return {
+    access: token === process.env.KEY,
+  };
 };
 
 export default withProtection;
