@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { HTMLAttributes, useRef, useState } from 'react';
 
 import Full from './Full';
 import { IoLockClosed } from 'react-icons/io5';
@@ -26,10 +26,11 @@ const Login = () => {
 
 export default Login;
 
-export const Input = forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef<'input'>>(({ className, ...props }, ref) => {
+export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>) => {
   const [type, setType] = useState('password');
   const cn = `w-full py-2 rounded-0 text-primary-100 placeholder-primary-300 border-0 p-0 font-base bg-transparent`;
   const Router = useRouter();
+  const ref = useRef<HTMLInputElement>();
 
   const Icon = () => {
     if (type === 'password') {
@@ -39,8 +40,10 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.currentTarget.value;
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
+
+    const value = ref.current.value;
 
     try {
       fetch('/api/auth/create', {
@@ -59,23 +62,24 @@ export const Input = forwardRef<HTMLInputElement, React.ComponentPropsWithoutRef
   };
 
   return (
-    <div
+    <form
       className="flex mb-8 w-full items-center rounded-8 overflow-hidden"
       style={{
         maxWidth: '250px',
         height: '41px',
         border: '1px solid rgba(255, 255, 255, 0.125)',
       }}
+      action=""
+      method="get"
+      onSubmit={handleSubmit}
     >
-      <div className="h-full grid place-items-center rounded-l-8" style={{ aspectRatio: '1 / 1' }}>
+      <div className="h-full grid place-items-center rounded-l-8 cursor-pointer" style={{ aspectRatio: '1 / 1' }} onClick={() => handleSubmit(null)}>
         <IoLockClosed className="h-3 w-3" />
       </div>
-      <input type={type} ref={ref} className={cn} {...props} data-testid="input" onChange={handleChange} />
+      <input type={type} className={cn} {...props} data-testid="input" autoComplete="on" ref={ref} />
       <div className="h-full grid place-items-center rounded-r-8" style={{ aspectRatio: '1 / 1' }}>
         <Icon />
       </div>
-    </div>
+    </form>
   );
-});
-
-Input.displayName = 'Input';
+};
