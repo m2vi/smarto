@@ -1,6 +1,7 @@
 ## TODO
 
 - [ ] remove duplicated code
+- [ ] finish authentication
 
 ## Big Apps
 
