@@ -29,13 +29,16 @@ export default Login;
 export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>) => {
   const [type, setType] = useState('password');
   const [extraClass, setExtraClass] = useState('');
+  const [disabled, setDisabled] = useState(false);
   const cn = `w-full py-2 rounded-0 text-primary-100 placeholder-primary-300 border-0 p-0 font-base bg-transparent`;
   const Router = useRouter();
   const ref = useRef<HTMLInputElement>();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (disabled) return;
     e?.preventDefault();
     setExtraClass('');
+    setDisabled(true);
 
     const value = ref.current.value;
 
@@ -56,6 +59,8 @@ export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>)
           }
         });
     } catch (error) {}
+
+    setDisabled(false);
   };
 
   const Icon = () => {

@@ -10,6 +10,7 @@ import Menu from '@components/pages/filmlist/Menu';
 import { useFilmSearch } from '@context/filmSearch';
 import { useTranslation } from 'react-i18next';
 import { util } from '@utils/films/client';
+import auth from '@utils/security/auth';
 
 const Index = ({ items, type, sort, max, genres, languages, query, locale }) => {
   const { dispatch, state } = useFilmSearch();
@@ -31,12 +32,16 @@ const Index = ({ items, type, sort, max, genres, languages, query, locale }) => 
   }, [max, sort, type, genres, languages, query]);
 
   const fetchMoreData = () => {
-    if (sort === 'unfiltered') return;
-    if (query && query !== '*') {
-      util.load(locale, type, sort, state.items.length, max, query).then(data => dispatch({ items: state.items.concat(data) }));
-    } else {
-      util.load(locale, type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
-    }
+    const token = auth.getToken().then(token => {
+      if (!token) return;
+
+      if (sort === 'unfiltered') return;
+      if (query && query !== '*') {
+        util.load(token, locale, type, sort, state.items.length, max, query).then(data => dispatch({ items: state.items.concat(data) }));
+      } else {
+        util.load(token, locale, type, sort, state.items.length, max).then(data => dispatch({ items: state.items.concat(data) }));
+      }
+    });
   };
 
   return (

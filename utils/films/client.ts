@@ -1,9 +1,11 @@
 import console from '@utils/tools/console';
 
 class Util {
-  public async load(locale: string, type: string, sort: string, start: number, max: number, query?: string) {
+  public async load(token: string, locale: string, type: string, sort: string, start: number, max: number, query?: string) {
     const data = await (
-      await fetch(`/api/filmlist/items?locale=${locale}&type=${type}&key=${sort}&start=${start}&offset=50${query && `&query=${query}`}`)
+      await fetch(`/api/filmlist/items?locale=${locale}&type=${type}&key=${sort}&start=${start}&offset=50${query && `&query=${query}`}`, {
+        headers: new Headers({ token: token }),
+      })
     ).json();
     console.load(`max: ${max}, current: ${start}`, data);
     return data;
