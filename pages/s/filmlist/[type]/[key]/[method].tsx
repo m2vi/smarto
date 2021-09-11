@@ -21,7 +21,7 @@ export async function getServerSideProps({ query: { type, key, method }, locale,
   return {
     props: {
       ...(await serverSideTranslations(locale, ['common'])),
-      ...(await fetchFilmlistProps(token, req, locale, type, key)),
+      ...(await fetchFilmlistProps(token, req, locale, type, key, method)),
     },
   };
 }

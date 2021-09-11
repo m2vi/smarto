@@ -4,10 +4,10 @@ import { sortByKey } from '@utils/tools/array';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const genres = async (_: NextApiRequest, res: NextApiResponse) => {
-  const { access, token } = await withProtection(_, res);
+  const { access } = await withProtection(_, res);
   if (!access) return;
 
-  const util = new FilmlistUtil(await fetchItems(token, _, 'en'));
+  const util = new FilmlistUtil(await fetchItems(process.env.API_TOKEN, _, 'en'));
 
   const allGenres = [];
 

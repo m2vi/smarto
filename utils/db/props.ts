@@ -24,8 +24,8 @@ export const fetchFilmlistProps = async (auth, req, locale, type, key, method = 
     sort: key,
     type: type,
     max: util?.max().all?.[key] ? util?.max().all?.[key] : 0,
-    genres: await fetchWithCache(`${baseUrl(req)}/api/filmlist/genres`, 60 * 24),
-    languages: await fetchWithCache(`${baseUrl(req)}/api/filmlist/languages`, 60 * 24),
+    genres: await fetchWithCache(`${baseUrl(req)}/api/filmlist/genres?token=${auth}`, 60 * 24),
+    languages: await fetchWithCache(`${baseUrl(req)}/api/filmlist/languages?token=${auth}`, 60 * 24),
     locale,
   };
 };

@@ -4,6 +4,7 @@
 - [ ] finish authentication
 - [ ] add try catch
 - [ ] error managing
+- [ ] filmlist/ select target
 
 ## Big Apps
 
