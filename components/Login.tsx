@@ -28,20 +28,14 @@ export default Login;
 
 export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>) => {
   const [type, setType] = useState('password');
+  const [extraClass, setExtraClass] = useState('');
   const cn = `w-full py-2 rounded-0 text-primary-100 placeholder-primary-300 border-0 p-0 font-base bg-transparent`;
   const Router = useRouter();
   const ref = useRef<HTMLInputElement>();
 
-  const Icon = () => {
-    if (type === 'password') {
-      return <EyeOff className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('text')} />;
-    } else {
-      return <Eye className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('password')} />;
-    }
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e?.preventDefault();
+    setExtraClass('');
 
     const value = ref.current.value;
 
@@ -51,7 +45,10 @@ export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>)
       })
         .then(data => data.json())
         .then(data => {
-          if (data.error) return;
+          if (data.error) {
+            setExtraClass('swiggle');
+            return;
+          }
 
           if (data.token) {
             auth.createCookie(data.token);
@@ -61,25 +58,34 @@ export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>)
     } catch (error) {}
   };
 
+  const Icon = () => {
+    if (type === 'password') {
+      return <EyeOff className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('text')} />;
+    } else {
+      return <Eye className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('password')} />;
+    }
+  };
+
   return (
-    <form
-      className="flex mb-8 w-full items-center rounded-8 overflow-hidden"
-      style={{
-        maxWidth: '250px',
-        height: '41px',
-        border: '1px solid rgba(255, 255, 255, 0.125)',
-      }}
-      action=""
-      method="get"
-      onSubmit={handleSubmit}
-    >
-      <div className="h-full grid place-items-center rounded-l-8 cursor-pointer" style={{ aspectRatio: '1 / 1' }} onClick={() => handleSubmit(null)}>
-        <IoLockClosed className="h-3 w-3" />
-      </div>
-      <input type={type} className={cn} {...props} data-testid="input" autoComplete="on" ref={ref} />
-      <div className="h-full grid place-items-center rounded-r-8" style={{ aspectRatio: '1 / 1' }}>
-        <Icon />
-      </div>
-    </form>
+    <span className={`border mb-8 rounded-8 overflow-hidden border-input ${extraClass}`}>
+      <form
+        className="flex w-full items-center overflow-hidden"
+        style={{
+          maxWidth: '250px',
+          height: '41px',
+        }}
+        action=""
+        method="get"
+        onSubmit={handleSubmit}
+      >
+        <div className="h-full grid place-items-center cursor-pointer" style={{ aspectRatio: '1 / 1' }} onClick={() => handleSubmit(null)}>
+          <IoLockClosed className="h-3 w-3" />
+        </div>
+        <input type={type} className={cn} {...props} data-testid="input" autoComplete="on" ref={ref} />
+        <div className="h-full grid place-items-center" style={{ aspectRatio: '1 / 1' }}>
+          <Icon />
+        </div>
+      </form>
+    </span>
   );
 };
