@@ -6,6 +6,7 @@ import { GetServerSidePropsContext, NextApiRequest } from 'next';
 
 interface AuthOptions {
   strict?: boolean;
+  decode?: boolean;
 }
 
 export class Auth {
@@ -27,7 +28,7 @@ export class Auth {
     return this.getCookie('jwt', req.headers.cookie);
   }
 
-  public async getToken(req?: NextApiRequest, options: AuthOptions = { strict: true }) {
+  public async getToken(req?: NextApiRequest, options: AuthOptions = { strict: true, decode: true }) {
     if (req) {
       const cipher = this.getTokenFromRequest(req);
 
@@ -46,7 +47,7 @@ export class Auth {
       if (!verified) return false;
     }
 
-    return jwt.decode(cipher).toString();
+    return options.decode ? jwt.decode(cipher).toString() : cipher;
   }
 
   public async createCookie(jsonwebtoken: string, req?: NextApiRequest) {

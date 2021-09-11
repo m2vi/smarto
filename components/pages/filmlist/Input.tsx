@@ -17,5 +17,5 @@ export const Input = ({ className, items, ...props }) => {
     Router.push(`/s/filmlist/find/${encodeURIComponent(value)}`);
   };
 
-  return <input ref={ref} className={cn} {...props} data-testid="input" style={{ background: '#2d2c31', height: '40px' }} onChange={handleChange} />;
+  return <input ref={ref} className={cn} {...props} data-testid="input" style={{ height: '40px' }} onChange={handleChange} />;
 };

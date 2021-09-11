@@ -24,6 +24,7 @@ export const withProtection = async (_: NextApiRequest, res: NextApiResponse) =>
     if (checkAccess()) {
       return {
         access: true,
+        token: token ? token : queryToken,
       };
     } else {
       res.status(401).json({ error: 'Unauthorized' });

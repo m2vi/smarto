@@ -24,11 +24,11 @@ const Genres = ({ genres, languages }) => {
         {genres.map(({ id, count, name }) => (
           <Link href={`/s/filmlist/genre/${name.toLowerCase()}`} passHref={true} shallow={false} key={id}>
             <span
-              style={{ color: currGenre === name.toLowerCase() && '#d7b350' }}
-              className="my-1 first:mt-0 flex items-center justify-between cursor-pointer filmlist-hover w-full"
+              style={{ color: currGenre === name.toLowerCase() && 'var(--color-accent)' }}
+              className="my-1 first:mt-0 flex items-center justify-between cursor-pointer hover:text-accent w-full"
             >
               <span className="overflow-hidden overflow-ellipsis whitespace-nowrap">{t(`pages.filmlist.genres.${name.toLowerCase()}`)}</span>
-              <span className="ml-4 mr-2 filmlist-accent">{count}</span>
+              <span className="ml-4 mr-2 text-accent">{count}</span>
             </span>
           </Link>
         ))}
@@ -38,11 +38,11 @@ const Genres = ({ genres, languages }) => {
         {languages.map(({ id, count }) => (
           <Link href={`/s/filmlist/language/${id}`} passHref={true} shallow={false} key={id}>
             <span
-              style={{ color: currLanguage === id && '#d7b350' }}
-              className="my-1 first:mt-0 flex items-center justify-between cursor-pointer filmlist-hover w-full"
+              style={{ color: currLanguage === id && 'var(--color-accent)' }}
+              className="my-1 first:mt-0 flex items-center justify-between cursor-pointer hover:text-accent w-full"
             >
               <span className="overflow-hidden overflow-ellipsis whitespace-nowrap">{t(`pages.filmlist.languages.${id}`)}</span>
-              <span className="ml-4 mr-2 filmlist-accent">{count}</span>
+              <span className="ml-4 mr-2 text-accent">{count}</span>
             </span>
           </Link>
         ))}

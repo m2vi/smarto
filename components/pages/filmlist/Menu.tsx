@@ -87,14 +87,14 @@ const Sidebar = () => {
     <aside className="m-6 flex flex-col w-250 overflow-hidden overflow-y-auto dD5d-items">
       <p className="text-3xl mb-8 cursor-pointer" onClick={reloadCache}>
         {t('pages.filmlist.name')}
-        <span style={{ color: '#d7b350' }}>.</span>
+        <span style={{ color: 'var(--color-accent)' }}>.</span>
       </p>
       <div className="w-full flex flex-col items-start">
         {sections.map(({ icon: Icon, key }) => (
           <Link href={`/s/filmlist/default/${key}`} passHref={true} shallow={false} key={key}>
             <span
-              style={{ color: curr === key && '#d7b350' }}
-              className="my-2 flex items-center cursor-pointer filmlist-hover overflow-hidden overflow-ellipsis whitespace-nowrap"
+              style={{ color: curr === key && 'var(--color-accent)' }}
+              className="my-2 flex items-center cursor-pointer hover:text-accent overflow-hidden overflow-ellipsis whitespace-nowrap"
             >
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
@@ -105,8 +105,8 @@ const Sidebar = () => {
         {otherSections.map(({ path, icon: Icon, key }) => (
           <Link href={`${path}`} passHref={true} shallow={false} key={key}>
             <span
-              style={{ color: curr === key && '#d7b350' }}
-              className="my-2 flex items-center cursor-pointer filmlist-hover overflow-hidden overflow-ellipsis whitespace-nowrap"
+              style={{ color: curr === key && 'var(--color-accent)' }}
+              className="my-2 flex items-center cursor-pointer hover:text-accent overflow-hidden overflow-ellipsis whitespace-nowrap"
             >
               {<Icon className="h-4 2xl:w-4 mr-2" />}
               {t(`pages.filmlist.menu.${key}`)}
