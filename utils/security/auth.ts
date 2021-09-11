@@ -2,7 +2,7 @@ import { basicFetch } from '@utils/db/fetch';
 import { baseUrl } from '@utils/tools/utils';
 import Cookies from 'js-cookie';
 import jwt from 'jsonwebtoken';
-import { NextApiRequest } from 'next';
+import { GetServerSidePropsContext, NextApiRequest } from 'next';
 
 interface AuthOptions {
   strict?: boolean;
@@ -68,6 +68,15 @@ export class Auth {
       access: token ? true : false,
       token,
     };
+  }
+
+  public logout(ctx: GetServerSidePropsContext) {
+    if (ctx) {
+      ctx.res.setHeader('Set-Cookie', 'jwt=deleted; Max-Age=0; path=/');
+      return;
+    }
+
+    Cookies.remove('jwt');
   }
 }
 

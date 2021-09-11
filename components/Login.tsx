@@ -34,9 +34,9 @@ export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>)
 
   const Icon = () => {
     if (type === 'password') {
-      return <Eye className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('text')} />;
+      return <EyeOff className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('text')} />;
     } else {
-      return <EyeOff className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('password')} />;
+      return <Eye className="h-3 w-3 cursor-pointer text-accent" onClick={() => setType('password')} />;
     }
   };
 

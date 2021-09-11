@@ -25,7 +25,7 @@ const insert = async (_: NextApiRequest, res: NextApiResponse) => {
       watched.toString() === 'false' ? false : true,
     );
 
-    const allItems = (await fetchItems(process.env.API_KEY, _, 'en', true)) as CardProps[];
+    const allItems = (await fetchItems(process.env.API_TOKEN, _, 'en', true)) as CardProps[];
 
     if ((allItems as any).error) return res.status(401).json({ error: 'req failed', allItems });
 

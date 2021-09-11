@@ -1,27 +1,24 @@
-import Full from '@components/Full';
-import { Spinner } from '@components/Spinner';
 import auth from '@utils/security/auth';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
-const Index = () => {
-  const Router = useRouter();
+const Index = () => null;
 
-  useEffect(() => {
-    const func = async () => {
-      const token = await auth.getToken();
-
-      if (!token) {
-        Router.push('/login');
-      } else {
-        Router.replace('/s/discover');
-      }
+export async function getServerSideProps({ req }) {
+  const token = await auth.pageAuth(req);
+  if (!token) {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/login',
+      },
     };
-
-    func();
-  }, [Router]);
-
-  return null;
-};
+  } else {
+    return {
+      redirect: {
+        permanent: false,
+        destination: '/s/discover',
+      },
+    };
+  }
+}
 
 export default Index;
