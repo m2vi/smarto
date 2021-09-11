@@ -20,7 +20,7 @@ const Controls = ({ me }) => {
 
   return (
     <div className="h-screen w-full max-w-xs ml-3 bg-primary-800 p-4">
-      {data && (
+      {data && data && (
         <>
           <span className="flex justify-between items-center mb-300">
             <p className="font-semibold text-lg">{data.discord_status}</p>
@@ -44,7 +44,7 @@ const Activities = ({ data }) => {
         <IoChevronDown className="h-4 w-4 text-primary-300 hover:text-primary-200 cursor-pointer" />
       </span>
       {data.activities.map(({ id, application_id, assets, details, name, state, timestamps }) => {
-        if (!timestamps?.start || !assets.large_image) return;
+        if (!timestamps?.start || !assets?.large_image) return;
 
         return (
           <div key={id} className="flex my-1">
