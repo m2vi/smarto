@@ -7,10 +7,10 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 import { WidgetItems } from '@utils/widgets';
 
-const Widgets = ({ widgets, settings, user, ...props }) => {
+const Widgets = ({ widgets, settings, me, ...props }) => {
   const { t } = useTranslation();
 
-  const Widgets = widgets.map(name => WidgetItems(user).find(n => n.name === name));
+  const Widgets = widgets.map(name => WidgetItems(me).find(n => n.name === name));
 
   return (
     <div className="w-full max-w-xxs" {...props}>

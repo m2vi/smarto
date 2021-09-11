@@ -677,3 +677,7 @@ body {
 .border-input {
   border: 1px solid rgba(255, 255, 255, 0.125);
 }
+
+/* .Collapsible__contentOuter {
+  transition-duration: 25ms !important;
+} */
