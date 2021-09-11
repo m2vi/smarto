@@ -45,6 +45,7 @@ export interface userSettings {
 }
 
 export interface WidgetProps {
+  default: any;
   icon: any;
   name: string;
   unit: string;

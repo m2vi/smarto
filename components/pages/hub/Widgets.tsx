@@ -19,7 +19,7 @@ const Widgets = ({ widgets, settings, user, ...props }) => {
         <IoAddCircleOutline className="h-4 w-4 text-primary-200 hover:text-primary-100 cursor-pointer" />
       </span>
       <div className="grid grid-cols-2 grid-rows-3 gap-6 w-full">
-        {sortByKey(Widgets, 'name').map(({ icon, name, unit, openInNewTab, path, func, removeSpace }) => {
+        {sortByKey(Widgets, 'name').map(({ icon, name, unit, openInNewTab, path, func, removeSpace, default: defaultValue }) => {
           const { includeUnits } = settings.hub.widgets;
 
           return (
@@ -32,6 +32,7 @@ const Widgets = ({ widgets, settings, user, ...props }) => {
               path={path}
               func={func}
               removeSpace={removeSpace}
+              default={defaultValue}
             />
           );
         })}
@@ -44,8 +45,8 @@ const Widgets = ({ widgets, settings, user, ...props }) => {
   );
 };
 
-const Widget = ({ icon: Icon, name, unit, openInNewTab, path, func, removeSpace }: WidgetProps) => {
-  const [value, setValue] = useState('');
+const Widget = ({ icon: Icon, name, unit, openInNewTab, path, func, removeSpace, default: defaultValue }: WidgetProps) => {
+  const [value, setValue] = useState(defaultValue);
   const Router = useRouter();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { IoCloudOutline, IoListOutline, IoMedalOutline, IoTimerOutline, IoVideocamOutline } from 'react-icons/io5';
+import { IoCloudOutline, IoListOutline, IoMedalOutline, IoTimerOutline, IoTrophyOutline, IoVideocamOutline } from 'react-icons/io5';
 
 import { Client } from '@projects/lookup/client';
 import console from '@utils/tools/console';
@@ -8,14 +8,25 @@ import { fetchWithCache } from './db/fetch';
 export const WidgetItems = user => {
   const items = [
     {
-      icon: IoListOutline,
-      name: 'todo',
-      unit: 'left',
-      path: '/s/todo',
+      default: '0',
+      icon: IoTrophyOutline,
+      name: 'splitgate',
+      unit: 'wins',
+      path: null,
       openInNewTab: false,
-      func: async () => '0',
+      func: async () => {
+        try {
+          const data = await fetchWithCache('/api/stats/splitgate', 60 * 3);
+          console.fetch(data, 'stats/splitgate');
+          return data?.data?.segments[0]?.stats.wins?.value;
+        } catch (error) {
+          console.error('Failed to fetch stats/splitgate', error);
+          return null;
+        }
+      },
     },
     {
+      default: '0',
       icon: IoTimerOutline,
       name: 'timer',
       unit: 'left',
@@ -23,7 +34,7 @@ export const WidgetItems = user => {
       openInNewTab: false,
       func: async () => {
         try {
-          const data = await fetchWithCache('/api/@timer', 60 * 3);
+          const data = await fetchWithCache('/api/@timer', 60 * 24);
           console.fetch(data, '@timer');
           return data?.length;
         } catch (error) {
@@ -33,6 +44,7 @@ export const WidgetItems = user => {
       },
     },
     {
+      default: '00.00',
       icon: IoCloudOutline,
       name: 'weather',
       unit: '°C',
@@ -58,6 +70,7 @@ export const WidgetItems = user => {
       },
     },
     {
+      default: '0',
       icon: IoMedalOutline,
       name: 'scoresaber',
       unit: 'pp',
@@ -78,6 +91,7 @@ export const WidgetItems = user => {
       },
     },
     {
+      default: '0',
       icon: IoVideocamOutline,
       name: 'filmlist',
       unit: 'Items',

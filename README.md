@@ -2,6 +2,8 @@
 
 - [ ] remove duplicated code
 - [ ] finish authentication
+- [ ] add try catch
+- [ ] error managing
 
 ## Big Apps
 
