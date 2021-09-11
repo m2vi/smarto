@@ -40,7 +40,8 @@ export const Input = ({ className, ...props }: HTMLAttributes<HTMLInputElement>)
     setExtraClass('');
     setDisabled(true);
 
-    const value = ref.current.value;
+    const value = ref?.current?.value;
+    if (value === '' || !value) return setDisabled(false);
 
     try {
       fetch('/api/auth/create', {
