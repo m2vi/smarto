@@ -7,7 +7,7 @@ const create = async (_: NextApiRequest, res: NextApiResponse) => {
   if (process.env.KEY === token) {
     res.status(200).json({ token: jwt.sign(token, process.env.JWT_SECRET) });
   } else {
-    res.status(200).json({ error: 'Token does not match' });
+    res.status(200).json({ error: 'Wrong Password' });
   }
 };
 
