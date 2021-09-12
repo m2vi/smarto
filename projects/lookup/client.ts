@@ -3,15 +3,13 @@ import { baseUrl } from '@utils/tools/utils';
 
 export class Client {
   #baseUrl: string;
-  constructor(private token: string, private service: string, private req?: any) {
+  constructor(private service: string, private req?: any) {
     this.#baseUrl = '/api/lookup';
   }
 
   private async fetcher(id: string) {
     try {
-      const data = await basicFetch(`${this.req ? baseUrl(this.req) : ''}${this.#baseUrl}?service=${this.service}&id=${id}`, {
-        headers: new Headers({ token: this.token }),
-      });
+      const data = await basicFetch(`${this.req ? baseUrl(this.req) : ''}${this.#baseUrl}?service=${this.service}&id=${id}`);
       return data;
     } catch (error) {
       return {

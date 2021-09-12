@@ -1,10 +1,13 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
+import { Client } from '@projects/lookup/client';
 
 const create = async (_: NextApiRequest, res: NextApiResponse) => {
   const token = _.headers?.token?.toString();
 
   if (process.env.KEY === token) {
+    // const client = new Client("ip").get()
+
     res.status(200).json({ token: jwt.sign(token, process.env.JWT_SECRET) });
   } else {
     res.status(200).json({ error: 'Wrong Password' });

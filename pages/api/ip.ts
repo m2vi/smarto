@@ -4,7 +4,7 @@ import requestIp from 'request-ip';
 
 const ip = async (_: NextApiRequest, res: NextApiResponse) => {
   try {
-    const client = new Client(process.env.API_TOKEN, 'ip', _);
+    const client = new Client('ip', _);
     const ip = requestIp.getClientIp(_);
 
     if (ip === '::1') {
