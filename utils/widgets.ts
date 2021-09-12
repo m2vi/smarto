@@ -52,7 +52,7 @@ export const WidgetItems = user => {
       openInNewTab: true,
       removeSpace: true,
       func: async () => {
-        const weather = new Client('weather');
+        const weather = new Client(null, 'weather');
 
         try {
           const city = await weather.get(user.geo.city);
@@ -78,7 +78,7 @@ export const WidgetItems = user => {
       openInNewTab: true,
       removeSpace: true,
       func: async () => {
-        const saber = new Client('scoresaber');
+        const saber = new Client(null, 'scoresaber');
         try {
           const u = await saber.get(user.accounts.scoresaber);
           console.fetch(u, 'scoresaber');
