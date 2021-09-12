@@ -4,8 +4,10 @@ import requestIp from 'request-ip';
 
 const ip = async (_: NextApiRequest, res: NextApiResponse) => {
   try {
+    const { custom } = _.query;
+
     const client = new Client('ip', _);
-    const ip = requestIp.getClientIp(_);
+    const ip = custom ? custom?.toString() : requestIp.getClientIp(_);
 
     if (ip === '::1') {
       return res.status(200).json({ ip: 'local', valid: true });
@@ -17,7 +19,7 @@ const ip = async (_: NextApiRequest, res: NextApiResponse) => {
       return res.status(500).json({ ip: ip, valid: false });
     }
 
-    if (data?.location?.country === 'Austria') {
+    if (data?.location?.country === process.env.IP) {
       return res.status(200).json({ ip: ip, valid: true });
     }
 

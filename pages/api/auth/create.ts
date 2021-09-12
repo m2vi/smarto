@@ -1,16 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
-import { Client } from '@projects/lookup/client';
+import { basicFetch } from '@utils/db/fetch';
+import { baseUrl } from '@utils/tools/utils';
+import request_ip from 'request-ip';
 
 const create = async (_: NextApiRequest, res: NextApiResponse) => {
   const token = _.headers?.token?.toString();
 
   if (process.env.KEY === token) {
-    // const client = new Client("ip").get()
+    const data = await basicFetch(`${baseUrl(_)}/api/ip?custom=${request_ip.getClientIp(_)}`);
 
-    res.status(200).json({ token: jwt.sign(token, process.env.JWT_SECRET) });
+    if (data?.valid) {
+      res.status(200).json({ token: jwt.sign(token, process.env.JWT_SECRET) });
+    } else {
+      res.status(200).json({ error: 'Wrong access point' });
+    }
   } else {
-    res.status(200).json({ error: 'Wrong Password' });
+    res.status(200).json({ error: 'Wrong password' });
   }
 };
 
