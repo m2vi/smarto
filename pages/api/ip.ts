@@ -14,7 +14,7 @@ const ip = async (_: NextApiRequest, res: NextApiResponse) => {
     const data = await client.get(ip);
 
     if (!data?.success) {
-      return res.status(500).json({ ip: ip, valid: false });
+      return res.status(500).json({ ip: ip, valid: false, data });
     }
 
     if (data?.location?.country === 'Austria') {
