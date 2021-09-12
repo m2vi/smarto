@@ -23,7 +23,7 @@ const ip = async (_: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json({ ip: ip, valid: true });
     }
 
-    res.status(401).json({ ip: ip, valid: false });
+    res.status(401).json({ ip: process.env.IP, country: data?.location?.country, valid: false });
   } catch (error) {
     res.status(200).json({ ip: '-', valid: false, error: error.message });
   }
