@@ -1,10 +1,10 @@
 ## TODO
 
 - [ ] remove duplicated code
-- [ ] finish authentication
+- [x] finish authentication
 - [ ] add try catch
 - [ ] error managing
-- [ ] filmlist/ select target
+- [x] filmlist/ select target
 
 ## Big Apps
 
@@ -13,6 +13,7 @@
 - [ ] Package Tracker for [Post, DHL, UPS, DPD, ...]
 - [ ] Search
 - [ ] Math Stuff
+- [ ] Terminal
 
 ## Small Apps
 
