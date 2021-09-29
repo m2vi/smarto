@@ -95,11 +95,11 @@ export const WidgetItems = user => {
       icon: IoVideocamOutline,
       name: 'filmlist',
       unit: 'Items',
-      path: '/s/filmlist/default/all',
+      path: 'https://filmlist.m2vi.me',
       openInNewTab: false,
       func: async () => {
         try {
-          const data = await fetchWithCache('/api/filmlist/info', 60 * 3);
+          const data = await fetchWithCache('/api/filmlist', 60 * 3);
           console.fetch(data, 'filmlist/info');
           return data.all;
         } catch (error) {

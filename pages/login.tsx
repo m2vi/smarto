@@ -21,7 +21,7 @@ export async function getServerSideProps({ locale, req }) {
     return {
       redirect: {
         permanent: false,
-        destination: '/s/discover',
+        destination: `/${locale}/browse`,
       },
     };
   }

@@ -12,13 +12,13 @@ interface AuthOptions {
 export class Auth {
   public async pageAuth(req: NextApiRequest) {
     const token = await this.getToken(req);
-    const cipher = await this.getTokenFromRequest(req);
+    const cipher = this.getTokenFromRequest(req);
     if (!token) return false;
 
     return cipher;
   }
 
-  private getCookie(name, value) {
+  private getCookie(name: string, value: string) {
     value = `; ${value}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) return parts.pop().split(';').shift();
