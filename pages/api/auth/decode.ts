@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
-import aes from '@utils/security/aes';
 import { baseUrl } from '@utils/tools/utils';
 
 const decode = async (_: NextApiRequest, res: NextApiResponse) => {

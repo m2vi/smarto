@@ -1,5 +1,4 @@
 import { basicFetch } from '@utils/db/fetch';
-import withProtection from '@utils/db/protection';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const lookup = async (_: NextApiRequest, res: NextApiResponse) => {

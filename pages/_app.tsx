@@ -5,9 +5,10 @@ import '@styles/notifications.css';
 
 import { AppProps } from 'next/app';
 import NProgress from 'nprogress';
-import { NotificationContainer } from 'react-notifications';
 import Router from 'next/router';
 import { appWithTranslation } from 'next-i18next';
+import { ToastContainer } from 'react-toastify';
+import { IoClose } from 'react-icons/io5';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -17,7 +18,18 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Component {...pageProps} />
-      <NotificationContainer />
+      <ToastContainer
+        position="top-right"
+        autoClose={4500}
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable={true}
+        pauseOnHover={true}
+        closeButton={props => <IoClose className="text-primary-300" {...props} />}
+      />
     </>
   );
 };

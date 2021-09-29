@@ -1,5 +1,4 @@
 import { IoLogOutOutline, IoSettingsOutline } from 'react-icons/io5';
-import { util } from '@utils/films/client';
 import Link from 'next/link';
 import { Projects } from '@projects/index';
 import { useRouter } from 'next/router';
@@ -17,15 +16,7 @@ export const Sidebar = ({ settings }) => {
       {projects
         .filter(p => p.key === ':h')
         .map(({ key, icon: Icon }) => (
-          <span
-            className="flex justify-center items-center p-4 cursor-pointer"
-            key={key}
-            onClick={() =>
-              util.reload().then(() => {
-                Router.reload();
-              })
-            }
-          >
+          <span className="flex justify-center items-center p-4 cursor-pointer" key={key}>
             <Icon className="h-8 w-8 rounded-15" draggable={false} />
           </span>
         ))}

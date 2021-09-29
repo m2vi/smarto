@@ -1,7 +1,6 @@
 import Favicon from '@components/Favicon';
 import Head from 'next/head';
 import Hub from '@components/pages/hub';
-import { HubSearchProvider } from '@context/hubSearch';
 import { WidgetStateProvider } from '@context/widgetState';
 import { baseUrl } from '@utils/tools/utils';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
@@ -20,11 +19,9 @@ export const Discover = ({ ...props }) => {
         <Favicon project="hub" />
       </Head>
 
-      <HubSearchProvider>
-        <WidgetStateProvider>
-          <Hub {...(props as any)} />
-        </WidgetStateProvider>
-      </HubSearchProvider>
+      <WidgetStateProvider>
+        <Hub {...(props as any)} />
+      </WidgetStateProvider>
     </>
   );
 };

@@ -10,7 +10,7 @@ const ip = async (_: NextApiRequest, res: NextApiResponse) => {
     const ip = custom ? custom?.toString() : requestIp.getClientIp(_);
 
     if (ip === '::1') {
-      return res.status(200).json({ ip: 'local', valid: true });
+      return res.status(200).json({ ip: 'localhost', valid: true });
     }
 
     const data = await client.get(ip);

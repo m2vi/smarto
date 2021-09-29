@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import jwt from 'jsonwebtoken';
 
-const create = async (_: NextApiRequest, res: NextApiResponse) => {
+const verify = async (_: NextApiRequest, res: NextApiResponse) => {
   const jsonwebtoken = _.headers?.token?.toString();
 
   try {
@@ -13,4 +13,4 @@ const create = async (_: NextApiRequest, res: NextApiResponse) => {
   }
 };
 
-export default create;
+export default verify;
