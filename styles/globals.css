@@ -681,3 +681,8 @@ body {
 /* .Collapsible__contentOuter {
   transition-duration: 25ms !important;
 } */
+
+.last-rounded:last-child {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
