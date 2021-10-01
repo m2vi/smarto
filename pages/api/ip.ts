@@ -15,7 +15,7 @@ const ip = async (_: NextApiRequest, res: NextApiResponse) => {
 
     const data = await client.get(ip);
 
-    if (!data?.success) {
+    if (data?.message) {
       return res.status(500).json({ ip: ip, valid: false });
     }
 
