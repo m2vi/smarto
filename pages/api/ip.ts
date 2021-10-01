@@ -19,7 +19,12 @@ const ip = async (_: NextApiRequest, res: NextApiResponse) => {
       return res.status(500).json({ ip: ip, valid: false });
     }
 
-    if (data?.location?.country === process.env.IP) {
+    if (
+      data?.location?.country === process.env.IP &&
+      data?.security?.vpn === false &&
+      data?.security?.tor === false &&
+      data?.security?.proxy === false
+    ) {
       return res.status(200).json({ ip: ip, valid: true });
     }
 
